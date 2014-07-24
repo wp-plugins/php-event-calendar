@@ -12,13 +12,22 @@ Built with PHP Event Calendar Lite, PHP Event Calendar lets you easily create, s
 
 == Description ==
 
-The plugin is built with FREE PHP Event Calendar Lite edition. It is a modern, responsive, multi-user calendar/scheduling application. It can be used right out of the box as a standalone event calendar application or can be customized easily to seamlessly integrate into your own environment.
+The plugin is built with FREE [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar") Lite version. It is a modern, responsive, multi-user calendar/scheduling application. It can be used right out of the box as a standalone event calendar application or can be customized easily to seamlessly integrate into your own environment. It supports all major Web browsers as well as iOS and Android devices.
 
-PHP Event Calendar supports multiple calendars, shared and public calendars, repeating/recurring events, event drag and drop, Google Calendar import, email reminder, and many other features.
+The Lite version is similar to full version with a few limitations: allows single calendar only; no recurring/repeating events; no email reminder. The full version has no those limitations. 
 
-PHP Event Calendar supports all major Web browsers as well as iOS and Android devices.
+PHP Event Calendar full version supports:
 
-The Lite edition is similar to full version with a few limitations. The Lite edition allows single calendar only; no recurring/repeating events; no email reminder. The full version has no those limitations. 
+* Multiple calendars, 
+* Shared and public calendars, 
+* Repeating/recurring events, 
+* Event drag and drop, 
+* Email reminders, 
+* Agenda and custom list view,
+* Event search
+* More to come!
+
+More information about full version can be found on [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar Website") website.
 
 == Installation ==
 
@@ -58,7 +67,7 @@ Please make sure to include [php_event_calendar] shortcode in your page.
 
 = I've got suggestions. Where should I send them? =
 
-Great! Please visit our <a href="phpeventcalendar.uservoice.com/">technical support</a> and submit your ideas and suggestions.
+Great! Please visit our [technical support](http://phpeventcalendar.uservoice.com/ "PHP Event Calendar Online Tech Support") and submit your ideas and suggestions.
 
 == Screenshots ==
 
