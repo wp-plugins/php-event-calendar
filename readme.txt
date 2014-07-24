@@ -1,4 +1,4 @@
-=== Content Engagement ===
+=== PHP Event Calendar for WordPress ===
 Contributors: chenster
 Donate link: http://phpeventcalendar.com/
 Tags: events, calendar, event, scheduler, dates, date, meeting, seminar, class
