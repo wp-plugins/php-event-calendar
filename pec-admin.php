@@ -74,16 +74,15 @@ $status_flag=1;
 }
 if ($status_flag==0){
 ?>
-<div class="updated"><p><strong><?php _e('Your selected file could not download. Server may not give the HTTP Header permission or requesting session time may Expired.   Try again.', 'menu-test' ); ?></strong></p></div>
+<div class="updated"><p><strong><?php _e('Your selected file could not download. Server may not give the HTTP Header permission or requesting session time may Expired.   Try again.', 'menu-pec' ); ?></strong></p></div>
 <?php
 }else{
     ?>
-    <div class="updated"><p><strong><?php _e('File Downloading complete.', 'menu-test' );  ?></strong></p></div>
+    <div class="updated"><p><strong><?php _e('File Downloading complete.', 'menu-pec' );  ?></strong></p></div>
 <?php
 }
 include("icalreader.php"); // Run parser and insert into DB
 }
-
 // File upload through Browse local file
 if( isset($_FILES['fupload'])) {
     // Read posted file information
@@ -95,7 +94,7 @@ if( isset($_FILES['fupload'])) {
     $status_flag = 0;
 
     //Put the file in directory with checking
-    if ($file_type == "text/calendar") {
+    if ($file_type == "text/calendar" || $file_type == "application/octet-stream") {
         if(!is_writable($dir)){
             chmod($dir, 0777);
         }
@@ -105,11 +104,11 @@ if( isset($_FILES['fupload'])) {
     // Put an settings updated message on the screen
     if ($status_flag==0){
         ?>
-        <div class="updated"><p><strong><?php _e('Your selected file is not *.ics format. Try again'.$file_type, 'menu-test' ); ?></strong></p></div>
+        <div class="updated"><p><strong><?php _e('Your selected file is not *.ics format. Try again'.$file_type, 'menu-pec' ); ?></strong></p></div>
     <?php
     }else{
         ?>
-        <div class="updated"><p><strong><?php _e('File uploading complete successfully.', 'menu-test' );  ?></strong></p></div>
+        <div class="updated"><p><strong><?php _e('File uploading complete successfully.', 'menu-pec' );  ?></strong></p></div>
     <?php
     }
     include("icalreader.php"); // Run parser and insert into DB
@@ -168,9 +167,9 @@ echo '<div id="pec-settings-form">';
 
 // header upload .ics file
 
-echo "<h3>2. ". __("Upload an iCalendar *.ics file", "menu-test") ."</h3>";
-echo "<table style='padding-left:12px'><tr><td>";
-echo "<h4>" . __( 'Upload from this computer', 'menu-test' ) . "</h4>";
+echo "<h3>2. ". __("Upload an iCalendar *.ics file", "menu-pec") ."</h3>";
+echo "<table style='padding-left:12px; width:100%'><tr><td>";
+echo "<h4>" . __( 'Upload from this computer', 'menu-pec' ) . "</h4>";
 
 // settings form
 
@@ -179,7 +178,7 @@ echo "<h4>" . __( 'Upload from this computer', 'menu-test' ) . "</h4>";
 <form enctype="multipart/form-data" action="" method="post">
     <input type="hidden" name="<?php echo $hidden_field_name; ?>" value="Y">
 
-    <p class="submit"><?php _e("File:", 'menu-test' ); ?>
+    <p class="submit"><?php _e("File:", 'menu-pec' ); ?>
         <input type="file" name="<?php echo $data_file_name; ?>" >
         <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Upload') ?>" />
     </p>
@@ -196,7 +195,7 @@ echo '<td><div class="pec-admin-vertical-hr"></div></td>'; // vertical hr
 // header upload via URL
 
 echo "<td>";
-echo "<h4>" . __( 'Or upload from web URL', 'menu-test' ) . "</h4>";
+echo "<h4>" . __( 'Or upload from web URL', 'menu-pec' ) . "</h4>";
 
 // settings form
 
@@ -205,7 +204,7 @@ echo "<h4>" . __( 'Or upload from web URL', 'menu-test' ) . "</h4>";
 <form enctype="multipart/form-data" action="" method="post">
     <input type="hidden" name="<?php echo $hidden_field_name; ?>" value="Y">
 
-    <p class="submit"><?php _e("File:", 'menu-test' ); ?>
+    <p class="submit"><?php _e("File:", 'menu-pec' ); ?>
         <input type="url" name="<?php echo $data_file_name_url; ?>" >
         <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Upload') ?>" />
     </p>

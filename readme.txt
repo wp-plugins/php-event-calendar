@@ -12,17 +12,17 @@ Built with PHP Event Calendar Lite, PHP Event Calendar lets you easily create, s
 
 == Description ==
 
-The plugin is built with FREE [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar") Lite version. It is a modern, responsive, multi-user calendar/scheduling application. It can be used right out of the box as a standalone event calendar application or can be customized easily to seamlessly integrate into your own environment. It supports all major Web browsers as well as iOS and Android devices.
+The plugin is built with FREE [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar") Lite version, a modern, responsive, multi-user calendar/scheduling application. It can be used right out of the box as a standalone event calendar application or can be customized easily to seamlessly integrate into your own environment. It supports all major Web browsers as well as iOS and Android devices.
 
-The Lite version is similar to full version with a few limitations: allows single calendar only; no recurring/repeating events; no email reminder. The full version has no those limitations. 
+The Lite version is similar to full version with a few limitations: allows single calendar only; no recurring/repeating events; no email reminder. The full version has no those limitations.
 
 PHP Event Calendar full version supports:
 
-* Multiple calendars, 
-* Shared and public calendars, 
-* Repeating/recurring events, 
-* Event drag and drop, 
-* Email reminders, 
+* Multiple calendars,
+* Shared and public calendars,
+* Repeating/recurring events,
+* Event drag and drop,
+* Email reminders,
 * Agenda and custom list view,
 * Event search
 * More to come!
@@ -43,23 +43,27 @@ That's it! You can now access event calendar setting on the nav bar in admin das
 
 == Frequently Asked Questions ==
 
-= What is .ics file? =
-
-From Wikipeida: iCalendar is a computer file format which allows Internet users to send meeting requests and tasks to other Internet users, via email, or sharing files with an extension of .ics. 
-
-iCalendar is used and supported by Google Calendar, Apple Calendar (formerly iCal),[2] IBM Lotus Notes,[3] Yahoo! Calendar, Evolution (software), eM Client, Lightning extension for Mozilla Thunderbird and SeaMonkey, and partially by Microsoft Outlook and Novell GroupWise.
-
-= How do I export Google Calendar or Outlookt events to .ics file? =
-
-Please go to PHP Event Calendar setting in admin dashboard and check out screenshot links that show how to export in different calendar software.
-
 = Where do I enter events? =
 
-The initial release can only enter events through import by either file upload or URL. We are working to include full event management UI in future update.
+You can enter events in two ways:
+
+* Go to PHP Events Calendar > Events Management to manage events using user friendly interface.
+
+* Go to PHP Events Calendar > Imports to upload events through local .ics file or URL that links to a .ics file.
 
 = How do I remove an event from calendar? = 
 
-All events imported are read only. We are working on bringing you event management full UI. Meanwhile, to remove an event, the admin users can go to their WordPress MySql database and find pec_events table to remove any event.
+PHP Events Calendar > Events Management to add, modify or remove any event.
+
+= How do I export Google Calendar or Outlookt events to .ics file? =
+
+Please go to PHP Event Calendar > Imports in admin dashboard and check out Screenshot links that show how to export in different calendar software.
+
+= What is .ics file? =
+
+From Wikipeida: iCalendar is a computer file format which allows Internet users to send meeting requests and tasks to other Internet users, via email, or sharing files with an extension of .ics.
+
+iCalendar is used and supported by Google Calendar, Apple Calendar (formerly iCal), IBM Lotus Notes, Yahoo! Calendar, Evolution (software), eM Client, Lightning extension for Mozilla Thunderbird and SeaMonkey, and partially by Microsoft Outlook and Novell GroupWise.
 
 = I don't see my calendar! =
 
@@ -67,7 +71,7 @@ Please make sure to include [php_event_calendar] shortcode in your page.
 
 = I've got suggestions. Where should I send them? =
 
-Great! Please visit our [technical support](http://phpeventcalendar.uservoice.com/ "PHP Event Calendar Online Tech Support") and submit your ideas and suggestions.
+Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technical support</a> and submit your ideas and suggestions.
 
 == Screenshots ==
 
@@ -78,8 +82,15 @@ Great! Please visit our [technical support](http://phpeventcalendar.uservoice.co
 5. Event Detail View
 6. Month View with Sidebar 
 7. Month View (Full Width Responsive)
+8. Events Management UI - Event Edit Window
+9. Events Management UI - Week View
 
 == Changelog ==
+
+= 1.1 =
+* Interactive event management admin user interface is available!
+* Event color picker
+* Minor UI enhancements
 
 = 1.0.0 =
 Initial Release

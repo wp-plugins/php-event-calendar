@@ -118,7 +118,7 @@ $allCalendars = $allCals->allCalendars;
         border: 1px solid #F0F0F0;
         float: none;
         list-style: none outside none;
-        margin-left: -40px;
+        margin:0;
         padding: 0;
         text-align: left;
         width: 81px;
@@ -158,171 +158,171 @@ $allCalendars = $allCals->allCalendars;
 </style>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="text-align:left;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h5 class="modal-title" id="myModalLabel"></h5>
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h5 class="modal-title" id="myModalLabel"></h5>
+</div>
+<div style="margin: 2px 20px 0px 4px; float: right; display: none" id="remove-block">
+    <button type="button" class="btn btn-danger btn-xs ladda-button" data-style="expand-left" data-event-id="" id="remove-link"><span class="ladda-label">Remove This Event</span></button>
+</div>
+<div style="clear: both"></div>
+<form role="form" id="eventForm" class="form-horizontal">
+<div class="modal-body" style="padding-top: 10px;padding-bottom:0px">
+<fieldset>
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <div class="form-group">
+            <label for="title" class="col-sm-3 control-label">Title</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="title" name="title" placeholder="Event Title" />
             </div>
-            <div style="margin: 2px 20px 0px 4px; float: right; display: none" id="remove-block">
-                <button type="button" class="btn btn-danger btn-xs ladda-button" data-style="expand-left" data-event-id="" id="remove-link"><span class="ladda-label">Remove This Event</span></button>
+        </div>
+
+        <div class="form-group">
+            <label for="start-date" class="col-sm-3 control-label">Start</label>
+            <div class="input-group col-sm-6 date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="start" data-link-format="yyyy-mm-dd" >
+                <input type="text" class="form-control" id="start-date" name="start-date" placeholder="Start Date" readonly="readonly" style="background-color: white; cursor: default;" />
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
             </div>
-            <div style="clear: both"></div>
-            <form role="form" id="eventForm" class="form-horizontal">
-                <div class="modal-body" style="padding-top: 10px">
-                    <fieldset>
-                        <div class="panel panel-default">
-                            <div class="panel-body">
+            <div class="col-sm-3">
+                <input name="start-time" id="start-time" class="form-control"  readonly="readonly" style="background-color: white; cursor: default;"/>
+                <div class="time-panel" id="time-panel-start">
+                    <ul class="time-panel-ul">
+                        <li data-value="00:00">00:00 AM</li>
+                        <li data-value="00:30">00:30 AM</li>
+                        <li data-value="01:00">01:00 AM</li>
+                        <li data-value="01:30">01:30 AM</li>
+                        <li data-value="02:00">02:00 AM</li>
+                        <li data-value="02:30">02:30 AM</li>
+                        <li data-value="03:00">03:00 AM</li>
+                        <li data-value="03:30">03:30 AM</li>
+                        <li data-value="04:00">04:00 AM</li>
+                        <li data-value="04:30">04:30 AM</li>
+                        <li data-value="05:00">05:00 AM</li>
+                        <li data-value="05:30">05:30 AM</li>
+                        <li data-value="06:00">06:00 AM</li>
+                        <li data-value="06:30">06:30 AM</li>
+                        <li data-value="07:00">07:00 AM</li>
+                        <li data-value="07:30">07:30 AM</li>
+                        <li data-value="08:00">08:00 AM</li>
+                        <li data-value="08:30">08:30 AM</li>
+                        <li data-value="09:00">09:00 AM</li>
+                        <li data-value="09:30">09:30 AM</li>
+                        <li data-value="10:00">10:00 AM</li>
+                        <li data-value="10:30">10:30 AM</li>
+                        <li data-value="11:00">11:00 AM</li>
+                        <li data-value="11:30">11:30 AM</li>
+                        <li data-value="12:00">12:00 PM</li>
+                        <li data-value="12:30">12:30 PM</li>
+                        <li data-value="13:00">01:00 PM</li>
+                        <li data-value="13:30">01:30 PM</li>
+                        <li data-value="14:00">02:00 PM</li>
+                        <li data-value="14:30">02:30 PM</li>
+                        <li data-value="15:00">03:00 PM</li>
+                        <li data-value="15:30">03:30 PM</li>
+                        <li data-value="16:00">04:00 PM</li>
+                        <li data-value="16:30">04:30 PM</li>
+                        <li data-value="17:00">05:00 PM</li>
+                        <li data-value="17:30">05:30 PM</li>
+                        <li data-value="18:00">06:00 PM</li>
+                        <li data-value="18:30">06:30 PM</li>
+                        <li data-value="19:00">07:00 PM</li>
+                        <li data-value="19:30">07:30 PM</li>
+                        <li data-value="20:00">08:00 PM</li>
+                        <li data-value="20:30">08:30 PM</li>
+                        <li data-value="21:00">09:00 PM</li>
+                        <li data-value="21:30">09:30 PM</li>
+                        <li data-value="22:00">10:00 PM</li>
+                        <li data-value="22:30">10:30 PM</li>
+                        <li data-value="23:00">11:00 PM</li>
+                        <li data-value="23:30">11:30 PM</li>
 
-                                <div class="form-group">
-                                    <label for="title" class="col-sm-3 control-label">Title</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="title" name="title" placeholder="Event Title" />
-                                    </div>
-                                </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-                                <div class="form-group">
-                                    <label for="start-date" class="col-sm-3 control-label">Start</label>
-                                    <div class="input-group col-sm-6 date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="start" data-link-format="yyyy-mm-dd" >
-                                        <input type="text" class="form-control" id="start-date" name="start-date" placeholder="Start Date" readonly="readonly" style="background-color: white; cursor: default;" />
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <input name="start-time" id="start-time" class="form-control"  readonly="readonly" style="background-color: white; cursor: default;"/>
-                                        <div class="time-panel" id="time-panel-start">
-                                            <ul class="time-panel-ul">
-                                                <li data-value="00:00">00:00 AM</li>
-                                                <li data-value="00:30">00:30 AM</li>
-                                                <li data-value="01:00">01:00 AM</li>
-                                                <li data-value="01:30">01:30 AM</li>
-                                                <li data-value="02:00">02:00 AM</li>
-                                                <li data-value="02:30">02:30 AM</li>
-                                                <li data-value="03:00">03:00 AM</li>
-                                                <li data-value="03:30">03:30 AM</li>
-                                                <li data-value="04:00">04:00 AM</li>
-                                                <li data-value="04:30">04:30 AM</li>
-                                                <li data-value="05:00">05:00 AM</li>
-                                                <li data-value="05:30">05:30 AM</li>
-                                                <li data-value="06:00">06:00 AM</li>
-                                                <li data-value="06:30">06:30 AM</li>
-                                                <li data-value="07:00">07:00 AM</li>
-                                                <li data-value="07:30">07:30 AM</li>
-                                                <li data-value="08:00">08:00 AM</li>
-                                                <li data-value="08:30">08:30 AM</li>
-                                                <li data-value="09:00">09:00 AM</li>
-                                                <li data-value="09:30">09:30 AM</li>
-                                                <li data-value="10:00">10:00 AM</li>
-                                                <li data-value="10:30">10:30 AM</li>
-                                                <li data-value="11:00">11:00 AM</li>
-                                                <li data-value="11:30">11:30 AM</li>
-                                                <li data-value="12:00">12:00 PM</li>
-                                                <li data-value="12:30">12:30 PM</li>
-                                                <li data-value="13:00">01:00 PM</li>
-                                                <li data-value="13:30">01:30 PM</li>
-                                                <li data-value="14:00">02:00 PM</li>
-                                                <li data-value="14:30">02:30 PM</li>
-                                                <li data-value="15:00">03:00 PM</li>
-                                                <li data-value="15:30">03:30 PM</li>
-                                                <li data-value="16:00">04:00 PM</li>
-                                                <li data-value="16:30">04:30 PM</li>
-                                                <li data-value="17:00">05:00 PM</li>
-                                                <li data-value="17:30">05:30 PM</li>
-                                                <li data-value="18:00">06:00 PM</li>
-                                                <li data-value="18:30">06:30 PM</li>
-                                                <li data-value="19:00">07:00 PM</li>
-                                                <li data-value="19:30">07:30 PM</li>
-                                                <li data-value="20:00">08:00 PM</li>
-                                                <li data-value="20:30">08:30 PM</li>
-                                                <li data-value="21:00">09:00 PM</li>
-                                                <li data-value="21:30">09:30 PM</li>
-                                                <li data-value="22:00">10:00 PM</li>
-                                                <li data-value="22:30">10:30 PM</li>
-                                                <li data-value="23:00">11:00 PM</li>
-                                                <li data-value="23:30">11:30 PM</li>
+        <div class="form-group" id="end-group">
+            <label for="end" class="col-sm-3 control-label">End</label>
+            <div class="input-group col-sm-6 form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="end" data-link-format="yyyy-mm-dd" >
+                <input type="text" class="form-control" placeholder="End Date" name="end-date" id="end-date" readonly="readonly" style="background-color: white; cursor: default;" />
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+            <div class="col-sm-3">
+                <input name="end-time" id="end-time" class="form-control"  readonly="readonly" style="background-color: white; cursor: default;" />
+                <div class="time-panel" id="time-panel-end">
+                    <ul class="time-panel-ul">
+                        <li data-value="00:00">00:00 AM</li>
+                        <li data-value="00:30">00:30 AM</li>
+                        <li data-value="01:00">01:00 AM</li>
+                        <li data-value="01:30">01:30 AM</li>
+                        <li data-value="02:00">02:00 AM</li>
+                        <li data-value="02:30">02:30 AM</li>
+                        <li data-value="03:00">03:00 AM</li>
+                        <li data-value="03:30">03:30 AM</li>
+                        <li data-value="04:00">04:00 AM</li>
+                        <li data-value="04:30">04:30 AM</li>
+                        <li data-value="05:00">05:00 AM</li>
+                        <li data-value="05:30">05:30 AM</li>
+                        <li data-value="06:00">06:00 AM</li>
+                        <li data-value="06:30">06:30 AM</li>
+                        <li data-value="07:00">07:00 AM</li>
+                        <li data-value="07:30">07:30 AM</li>
+                        <li data-value="08:00">08:00 AM</li>
+                        <li data-value="08:30">08:30 AM</li>
+                        <li data-value="09:00">09:00 AM</li>
+                        <li data-value="09:30">09:30 AM</li>
+                        <li data-value="10:00">10:00 AM</li>
+                        <li data-value="10:30">10:30 AM</li>
+                        <li data-value="11:00">11:00 AM</li>
+                        <li data-value="11:30">11:30 AM</li>
+                        <li data-value="12:00">12:00 PM</li>
+                        <li data-value="12:30">12:30 PM</li>
+                        <li data-value="13:00">01:00 PM</li>
+                        <li data-value="13:30">01:30 PM</li>
+                        <li data-value="14:00">02:00 PM</li>
+                        <li data-value="14:30">02:30 PM</li>
+                        <li data-value="15:00">03:00 PM</li>
+                        <li data-value="15:30">03:30 PM</li>
+                        <li data-value="16:00">04:00 PM</li>
+                        <li data-value="16:30">04:30 PM</li>
+                        <li data-value="17:00">05:00 PM</li>
+                        <li data-value="17:30">05:30 PM</li>
+                        <li data-value="18:00">06:00 PM</li>
+                        <li data-value="18:30">06:30 PM</li>
+                        <li data-value="19:00">07:00 PM</li>
+                        <li data-value="19:30">07:30 PM</li>
+                        <li data-value="20:00">08:00 PM</li>
+                        <li data-value="20:30">08:30 PM</li>
+                        <li data-value="21:00">09:00 PM</li>
+                        <li data-value="21:30">09:30 PM</li>
+                        <li data-value="22:00">10:00 PM</li>
+                        <li data-value="22:30">10:30 PM</li>
+                        <li data-value="23:00">11:00 PM</li>
+                        <li data-value="23:30">11:30 PM</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+</div>
+<!--- Action Links -->
 
-                                <div class="form-group" id="end-group">
-                                    <label for="end" class="col-sm-3 control-label">End</label>
-                                    <div class="input-group col-sm-6 form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="end" data-link-format="yyyy-mm-dd" >
-                                        <input type="text" class="form-control" placeholder="End Date" name="end-date" id="end-date" readonly="readonly" style="background-color: white; cursor: default;" />
-                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <input name="end-time" id="end-time" class="form-control"  readonly="readonly" style="background-color: white; cursor: default;" />
-                                        <div class="time-panel" id="time-panel-end">
-                                            <ul class="time-panel-ul">
-                                                <li data-value="00:00">00:00 AM</li>
-                                                <li data-value="00:30">00:30 AM</li>
-                                                <li data-value="01:00">01:00 AM</li>
-                                                <li data-value="01:30">01:30 AM</li>
-                                                <li data-value="02:00">02:00 AM</li>
-                                                <li data-value="02:30">02:30 AM</li>
-                                                <li data-value="03:00">03:00 AM</li>
-                                                <li data-value="03:30">03:30 AM</li>
-                                                <li data-value="04:00">04:00 AM</li>
-                                                <li data-value="04:30">04:30 AM</li>
-                                                <li data-value="05:00">05:00 AM</li>
-                                                <li data-value="05:30">05:30 AM</li>
-                                                <li data-value="06:00">06:00 AM</li>
-                                                <li data-value="06:30">06:30 AM</li>
-                                                <li data-value="07:00">07:00 AM</li>
-                                                <li data-value="07:30">07:30 AM</li>
-                                                <li data-value="08:00">08:00 AM</li>
-                                                <li data-value="08:30">08:30 AM</li>
-                                                <li data-value="09:00">09:00 AM</li>
-                                                <li data-value="09:30">09:30 AM</li>
-                                                <li data-value="10:00">10:00 AM</li>
-                                                <li data-value="10:30">10:30 AM</li>
-                                                <li data-value="11:00">11:00 AM</li>
-                                                <li data-value="11:30">11:30 AM</li>
-                                                <li data-value="12:00">12:00 PM</li>
-                                                <li data-value="12:30">12:30 PM</li>
-                                                <li data-value="13:00">01:00 PM</li>
-                                                <li data-value="13:30">01:30 PM</li>
-                                                <li data-value="14:00">02:00 PM</li>
-                                                <li data-value="14:30">02:30 PM</li>
-                                                <li data-value="15:00">03:00 PM</li>
-                                                <li data-value="15:30">03:30 PM</li>
-                                                <li data-value="16:00">04:00 PM</li>
-                                                <li data-value="16:30">04:30 PM</li>
-                                                <li data-value="17:00">05:00 PM</li>
-                                                <li data-value="17:30">05:30 PM</li>
-                                                <li data-value="18:00">06:00 PM</li>
-                                                <li data-value="18:30">06:30 PM</li>
-                                                <li data-value="19:00">07:00 PM</li>
-                                                <li data-value="19:30">07:30 PM</li>
-                                                <li data-value="20:00">08:00 PM</li>
-                                                <li data-value="20:30">08:30 PM</li>
-                                                <li data-value="21:00">09:00 PM</li>
-                                                <li data-value="21:30">09:30 PM</li>
-                                                <li data-value="22:00">10:00 PM</li>
-                                                <li data-value="22:30">10:30 PM</li>
-                                                <li data-value="23:00">11:00 PM</li>
-                                                <li data-value="23:30">11:30 PM</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!--- Action Links -->
-
-                        <div class="well well-sm" style="margin-top: 10px">
+<div class="well well-sm" style="margin-top: 10px">
                             <span class="basic">
                                <label for="allDay" style="padding-right: 5px">
-                                <input type="checkbox" name="allDay" id="allDay"> All Day
+                                   <input type="checkbox" name="allDay" id="allDay"> All Day
                                </label>
-                               <label for="repeat" style="padding-right: 5px">
-                                <input type="checkbox" name="repeat" id="repeat" value="1"> Repeat
+                               <label for="repeat" style="padding-right: 5px; display: none;">
+                                   <input type="checkbox" name="repeat" id="" value="1" disabled> Repeat <!-- lite_disabled -->
                                </label>
                                &nbsp;
-                               <div class="show-link" style="float: right; padding-right: 5px;">
-                               <a href="javascript:void(0);" id="show-standard-settings">Show Standard Settings</a>
+                               <div class="show-link" style="float: right; padding-right: 5px;"> <!-- lite_disabled: always expanding this section for lite version only -->
+                                   <a href="javascript:void(0);" id="show-standard-settings">Show Standard Settings</a>
                                </div>
                             </span>
 
@@ -467,7 +467,7 @@ $allCalendars = $allCals->allCalendars;
                             <!-- Repeat Box Ends -->
 
                             <!-- Standard Settings -->
-                            <div class="standard col-sm-12" style="margin-top: 8px">
+                            <div class="standard col-sm-12" style="margin-top: 8px;">
                                 <div class="form-group">
                                     <label for="location" class="col-sm-3 control-label">Location</label>
                                     <div class="col-sm-9">
@@ -489,7 +489,7 @@ $allCalendars = $allCals->allCalendars;
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group" style="display:none">
                                     <label for="select-calendar" class="col-sm-3 control-label">Calendars</label>
                                     <div class="col-sm-9">
                                         <!--<select class="selectpicker show-tick" data-selected-text-format="count" multiple>-->
@@ -498,7 +498,9 @@ $allCalendars = $allCals->allCalendars;
                                                 <?php
                                                 //print_r($_SESSION['userData']['active_calendar_id']);
                                                 $selectedDone = false;
-                                                if(!$selectedDone && in_array($v['id'],$_SESSION['userData']['active_calendar_id'])){
+                                                $activeCalendars = C_Calendar::activeCalendarId(PEC_USER_ID);
+                                                $activeCalendars = explode(',', $activeCalendars[0]);
+                                                if(!$selectedDone && in_array($v['id'],$activeCalendars)){
                                                     $active = 'selected="selected"';
                                                     $selectedDone = true;
                                                 }
@@ -516,7 +518,7 @@ $allCalendars = $allCals->allCalendars;
                                     <label for="backgroundColor" class="col-sm-3 control-label">Event Color</label>
                                     <div class="col-sm-9">
                                         <div class="form-control" style="padding-bottom: 2px;">
-                                            <span style="background-color: #3a87ad" class="color-box color-box-selected" data-color="#3a87ad" id="cid_3a87ad">&nbsp;✔</span>
+                                            <span style="background-color: #3a87ad" class="color-box color-box-selected" data-color="#3a87ad" id="cid_3a87ad">&nbsp;</span>
                                             <span style="background-color: #eaff00" class="color-box" data-color="#eaff00" id="cid_eaff00">&nbsp;</span>
                                             <span style="background-color: #f903a5" class="color-box" data-color="#f903a5" id="cid_f903a5">&nbsp;</span>
                                             <span style="background-color: #1a9b05" class="color-box" data-color="#1a9b05" id="cid_1a9b05">&nbsp;</span>
@@ -531,7 +533,7 @@ $allCalendars = $allCals->allCalendars;
                                 </div>
 
 
-                                <div class="form-group">
+                                <div class="form-group" style="display:none">
                                     <label for="free_busy" class="col-sm-3 control-label">Show as</label>
                                     <div class="col-sm-9">
                                         <select name="free_busy" id="free_busy" class="form-control">
@@ -541,12 +543,12 @@ $allCalendars = $allCals->allCalendars;
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group" style="display:none">
                                     <label for="privacy" class="col-sm-3 control-label">Privacy</label>
                                     <div class="col-sm-9">
                                         <select name="privacy" id="privacy" class="form-control ">
-                                            <option value="private">Private</option>
                                             <option value="public">Public</option>
+                                            <option value="private">Private</option>
                                         </select>
                                     </div>
                                 </div>
@@ -558,194 +560,196 @@ $allCalendars = $allCals->allCalendars;
                             <!-- Standard Settings Ends -->
 
 
-                        </div>
+</div>
 
 
-                        <div class="well well-sm" style="margin-top: 10px; min-height: 40px;">
+<div class="well well-sm" style="margin-top: 10px; min-height: 40px; display: none"> <!-- lite_disabled -->
                             <span class="basic-remind">
-                               <div class="show-link-remind" style="float: right; padding-right: 5px;">
-                                   <a href="javascript:void(0);" id="show-reminder-settings">Show Reminder Settings</a>
+                               <div class="show-link-remind" style="float: right; padding-right: 5px; display: none;"> <!-- lite_disabled -->
+                                   <a href="javascript:void(0);" id="">Show Reminder Settings</a><!-- lite_disabled -->
                                </div>
                             </span>
 
-                            <div class="form-inline reminder" style="float: right; padding-bottom:3px">
-                                <div class="checkbox" style="padding-top: 0; float: right; ">
-                                    <label for="hide-reminder-settings-settings"  style="padding-right: 5px; ">
-                                        <a href="javascript:void(0);" id="hide-reminder-settings">Hide Reminder Settings</a>
-                                    </label>
-                                </div>
-                            </div>
+    <div class="form-inline reminder" style="float: right; padding-bottom:3px">
+        <div class="checkbox" style="padding-top: 0; float: right; ">
+            <label for="hide-reminder-settings-settings"  style="padding-right: 5px; ">
+                <a href="javascript:void(0);" id="hide-reminder-settings">Hide Reminder Settings</a>
+            </label>
+        </div>
+    </div>
 
-                            <div class="reminder col-sm-12" style="margin-top: 8px">
-                                <div id="reminder-holder">
-                                    <div class="form-group reminder-group" id="reminder1" style="display: block">
-                                        <label for="reminder_type_1" class="col-sm-3 control-label">Reminder</label>
-                                        <div class="col-sm-9">
-                                            <div class="col-sm-4">
-                                                <select name="reminder_type[]" id="reminder_type_1" class="form-control">
-                                                    <option value="email">Email</option>
-                                                    <option value="popup">Popup</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-3" style="padding-left: 5px;">
-                                                <select name="reminder_time[]" id="reminder_time_1" class="form-control">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="15">15</option>
-                                                    <option value="20">20</option>
-                                                    <option value="25">25</option>
-                                                    <option value="30">30</option>
-                                                    <option value="45">45</option>
-                                                    <option value="50">50</option>
-                                                    <option value="55">55</option>
-                                                    <option value="60">60</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-3" style="padding-left: 5px">
-                                                <select name="reminder_time_unit[]" id="reminder_time_unit_1" class="form-control">
-                                                    <option value="minute">Minute</option>
-                                                    <option value="hour">Hour</option>
-                                                    <option value="day">Day</option>
-                                                    <option value="week">Week</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-2"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group reminder-group" id="reminder2" style="display: block">
-                                        <label for="reminder_type_2" class="col-sm-3 control-label">&nbsp;</label>
-                                        <div class="col-sm-9">
-                                            <div class="col-sm-4">
-                                                <select name="reminder_type[]" id="reminder_type_2" class="form-control">
-                                                    <option value="email">Email</option>
-                                                    <option value="popup">Popup</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-3" style="padding-left: 5px;">
-                                                <select name="reminder_time[]" id="reminder_time_2" class="form-control">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="15">15</option>
-                                                    <option value="20">20</option>
-                                                    <option value="25">25</option>
-                                                    <option value="30">30</option>
-                                                    <option value="45">45</option>
-                                                    <option value="50">50</option>
-                                                    <option value="55">55</option>
-                                                    <option value="60">60</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-3" style="padding-left: 5px">
-                                                <select name="reminder_time_unit[]" id="reminder_time_unit_2" class="form-control">
-                                                    <option value="minute">Minute</option>
-                                                    <option value="hour">Hour</option>
-                                                    <option value="day">Day</option>
-                                                    <option value="week">Week</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-2"><button class='close_reminder' onclick="javascript:hideReminder2();" aria-hidden='true' data-dismiss='guest' type='button'>×</button></div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group reminder-group" id="reminder3" style="display: block">
-                                        <label for="reminder_type_3" class="col-sm-3 control-label">&nbsp;</label>
-                                        <div class="col-sm-9">
-                                            <div class="col-sm-4">
-                                                <select name="reminder_type[]" id="reminder_type_3" class="form-control">
-                                                    <option value="email">Email</option>
-                                                    <option value="popup">Popup</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-3" style="padding-left: 5px;">
-                                                <select name="reminder_time[]" id="reminder_time_3" class="form-control">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="15">15</option>
-                                                    <option value="20">20</option>
-                                                    <option value="25">25</option>
-                                                    <option value="30">30</option>
-                                                    <option value="45">45</option>
-                                                    <option value="50">50</option>
-                                                    <option value="55">55</option>
-                                                    <option value="60">60</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-3" style="padding-left: 5px">
-                                                <select name="reminder_time_unit[]" id="reminder_time_unit_3" class="form-control">
-                                                    <option value="minute">Minute</option>
-                                                    <option value="hour">Hour</option>
-                                                    <option value="day">Day</option>
-                                                    <option value="week">Week</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-2"><button class='close_reminder' data-val='reminder3' onclick="javascript:hideReminder3();"  aria-hidden='true' data-dismiss='guest' type='button'>×</button></div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="privacy" class="col-sm-3 control-label">&nbsp;</label>
-                                    <div class="col-sm-9">
-                                        <a href="javascript:void(0);" id="add_reminder" style="font-size: 12px;">Add Reminder</a>
-                                    </div>
-
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="privacy" class="col-sm-3 control-label">Guest</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="guest" style="width:80%; float:left;">&nbsp;<button type="button" class="btn btn-small btn-success" id="add-guest">Add</button>
-                                        <div id="guest-list"></div>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-
-                            <!-- Standard Settings Ends -->
-
-
-                        </div>
-
-
-
-                    </fieldset>
+    <div class="reminder col-sm-12" style="margin-top: 8px">
+        <div id="reminder-holder">
+            <div class="form-group reminder-group" id="reminder1" style="display: block">
+                <label for="reminder_type_1" class="col-sm-3 control-label">Reminder</label>
+                <div class="col-sm-9">
+                    <div class="col-sm-4">
+                        <select name="reminder_type[]" id="reminder_type_1" class="form-control">
+                            <option value="email">Email</option>
+                            <option value="popup">Popup</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3" style="padding-left: 5px;">
+                        <select name="reminder_time[]" id="reminder_time_1" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                            <option value="50">50</option>
+                            <option value="55">55</option>
+                            <option value="60">60</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3" style="padding-left: 5px">
+                        <select name="reminder_time_unit[]" id="reminder_time_unit_1" class="form-control">
+                            <option value="minute">Minute</option>
+                            <option value="hour">Hour</option>
+                            <option value="day">Day</option>
+                            <option value="week">Week</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2"></div>
                 </div>
-                <div class="modal-footer">
-                    <input type="hidden" value="-1" name="update-event" id="update-event" />
-                    <input type="hidden" value="" name="currentView" id="currentView" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="create-event">Create Event</button>
-                </div>
-            </form>
+            </div>
 
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+            <div class="form-group reminder-group" id="reminder2" style="display: block">
+                <label for="reminder_type_2" class="col-sm-3 control-label">&nbsp;</label>
+                <div class="col-sm-9">
+                    <div class="col-sm-4">
+                        <select name="reminder_type[]" id="reminder_type_2" class="form-control">
+                            <option value="email">Email</option>
+                            <option value="popup">Popup</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3" style="padding-left: 5px;">
+                        <select name="reminder_time[]" id="reminder_time_2" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                            <option value="50">50</option>
+                            <option value="55">55</option>
+                            <option value="60">60</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3" style="padding-left: 5px">
+                        <select name="reminder_time_unit[]" id="reminder_time_unit_2" class="form-control">
+                            <option value="minute">Minute</option>
+                            <option value="hour">Hour</option>
+                            <option value="day">Day</option>
+                            <option value="week">Week</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2"><button class='close_reminder' onclick="javascript:hideReminder2();" aria-hidden='true' data-dismiss='guest' type='button'>×</button></div>
+
+                </div>
+            </div>
+
+            <div class="form-group reminder-group" id="reminder3" style="display: block">
+                <label for="reminder_type_3" class="col-sm-3 control-label">&nbsp;</label>
+                <div class="col-sm-9">
+                    <div class="col-sm-4">
+                        <select name="reminder_type[]" id="reminder_type_3" class="form-control">
+                            <option value="email">Email</option>
+                            <option value="popup">Popup</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3" style="padding-left: 5px;">
+                        <select name="reminder_time[]" id="reminder_time_3" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                            <option value="50">50</option>
+                            <option value="55">55</option>
+                            <option value="60">60</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3" style="padding-left: 5px">
+                        <select name="reminder_time_unit[]" id="reminder_time_unit_3" class="form-control">
+                            <option value="minute">Minute</option>
+                            <option value="hour">Hour</option>
+                            <option value="day">Day</option>
+                            <option value="week">Week</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2"><button class='close_reminder' data-val='reminder3' onclick="javascript:hideReminder3();"  aria-hidden='true' data-dismiss='guest' type='button'>×</button></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="privacy" class="col-sm-3 control-label">&nbsp;</label>
+            <div class="col-sm-9">
+                <a href="javascript:void(0);" id="add_reminder" style="font-size: 12px;">Add Reminder</a>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="privacy" class="col-sm-3 control-label">Guest</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="guest" style="width:80%; float:left;">&nbsp;<button type="button" class="btn btn-small btn-success" id="add-guest">Add</button>
+                <div id="guest-list"></div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <!-- Standard Settings Ends -->
+
+
+</div>
+
+
+
+</fieldset>
+</div>
+<div class="modal-footer">
+
+    <input type="hidden" value="-1" name="update-event" id="update-event" />
+    <input type="hidden" value="PEC_CREATE_EVENT" name="action" id="action" />
+    <input type="hidden" value="" name="currentView" id="currentView" />
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary" id="create-event">Create Event</button>
+</div>
+</form>
+
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

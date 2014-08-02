@@ -1,9 +1,9 @@
+
 var reminder2Obj;
 var reminder3Obj;
 var shareForm;
 var calEditForm;
 jQuery(document).ready(function($) {
-alert('fdf');
     /*
      $.bootstrapGrowl('<div style="text-align: left">This demo is a working preview of the full calendar control that is currently still under heavy development.' +
      'Check back here from time to time to see the latest changes and updates.' +
@@ -134,7 +134,7 @@ alert('fdf');
         }
     });
 
-    function searchEventsBasedOnKeyword(searchKey, laddaObj) {
+    /*function searchEventsBasedOnKeyword(searchKey, laddaObj) {
         //=== ladda button animation starts
         var l = Ladda.create(laddaObj);
         l.start();
@@ -160,7 +160,7 @@ alert('fdf');
                 //==== ladda button animation stops
                 l.stop();
             }, "json");
-    }
+    }*/
 
     //====validating
     function validateEventCreateForm() {
@@ -290,8 +290,12 @@ alert('fdf');
 
         var jqxhr = $.ajax({
             type: "POST",
-            url: "<?php echo WP_PEC_PLUGIN_SITE_URL?>/server/ajax/events_manager.php",
-            data: formData,
+            //url: "<?php //echo WP_PEC_PLUGIN_SITE_URL?>/server/ajax/events_manager.php",
+            url: ajaxurl, //For Wordpress AJAX instead use WP Admin Ajax URL, which is actually ajaxurl
+            data: {formData,
+                    action: PEC_CREATE_EVENT,
+                    _ajax_nonce: 'wp_create_nonce(NONCE_PEC_CREATE_EVENT)' //Make sure to use WP nonce
+                },
             dataType: "json"
         })
             .done(function (eventJSON) {
@@ -526,8 +530,11 @@ alert('fdf');
 
         var jqxhr = $.ajax({
             type: 'POST',
-            url: '<?php echo WP_PEC_PLUGIN_SITE_URL?>/server/ajax/events_manager.php',
-            data: {action: 'LOAD_SELECTED_CALENDAR_FROM_SESSION'},
+            //url: '<?php //echo WP_PEC_PLUGIN_SITE_URL?>/server/ajax/events_manager.php',
+            url: ajaxurl, //For Wordpress AJAX instead use WP Admin Ajax URL, which is actually ajaxurl
+            data: {action: 'LOAD_SELECTED_CALENDAR_FROM_SESSION',
+            _ajax_nonce: 'wp_create_nonce(NONCE_LOAD_SELECTED_CALENDAR_FROM_SESSION)' //Make sure to use WP nonce
+            },
             dataType: 'json'
         })
             .done(function (selCal) {
@@ -539,8 +546,9 @@ alert('fdf');
 
         var jqxhr = $.ajax({
             type: 'POST',
-            url: '<?php echo WP_PEC_PLUGIN_SITE_URL?>/server/ajax/events_manager.php',
-            data: {action: 'LOAD_SELECTED_CALENDAR_COLOR'}
+            //url: '<?php //echo WP_PEC_PLUGIN_SITE_URL?>/server/ajax/events_manager.php',
+            url: ajaxurl,
+            data: {action: 'LOAD_SELECTED_CALENDAR_COLOR', _ajax_nonce: 'wp_create_nonce(NONCE_LOAD_SELECTED_CALENDAR_COLOR)'}
         })
             .done(function (selCalColor) {
                 //====setting up values
@@ -836,8 +844,8 @@ alert('fdf');
 
         var jqxhr = $.ajax({
             type: "POST",
-            url: "<?php echo WP_PEC_PLUGIN_SITE_URL?>/server/ajax/calendar_manager.php",
-            data: {cID:calID, action: 'EXPORT_CALENDAR'}
+            //url: "<?php //echo WP_PEC_PLUGIN_SITE_URL?>/server/ajax/calendar_manager.php",
+            data: {cID:calID, action: 'EXPORT_CALENDAR', _ajax_nonce: 'wp_create_nonce(NONCE_EXPORT_CALENDAR)'}
         })
             .done(function (directory) {
                 if(directory == 'fail'){
@@ -936,8 +944,9 @@ alert('fdf');
 
         var jqxhr = $.ajax({
             type: "POST",
-            url: "<?php echo WP_PEC_PLUGIN_SITE_URL?>/server/ajax/calendar_manager.php",
-            data: {cID:cID, name:name, cal_desc:cal_desc, clr:clr, privacy:privacy, action: 'UPDATE_CALENDAR'}
+            //url: "<?php //echo WP_PEC_PLUGIN_SITE_URL?>/server/ajax/calendar_manager.php",
+            url: ajaxurl,
+            data: {cID:cID, name:name, cal_desc:cal_desc, clr:clr, privacy:privacy, action: 'UPDATE_CALENDAR', _ajax_nonce: 'wp_create_nonce(NONCE_UPDATE_CALENDAR)'}
         })
             .done(function (calJSON) {
                 $.bootstrapGrowl(" Calendar Updated Successfully ", {
@@ -1114,7 +1123,7 @@ alert('fdf');
 
                 }
                 else {
-                    var calContent = '<a href="javascript:void(0);" class="list-group-item ladda-button new-cal" data-style="expand-right" style="background-color: inherit; color:white;" id="' + calID + '" ><span class="ladda-label">' + calName + '</span></a>';
+                    var calContent = '<a href="javascript:void(0);" class="list-group-item ladda-button new-cal" data-style="expand-right" style="background-color: ' + calColor + '; color:white;" id="' + calID + '" ><span class="ladda-label">' + calName + '</span></a>';
                     $('#my-calendars div.list-group').append(calContent);
                     $('.new-cal').click();
                     $('.new-cal').removeClass('new-cal');
@@ -1713,8 +1722,7 @@ function eventRenderer(calEvent,jsEvent,view,userRole,shortdateFormat, longdateF
 
 }
 
-function
-    formatTime(dateStr) {
+function formatTime(dateStr) {
     var d = new Date(dateStr);
     var hh = d.getHours();
     var m = d.getMinutes();
@@ -1736,6 +1744,7 @@ function
 
     return replacement;
 }
+
 function formatTimeStr(dateStr) {
     var timeData = dateStr.split(':');
 

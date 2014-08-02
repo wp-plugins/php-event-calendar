@@ -572,7 +572,7 @@ class C_Events extends C_Calendar
      */
     public function loadAllEvents($calID = 0,$searchKey='')
     {
-        $userID = $_SESSION['userData']['id'];
+        $userID = PEC_USER_ID;
         $sql = "SELECT `pe`.* FROM  `pec_events` as `pe` LEFT JOIN `pec_calendars` `pc` ON (`pe`.`cal_id` = `pc`.`id`) WHERE `pc`.`user_id`=$userID";
 
 
@@ -587,7 +587,7 @@ class C_Events extends C_Calendar
             $sql .= " AND `pe`.`title` LIKE '%$searchKey%' ";
         }
 
-        $sql .= "ORDER BY `pe`.`start_date` ASC";
+        $sql .= " ORDER BY `pe`.`start_date` ASC";
         $allEvents = $this->dbObj->db_query($sql);
         //die($allEvents);
         if ($this->dbObj->num_rows($allEvents) > 0) {
@@ -1255,7 +1255,7 @@ class C_Events extends C_Calendar
      */
     public static function removeEvent($eventID)
     {
-        if(!isset($_SESSION['userData'])) return false;
+        if(!PEC_USER_ID) return false;
         //====DB
         $dbObj = new C_Database(PEC_DB_HOST, PEC_DB_USER, PEC_DB_PASS, PEC_DB_NAME, PEC_DB_TYPE, PEC_DB_CHARSET);
         $db = $dbObj->db;

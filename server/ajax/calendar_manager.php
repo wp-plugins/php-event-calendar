@@ -1,5 +1,5 @@
 <?php
-require_once("../../conf.php");
+//require_once("../../conf.php");
 
 if(isset($_POST['create-update-calendar']) && $_POST['create-update-calendar'] == 1){
     //==== Get POST Params
@@ -95,7 +95,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'UPDATE_CALENDAR'){
     $params['color'] = $_POST['clr'];
     $params['public'] = $_POST['privacy'];
     $params['description'] = $_POST['cal_desc'];
-    $params['user_id'] = $_SESSION['userData']['id'];
+    $params['user_id'] = PEC_USER_ID;
     C_Calendar::updateCalendar($params,$cID);
 }
 

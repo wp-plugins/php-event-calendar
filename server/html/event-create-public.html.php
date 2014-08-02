@@ -87,7 +87,7 @@ $allCalendars = $allCals->allCalendars;
         border: 1px solid #F0F0F0;
         float: none;
         list-style: none outside none;
-        margin-left: -40px;
+        margin:0;
         padding: 0;
         text-align: left;
         width: 81px;

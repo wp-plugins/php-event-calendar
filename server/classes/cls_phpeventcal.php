@@ -137,7 +137,7 @@ class C_PhpEventCal extends C_Core
      */
     public function modal_window()
     {
-        require_once(PEC_PLUGIN_DIR . '/server/html/event-create.html.php');
+        require_once(PEC_PLUGIN_ROOT_DIR . '/server/html/event-create.html.php');
     }
 // Modal window for public calender details
     public function modal_window_public()
@@ -188,10 +188,10 @@ class C_PhpEventCal extends C_Core
      * @author Richard Chen
      * @modifiedby Richard Z.C. <info@phpeventcalendar.com>
      */
-    private function display_properties_main_public($calendarProperties)
-    {
+    private function display_properties_main_public($calendarProperties){
         //$userRol = $_SESSION['userData']['role'];
         $adminURL = admin_url('admin-ajax.php');
+
         echo "
             var ajaxurl = '$adminURL'; //this is required for Wordpress User Facing Pages for AJAX Calls
             //==================Custom JS=============================
@@ -282,8 +282,8 @@ class C_PhpEventCal extends C_Core
                         //url: '$this->webURL/server/ajax/events_manager.php', //comment out for Wordpress AJAX URL
                         url: ajaxurl, //For Wordpress AJAX instead use WP Admin Ajax URL, which is actually ajaxurl
                             data: {eventID:calEvent.id,action:'LOAD_SINGLE_EVENT_BASED_ON_EVENT_ID_PUBLIC'},
-                            dataType: 'json'
-                            //_ajax_nonce: 'wp_create_nonce(NONCE_LOAD_SINGLE_EVENT_BASED_ON_EVENT_ID_PUBLIC)' //Make sure to use WP nonce
+                            dataType: 'json',
+                            _ajax_nonce: 'wp_create_nonce(NONCE_LOAD_SINGLE_EVENT_BASED_ON_EVENT_ID_PUBLIC)' //Make sure to use WP nonce
 
                         })
                         .done(function(ed) {
@@ -291,7 +291,7 @@ class C_PhpEventCal extends C_Core
                             var longdateFormat = '$calendarProperties[longdate_format]';
 
                             $('#myModal').modal({backdrop:'static',keyboard:false});
-                            var modalTitle = 'Event: <b>'+ calEvent.title.toUpperCase() + '</b> <br >' +  $.fullCalendar.moment(calEvent.start).format(longdateFormat+' hh:mm a');
+                            var modalTitle = 'Event: <b>'+ calEvent.title.toUpperCase() + '</b> <br >' +  $.fullCalendar.moment(calEvent.start).format(longdateFormat+' hh:mm A');
                             $('#myModalLabel').html(modalTitle);
                             $('#myTab a:first').tab('show');
 
@@ -359,7 +359,6 @@ class C_PhpEventCal extends C_Core
                                 $('#dayAll').html('All Day Event');
                                 $('#allday_msg').show();
                                 $('#end-group').hide();
-                                //$('#start-time').val('');
                             }
                             else {
                                 $('#end-group').show();
@@ -393,7 +392,6 @@ class C_PhpEventCal extends C_Core
                             //$('#select-calendar').attr('disabled','disabled');
 
 
-                            //alert(ed.location)
                             if(ed.location != null) {
                                 $('#loc_msg').show();
                                 $('#location').val(ed.location);
@@ -401,7 +399,6 @@ class C_PhpEventCal extends C_Core
                             else {
                                 $('#loc_msg').hide();
                                 $('#location').val('');
-
                             }
 
                             if(ed.url != null) {
@@ -411,7 +408,6 @@ class C_PhpEventCal extends C_Core
                             else {
                                 $('#url_msg').hide();
                                 $('#url').val('');
-
                             }
 
                             if(ed.description != '') {
@@ -421,8 +417,8 @@ class C_PhpEventCal extends C_Core
                             else {
                                 $('#desc_msg').hide();
                                 $('#description').val('');
-
                             }
+
                             $('#backgroundColor').val(ed.backgroundColor);
 
 
@@ -584,7 +580,8 @@ class C_PhpEventCal extends C_Core
                     document.getElementById('eventForm').reset();
                     $('.checkbox-inline input, #allDay').removeAttr('checked');
                     $('.repeat-box').hide();
-                    $('#hide-standard-settings').click();
+                    //$('#hide-standard-settings').click(); //<!-- lite_disabled: always expanding this section for lite version only -->
+                    $('#show-standard-settings').click(); //lite_disabled
                     //$('.color-box').removeClass('color-box-selected');
                     $('#backgroundColor').val('#3a87ad');
                     $('#repeat_end_on').val('');
@@ -615,8 +612,9 @@ class C_PhpEventCal extends C_Core
                     //$('.select-calendar-cls').css('opacity','1');
                     var jqxhr = $.ajax({
                         type: 'POST',
-                        url: '$this->webURL/server/ajax/events_manager.php',
-                            data: {action:'LOAD_SELECTED_CALENDAR_FROM_SESSION'},
+                            //url: '<?php //echo WP_PEC_PLUGIN_SITE_URL?>/server/ajax/events_manager.php',
+                            url: ajaxurl, //For Wordpress AJAX instead use WP Admin Ajax URL, which is actually ajaxurl
+                            data: {action: 'LOAD_SELECTED_CALENDAR_FROM_SESSION',_ajax_nonce: 'wp_create_nonce(NONCE_LOAD_SELECTED_CALENDAR_FROM_SESSION)'},
                             dataType: 'json'
                         })
                         .done(function(selCal) {
@@ -628,8 +626,9 @@ class C_PhpEventCal extends C_Core
 
                     var jqxhr = $.ajax({
                         type: 'POST',
-                        url: '$this->webURL/server/ajax/events_manager.php',
-                            data: {action:'LOAD_SELECTED_CALENDAR_COLOR'},
+                            //url: '<?php //echo WP_PEC_PLUGIN_SITE_URL?>/server/ajax/events_manager.php',
+                            url: ajaxurl, //For Wordpress AJAX instead use WP Admin Ajax URL, which is actually ajaxurl
+                            data: {action: 'LOAD_SELECTED_CALENDAR_COLOR',_ajax_nonce: 'wp_create_nonce(NONCE_LOAD_SELECTED_CALENDAR_COLOR)'},
                         })
                         .done(function(selCalColor) {
                             //====setting up values
@@ -662,7 +661,8 @@ class C_PhpEventCal extends C_Core
 				eventClick: function(calEvent, jsEvent, view) {
 				    var shortdateFormat = '$calendarProperties[shortdate_format]';
                     var longdateFormat = '$calendarProperties[longdate_format]';
-				    eventRenderer(calEvent,jsEvent,view,userRole,shortdateFormat);
+                    userRole = 'admin';
+				    eventRenderer(calEvent,jsEvent,view,userRole,shortdateFormat,longdateFormat);
                 }
             });";
     }
@@ -693,8 +693,8 @@ class C_PhpEventCal extends C_Core
      */
     public function display_container()
     {
-        require_once(PEC_PLUGIN_DIR . '/server/html/calendar-window.html.php');
-        require_once(PEC_PLUGIN_DIR . '/server/html/calendar-window.html.php');
+        require_once(PEC_PLUGIN_ROOT_DIR . '/server/html/calendar-window.html.php');
+        //require_once(PEC_PLUGIN_DIR . '/server/html/calendar-window.html.php');
     }
 }
 

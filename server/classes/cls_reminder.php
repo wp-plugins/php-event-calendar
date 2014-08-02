@@ -80,7 +80,7 @@ class C_Reminder {
      * @author Richard Z.C. <info@phpeventcalendar.com>
      */
     public function __construct($eventID,$guests,$reminder_type,$reminder_time,$reminder_time_unit){
-        $this->userID = $_SESSION['userData']['id'];
+        $this->userID = PEC_USER_ID;
 
         $this->reminder_type = $reminder_type;
         $this->reminder_time = $reminder_time;

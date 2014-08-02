@@ -3,7 +3,7 @@
 /*=====================================================================================
 | SAVE EVENT & UPDATE EVENT
 |*=====================================================================================*/
-if(isset($_POST['update-event'])){
+if(isset($_POST['update-event']) && $_POST['action'] == 'PEC_CREATE_EVENT'){
     //==== Get POST Params
     $title = (isset($_POST['title']) && $_POST['title'] != '') ? $_POST['title'] : '';
     $start_date = (isset($_POST['start-date']) && $_POST['start-date'] != '') ? $_POST['start-date'] : '';
@@ -137,6 +137,7 @@ if(isset($_POST['update-event'])){
         $params['borderColor'] = $eventObj->backgroundColor;
     else
         $params['borderColor'] = '';
+
     $params['url'] = $eventObj->url;
     $params['allDay'] = $eventObj->allDay;
 
@@ -161,7 +162,7 @@ if(isset($_POST['update-event'])){
                 $params['cal_id']   = $cid;
                 $eventObj->calendar_selected = true;
                 //===check whether new calendar is in activated calendars.
-                if(in_array($cid,$_SESSION['userData']['active_calendar_id'])) $returnEventData = true;
+                if(in_array($cid,C_Calendar::loadSingleCalendarData($cid))) $returnEventData = true;
                 $eventObj->id       = $eventObj->editEvent($params,$uid);
             }
 
@@ -234,7 +235,7 @@ if(isset($_POST['update-event'])){
             echo '[]';
             die;
         }
-        if(!is_null($repeatEvents)) echo json_encode($repeatEvents);
+        if(!is_null($repeatEvents)) wp_send_json($repeatEvents);
         else echo '['.json_encode($jsonParam).']';
         //echo "<script type='text/javascript'>location.reload();</script>";
         die;
@@ -248,7 +249,7 @@ if(isset($_POST['update-event'])){
         else if(isset($_SESSION['userData']['active_calendar_id'])) $calID = $_SESSION['userData']['active_calendar_id'];
         else {
             //===get all calendars
-            $allCalls = $eventObj->loadAllCalendars($_SESSION['userData']['id']);
+            $allCalls = $eventObj->loadAllCalendars(PEC_USER_ID);
             //===get first calendar id
             $calID = $allCalls[0]['id'];
         }
@@ -263,10 +264,10 @@ if(isset($_POST['update-event'])){
 
         //==== If No Calendar is selected
         $paramsWhenCalendarIsSelected = NULL;
-//        print_r($params);
+        //        print_r($params);
         if(count(@$_POST['selected_calendars']) <= 0 ){
             //===get all calendars
-            $allCalls = $eventObj->loadAllCalendars($_SESSION['userData']['id']);
+            $allCalls = $eventObj->loadAllCalendars(PEC_USER_ID);
             //===get first calendar id
             $calID = $allCalls[0]['id'];
 
@@ -368,7 +369,7 @@ if(isset($_POST['update-event'])){
             //==== If single calendar is being selected
             if(count($paramsWhenCalendarIsSelected) ==1){
                 $jsonParam['id']        = $paramsWhenCalendarIsSelected[0];
-                if(!is_null($repeatEvents)) echo json_encode($repeatEvents);
+                if(!is_null($repeatEvents)) wp_send_json($repeatEvents);
                 else echo '['.json_encode($jsonParam).']';
                 die;
             }
@@ -379,11 +380,11 @@ if(isset($_POST['update-event'])){
                         $jsonParam['id']       = $eventID;
                         $newEvents[]           = $jsonParam;
                     }
-                    echo json_encode($newEvents);
+                    wp_send_json($newEvents);
                     die;
                 }
                 else {
-                    echo json_encode(array('title'=>'NO_EVENT_FOUND_FOR_SELECTED_CALENDARS'));
+                    wp_send_json(array('title'=>'NO_EVENT_FOUND_FOR_SELECTED_CALENDARS'));
                     die;
                 }
             }
@@ -460,8 +461,8 @@ if(isset($_POST['action']) && $_POST['action'] == 'LOAD_EVENTS_BASED_ON_SEARCH_K
 
 //    echo '[{title:NO___CALENDER___FOUND}]';
 //    die;
-    if($allEvents->myEvents == NULL) echo json_encode(array('title'=>'NO___EVENT___FOUND'));
-    else echo json_encode($allEvents->myEvents);
+    if($allEvents->myEvents == NULL) wp_send_json(array('title'=>'NO___EVENT___FOUND'));
+    else wp_send_json($allEvents->myEvents);
 }
 
 /*=====================================================================================
@@ -471,14 +472,14 @@ if(isset($_POST['action']) && $_POST['action'] == 'LOAD_EVENTS_BASED_ON_CALENDAR
 
     //==== if calendarID is NULL then fetch the first calendar id for the user
     if(!isset($_POST['calendarID']) || is_null($_POST['calendarID']) || !$_POST['calendarID']) {
-        $firstCalID = C_Calendar::getFirstCalendarID($_SESSION['userData']['id']);
+        $firstCalID = C_Calendar::getFirstCalendarID(PEC_USER_ID);
         $_POST['calendarID'] = $firstCalID;
     }
 
     //==== update active calendar for this user
     if(!is_array($_POST['calendarID'])) $callIDs = array($_POST['calendarID']);
     else $callIDs = $_POST['calendarID'];
-    C_User::setActiveCalendar($_SESSION['userData']['id'],$callIDs);
+    C_User::setActiveCalendar(PEC_USER_ID,$callIDs);
     //==== also update the current session for the user
     $_SESSION['userData']['active_calendar_id'] = $callIDs;
 
@@ -487,7 +488,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'LOAD_EVENTS_BASED_ON_CALENDAR
 
     //==== send a message to javascript to reload the page as one or more calendars is/are having external URL(s)
     if($activeExternalURLForCalendars){
-        echo json_encode(array('title'=>'CALENDARS___HAVE___URL'));
+        wp_send_json(array('title'=>'CALENDARS___HAVE___URL'));
         die;
     }
     //==== get all events for the selected calendars
@@ -498,7 +499,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'LOAD_EVENTS_BASED_ON_CALENDAR
 //    die;
 
     if($allEvents->myEvents == NULL) echo '[{title:NO___EVENT___FOUND}]';
-    else echo json_encode($allEvents->myEvents);
+    else wp_send_json($allEvents->myEvents);
 }
 
 /*=====================================================================================
@@ -516,7 +517,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'LOAD_SINGLE_EVENT_BASED_ON_EV
 
 
     if($eventData == NULL) echo '[{title:NO___EVENT___FOUND}]';
-    else echo json_encode($eventData);
+    else wp_send_json($eventData);
 }
 
 
@@ -526,7 +527,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'LOAD_SINGLE_EVENT_BASED_ON_EV
 if(isset($_POST['action']) && $_POST['action'] == 'LOAD_SINGLE_EVENT_BASED_ON_EVENT_ID_PUBLIC'){
     $eventData = C_Events::loadSingleEventData($_POST['eventID']);
     if($eventData == NULL) echo '[{title:NO___EVENT___FOUND}]';
-    wp_send_json($eventData);
+    else wp_send_json($eventData);
 }
 
 
@@ -534,8 +535,9 @@ if(isset($_POST['action']) && $_POST['action'] == 'LOAD_SINGLE_EVENT_BASED_ON_EV
 | LOAD A SINGLE EVENT BASED ON EVENT ID
 |*=====================================================================================*/
 if(isset($_POST['action']) && $_POST['action'] == 'LOAD_SELECTED_CALENDAR_FROM_SESSION'){
-    if(count($_SESSION['userData']['active_calendar_id']) > 0)    echo json_encode($_SESSION['userData']['active_calendar_id']);
-    else if(C_Calendar::getFirstCalendarID($_SESSION['userData']['id'])) echo json_encode(array($_SESSION['userData']['id']));
+    if(count(C_Calendar::activeCalendarId(PEC_USER_ID)) > 0){wp_send_json(C_Calendar::activeCalendarId(PEC_USER_ID));}
+    //if(count($_SESSION['userData']['active_calendar_id']) > 0)    wp_send_json($_SESSION['userData']['active_calendar_id']);
+    else if(C_Calendar::getFirstCalendarID(PEC_USER_ID)) wp_send_json(array(PEC_USER_ID));
     else echo 'NO_SELECTED_CALENDAR_FOUND';
 }
 
@@ -543,8 +545,9 @@ if(isset($_POST['action']) && $_POST['action'] == 'LOAD_SELECTED_CALENDAR_FROM_S
 | LOAD SELECTED CALENDAR COLOR
 |*=====================================================================================*/
 if(isset($_POST['action']) && $_POST['action'] == 'LOAD_SELECTED_CALENDAR_COLOR'){
-    if(count($_SESSION['userData']['active_calendar_id']) > 0) {
-        $selectedCals = implode(',',$_SESSION['userData']['active_calendar_id']);
+    $activeCals = C_Calendar::activeCalendarId(PEC_USER_ID);
+    if(count($activeCals) > 0) {
+        $selectedCals = implode(',',$activeCals);
         $calData = C_Calendar::loadSingleCalendarData($selectedCals);
 
         //=== For phase 1 only 1 calendar can be selected, so return the 1st data only
@@ -558,7 +561,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'LOAD_SELECTED_CALENDAR_COLOR'
 | REMOVE EVENT
 |*=====================================================================================*/
 if(isset($_POST['action']) && $_POST['action'] == 'REMOVE_THIS_EVENT'){
-    if(isset($_SESSION['userData']['id'])) {
+    if(PEC_USER_ID && PEC_USER_ID > 0) {
         $eventID = $_POST['eventID'];
         $isDelete = C_Events::removeEvent($eventID);
         if($isDelete) echo $eventID;

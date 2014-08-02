@@ -1,7 +1,7 @@
 <style>
 
     body {
-        margin-top: 40px;
+        margin-top: 0px; /*lite_disabled : 40px*/
         text-align: center;
         font-size: 14px;
         font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;

@@ -2,7 +2,7 @@
 //test for wp plugin branch
 require_once('conf.php');
 //====security checking
-$validateUser = C_Security::validateUserSession();
+//$validateUser = C_Security::validateUserSession();
 
 
 //====Load all calendars
@@ -120,12 +120,14 @@ $pec->dragOpacity(.2);
             text-shadow: 0 2px 5px black;
             color: maroon;
         }
-
+        #adminmenu li.menu-top {
+            text-align: left;
+        }
     </style>
 </head>
 
 <body>
-    <?php require_once(SERVER_HTML_INCLUDE_DIR.'top-navigation.html.php'); ?>
+    <?php //require_once(SERVER_HTML_INCLUDE_DIR.'top-navigation.html.php'); ?><!-- lite_disabled -->
     <div class="container">
 
         <?php
@@ -151,10 +153,10 @@ $pec->dragOpacity(.2);
                         <div id="my-calendars" class="panel panel-default" style="margin-top: 10px; margin-left: 3px;">
                             <div class="panel-heading">
                                 <h3 class="panel-title" style="width: 100%">
-                                    My Calendars
-                                    <span id="add-calendar" class="glyphicon glyphicon-plus" style="float: right; margin-left: 8px;"></span>
+                                    <span style="text-align: left; float: left">My Calendars</span>
+                                    <span id="" class="glyphicon glyphicon-plus" style="float: right; margin-left: 8px; display: none;"></span><!-- lite_disabled-->
                                     &nbsp;
-                                    <span id="manage-calendar" class="glyphicon glyphicon-cog" style="margin-top:1px; float: right; cursor: pointer;"></span>
+                                    <span id="" class="glyphicon glyphicon-cog" style="margin-top:1px; float: right; cursor: pointer; display: none;"></span><!-- lite_disabled-->
                                 </h3>
                             </div>
                             <div class="list-group">
@@ -162,7 +164,9 @@ $pec->dragOpacity(.2);
                                 <?php if($allCalendars != NULL) foreach($allCalendars as $k => $v){ ?>
                                     <?php
                                         //var_dump($_SESSION['userData']['active_calendar_id']);
-                                        if(@in_array($v['id'],$_SESSION['userData']['active_calendar_id'])){
+                                        $activeCalendars = C_Calendar::activeCalendarId(PEC_USER_ID);
+                                        $activeCalendars = explode(',', $activeCalendars[0]);
+                                        if(@in_array($v['id'],$activeCalendars)){
                                             $active = '<span class="glyphicon glyphicon-remove unselect-calendar"></span><span style="float: right" class="glyphicon glyphicon-ok"></span>';
                                             $activeClass = 'selected';
                                         }

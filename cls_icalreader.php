@@ -32,21 +32,31 @@ class ical {
     /* Which keyword has been added to cal at last? */
     private /** @type {string} */ $last_keyword;
 
+    /*The Calendar Name*/
+    public $cal_name;
+
+    /*The Calendar Description*/
+    public $cal_desc;
+
     public function __construct($filename) {
         $lines = file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         if (!isset($lines[0]) || stristr($lines[0],'BEGIN:VCALENDAR') === false){
             return false;
         } else {
             foreach ($lines as $line) {
+
                 $line = trim($line);
                 $add = $this->split_key_value($line);
+
                 if($add === false){
                     $this->add_to_array($type, false, $line);
                     continue;
                 }
 
                 list($keyword, $value) = $add;
-
+                if($keyword == 'X-WR-CALNAME') $this->cal_name = $value;
+                if($keyword == 'X-WR-CALDESC') $this->cal_desc = $value;
+                //echo "<pre>$keyword, $value</pre>";
                 switch ($line) {
                     // http://www.kanzaki.com/docs/ical/vtodo.html
                     case "BEGIN:VTODO":
@@ -79,6 +89,7 @@ class ical {
                         $type = "VCALENDAR";
                         break;
                     default:
+                        //$type = $keyword;
                         $this->add_to_array($type, $keyword, $value);
                         break;
                 }

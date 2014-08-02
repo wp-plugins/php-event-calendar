@@ -180,16 +180,17 @@ class C_Calendar extends C_Calendar_Settings
         $this->dbObj = new C_Database(PEC_DB_HOST, PEC_DB_USER, PEC_DB_PASS, PEC_DB_NAME, PEC_DB_TYPE, PEC_DB_CHARSET);
         $this->db = $this->dbObj->db;
 
-        $userID = @$_SESSION['userData']['id'];
+        $userID = PEC_USER_ID;
 
         //==== Load all calendars of the current user
         if ($name == 'LOAD_MY_CALENDARS') {
             $this->allCalendars = $this->loadAllCalendars($userID);
 
             //==== on page load if there is no calendar selected, then select the first calendar as default calendar
-            if($_SESSION['userData']['active_calendar_id'][0] == ''){
-                C_User::setActiveCalendar($_SESSION['userData']['id'], array($this->allCalendars[0]['id']));
-                $_SESSION['userData']['active_calendar_id'] = array($this->allCalendars[0]['id']);
+            $activeCalendars = $this->activeCalendarId($userID);
+            if($activeCalendars[0] == ''){
+                C_User::setActiveCalendar($userID, array($this->allCalendars[0]['id']));
+                //$_SESSION['userData']['active_calendar_id'] = array($this->allCalendars[0]['id']);
             }
 
             //===== If the user does not have any calendar created, or if this is the first time login for the user
@@ -211,7 +212,7 @@ class C_Calendar extends C_Calendar_Settings
                 $this->id = $this->saveCalendar($params);
                 $params['id'] = $this->id;
 
-                C_User::setActiveCalendar($_SESSION['userData']['id'], array($this->id));
+                C_User::setActiveCalendar($userID, array($this->id));
                 //==== also update the current session for the user
                 $_SESSION['userData']['active_calendar_id'] = array($this->id);
 
@@ -227,8 +228,8 @@ class C_Calendar extends C_Calendar_Settings
                 $params['language'] = 'English';
                 $params['time_zone'] = '-12';
                 $params['default_view'] = 'month';
-                $params['shortdate_format'] = 'mm/dd/yyyy';
-                $params['longdate_format'] = 'dddd, dd MM yyyy';
+                $params['shortdate_format'] = 'MM/DD/YYYY';
+                $params['longdate_format'] = 'dddd, DD MMMM YYYY';
                 $params['timeformat'] = 'core';
                 $params['start_day'] = 'Saturday';
                 $params['email_server'] = 'PHPMailer';
@@ -348,7 +349,7 @@ class C_Calendar extends C_Calendar_Settings
         $dbObj = new C_Database(PEC_DB_HOST, PEC_DB_USER, PEC_DB_PASS, PEC_DB_NAME, PEC_DB_TYPE, PEC_DB_CHARSET);
         $db = $dbObj->db;
 
-        $userID = $_SESSION['userData']['id'];
+        $userID = PEC_USER_ID;
         $sql = "SELECT * FROM  `pec_calendars` WHERE `id` IN ($calID) AND `user_id` = $userID";
         $allCals = $dbObj->db_query($sql);
 
@@ -511,7 +512,7 @@ class C_Calendar extends C_Calendar_Settings
         $resultStart = NULL;
         $calName = '';
 
-$resultStart = "BEGIN:VCALENDAR
+        $resultStart = "BEGIN:VCALENDAR
 PRODID:-//PEC Inc//PHP Event Calendar//EN
 VERSION:2.0
 CALSCALE:GREGORIAN
@@ -539,7 +540,7 @@ METHOD:PUBLISH";
         else{
             $tZone = null; $timezone_name = null;
         }
-$resultStart .= "
+        $resultStart .= "
 X-WR-TIMEZONE:".$timezone_name."
 BEGIN:VTIMEZONE
 TZID:".$timezone_name."
@@ -656,11 +657,11 @@ RRULE:FREQ=WEEKLY";
 
 
 
-$eventDetails .= "
+                $eventDetails .= "
 BEGIN:VEVENT
 DTSTART".$start."
 DTEND".$end
-    .$repeatType.$count.$until.$repeatBy.$interval.$mwf.$byDay."
+                    .$repeatType.$count.$until.$repeatBy.$interval.$mwf.$byDay."
 DTSTAMP:".$dtStamp."
 UID:".$event['id']."
 CREATED:".$event['created_on']."
@@ -694,9 +695,30 @@ END:VCALENDAR";
             echo "fail";
         }
         else*/
-            echo $folder;
+        echo $folder;
 
         //return $directory;
+
+    }
+
+    public static function activeCalendarId($userID){
+        //====DB
+        $dbObj = new C_Database(PEC_DB_HOST, PEC_DB_USER, PEC_DB_PASS, PEC_DB_NAME, PEC_DB_TYPE, PEC_DB_CHARSET);
+        $db = $dbObj->db;
+
+
+        $sql = "SELECT `active_calendar_id` FROM  `pec_users` WHERE `id` = $userID";
+        $allCal = $dbObj->db_query($sql);
+
+        $result = NULL;
+
+        if ($dbObj->num_rows($allCal) > 0) {
+            while ($res = $dbObj->fetch_array_assoc($allCal)) {
+                $result[] = $res['active_calendar_id'];
+            }
+        } else return NULL;
+
+        return $result;
 
     }
 

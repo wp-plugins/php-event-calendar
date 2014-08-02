@@ -96,7 +96,7 @@ class C_Core extends C_Properties
         //===this function can't be used in WP anymore as the scripts are being loaded from the WP hooks
 
         if(FULL_CALENDAR_VERSION == '/fullcalendar-2.0.0') {
-            //echo '<script src="' . WP_PEC_PLUGIN_SITE_URL . '/js' . FULL_CALENDAR_VERSION  . '/moment.min.js" type="text/javascript"></script>' . "\n";
+            echo '<script src="' . WP_PEC_PLUGIN_SITE_URL . '/js' . FULL_CALENDAR_VERSION  . '/moment.min.js" type="text/javascript"></script>' . "\n";
         }
         //echo '<script src="' . WP_PEC_PLUGIN_SITE_URL . '/js' . FULL_CALENDAR_VERSION  . '/jquery.min.js" type="text/javascript"></script>' . "\n";
         if ($jqueryUI) {

@@ -1,4 +1,8 @@
 <?php
+
+$current_user = wp_get_current_user();
+define('PEC_USER_ID', $current_user->ID);
+
 //define('PEC_PATH', '/phpEventCal/trunk');
 //define('PEC_PATH_LOCAL','/highpitch_eventcal'); //==when in local
 define('PEC_PATH_LOCAL','/'); //=== When in live
@@ -7,6 +11,7 @@ $host = $_SERVER['DOCUMENT_ROOT'];
 $plug_dir = str_replace($host,'',$dir);
 define('PEC_PATH', $plug_dir);
 define('PEC_PLUGIN_DIR',substr(PEC_PATH, strpos(PEC_PATH,'wp-content')));
+define('PEC_PLUGIN_ROOT_DIR',$dir);
 define('WP_ROOT',substr($dir,0,strpos($dir,'wp-content')));
 if(function_exists('get_site_url')) {
     define('WP_SITE_URL', get_site_url().'/');
