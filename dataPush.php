@@ -4,7 +4,7 @@
  * Plugin URI: http://phpeventcalendar.com/
  * Description: PHP Event Calendar can import and display your calendars from PHP Event Calendar, Google Calendar, Microsoft Outlook, Apple Calendar
  * and any other application that export events in standard iCalendar format (file extension .ics) in your WordPress site.
- * Version: 1.5
+ * Version: 1.1
  * Author: PHPControls Inc.
  * Author URI: http://phpcontrols.com/
  * License: GPL2
