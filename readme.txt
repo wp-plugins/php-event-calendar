@@ -8,26 +8,13 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Built with PHP Event Calendar Lite, PHP Event Calendar lets you easily create, share, and display beautiful, responsive event calendar online.  
+PHP Event Calendar for WordPress lets you easily create, share, and display beautiful, responsive online event calendars.
 
 == Description ==
 
-The plugin is built with FREE [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar") Lite version, a modern, responsive, multi-user calendar/scheduling application. It can be used right out of the box as a standalone event calendar application or can be customized easily to seamlessly integrate into your own environment. It supports all major Web browsers as well as iOS and Android devices.
+The plugin is built with FREE [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar") Lite, a modern, responsive, multi-user calendar/scheduling application. It can be used right out of the box as a standalone event calendar application or can be customized easily to seamlessly integrate into your own environment. It supports all major desktop web browsers as well as iOS and Android devices.
 
-The Lite version is similar to full version with a few limitations: allows single calendar only; no recurring/repeating events; no email reminder. The full version has no those limitations.
-
-PHP Event Calendar full version supports:
-
-* Multiple calendars,
-* Shared and public calendars,
-* Repeating/recurring events,
-* Event drag and drop,
-* Email reminders,
-* Agenda and custom list view,
-* Event search
-* More to come!
-
-More information about full version can be found on [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar Website") website.
+More information on [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar").
 
 == Installation ==
 
@@ -49,11 +36,11 @@ You can enter events in two ways:
 
 * Go to PHP Events Calendar > Events Management to manage events using user friendly interface.
 
-* Go to PHP Events Calendar > Imports to upload events through local .ics file or URL that links to a .ics file.
+* Go to PHP Events Calendar > Imports to upload events through a local .ics file or an URL that links to a .ics file.
 
 = How do I remove an event from calendar? = 
 
-PHP Events Calendar > Events Management to add, modify or remove any event.
+Go to PHP Events Calendar > Events Management to add, modify or remove any event.
 
 = How do I export Google Calendar or Outlookt events to .ics file? =
 
@@ -88,9 +75,9 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 == Changelog ==
 
 = 1.1 =
-* Interactive event management admin user interface is available!
+* Interactive event management admin dashboard is now available!
 * Event color picker
 * Minor UI enhancements
 
-= 1.0.0 =
+= 1.0 =
 Initial Release
