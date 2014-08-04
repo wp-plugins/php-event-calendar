@@ -1,0 +1,7 @@
+table.fc-header td {
+	border: 0px solid white;
+}
+
+.entry-content table, .comment-content table {
+	border-top: 0px !important
+}
