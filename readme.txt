@@ -12,7 +12,22 @@ PHP Event Calendar for WordPress lets you easily create, share, and display beau
 
 == Description ==
 
-The plugin is built with FREE [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar") Lite, a modern, responsive, multi-user calendar/scheduling application. It can be used right out of the box as a standalone event calendar application or can be customized easily to seamlessly integrate into your own environment. It supports all major desktop web browsers as well as iOS and Android devices.
+The plugin is built with FREE [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar") Lite, a modern, responsive, multi-user calendar/scheduling application. It can be used right out of the box as a standalone event calendar application or can be customized easily to seamlessly integrate into your own environment. The calendar supports multiple calendars, shared and public calendars, repeating/recurring events, event drag and drop, Google Calendar import, email reminder, and many other features.
+
+PHP Event Calendar supports all major desktop web browsers as well as iOS and Android devices.
+
+= Intuitive Event Management GUI = 
+
+The calendar is designed for simplicity and easy of use. Users can create new events and edit existing events through a familiar calendar graphic interface instead of a traditional WordPress table editor. Managing events is interactive and intuitive. It's perfect for people who are not tech savvy to manage an type of events online. 
+
+= Features: =
+
+* Drag & Drop - Update events date and time with mouse drag & drop.
+* Mobile Support - Supports mobile device via responsive user interface.
+* Bootstrap Ready - Built with the most popular front-end framework for web and mobile
+* Multiple Calendar Views - Supports Day, Week, Month as well as upcoming Resource views
+* Repeating Calendar Events - Fully customizable daily, weekly, monthly repeating events.
+* Multiple Calendars - Multiple calendars with different colors, toggled with one click.
 
 More information on [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar").
 
