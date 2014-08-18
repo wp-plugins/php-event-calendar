@@ -712,7 +712,7 @@
         function _renderView(inc) { // assumes elementVisible
             ignoreWindowResize++;
 
-            if (currentView.start) { // already been rendered?
+            if (currentView.name != 'list' && currentView.name != 'pec' && currentView.start) { // already been rendered?
                 trigger('viewDestroy', currentView, currentView, currentView.element);
                 unselect();
                 clearEvents();
@@ -2904,7 +2904,7 @@
     ;
     ;
 
-    //==== Agenda View Added
+    //==== Agenda View Added ----old
     fcViews.list = listView;
 
     function listView(element, calendar) {
@@ -3156,6 +3156,280 @@
     ;
     ;
 
+    //==== PEC View Added
+    fcViews.pec = pecView;
+
+    function pecView(element, calendar) {
+
+        //$('.fc-header-left span.fc-button-prev').addClass('fc-state-disabled');
+        //$('.fc-header-left span.fc-button-next').addClass('fc-state-disabled');
+
+        var t = this;
+
+
+        // exports
+        t.render = render;
+        t.incrementDate = incrementDate;
+
+        // imports
+        PecView.call(t, element, calendar, 'pec');
+        var opt = t.opt;
+        var renderList = t.renderList;
+        var formatDate = calendar.formatDate;
+
+        function render(date, delta) {
+
+            if (delta) {
+                //addMonths(date, delta);
+                //date.setDate(1);
+            }
+
+            var firstDay = opt('firstDay');
+
+            var start = t.intervalStart = date.clone().stripTime();
+            var end = t.intervalEnd = start.clone().add('days', 1);
+
+            //var title = calendar.formatDate(t.start, t.opt('titleFormat'));
+
+            //t.title = formatDate(start, opt('titleFormat'));
+
+            t.start = start;
+            t.end = end;
+
+            renderList(1, 1, false);
+        }
+
+        function incrementDate(date, delta) {
+            var out = date.clone().stripTime().add('days', delta);
+            out = t.skipHiddenDays(out, delta < 0 ? -1 : 1);
+            return out;
+        }
+
+
+
+    }
+
+    function PecView(element, calendar, viewName) {
+        var t = this;
+
+
+        // exports
+        t.renderList = renderList;
+        t.setHeight = setHeight;
+        t.setWidth = setWidth;
+        t.page = 0;
+        t.clearEvents = clearEvents;
+        t.renderEvents = renderEvents;
+
+        t.cellIsAllDay = function () {
+            return true
+        };
+
+        t.getColWidth = function () {
+            return colWidth
+        };
+        t.getDaySegmentContainer = function () {
+            return daySegmentContainer
+        };
+
+
+        // imports
+        View.call(t, element, calendar, viewName);
+        OverlayManager.call(t);
+        SelectionManager.call(t);
+
+        var opt = t.opt;
+        var trigger = t.trigger;
+        var clearEvents = t.clearEvents;
+        var renderOverlay = t.renderOverlay;
+        var clearOverlays = t.clearOverlays;
+        var daySelectionMousedown = t.daySelectionMousedown;
+        var formatDate = calendar.formatDate;
+
+
+        // locals
+        var updateEvents = t.calendar.updateEvents;
+        var table;
+        var head;
+        var headCells;
+        var body;
+        var bodyRows;
+        var bodyCells;
+        var bodyFirstCells;
+        var bodyCellTopInners;
+        var daySegmentContainer;
+
+        var viewWidth;
+        var viewHeight;
+        var colWidth;
+        var weekNumberWidth;
+
+        var rowCnt, colCnt;
+        var coordinateGrid;
+        var hoverListener;
+        var colContentPositions;
+
+        var rtl, dis, dit;
+        var firstDay;
+        var nwe; // no weekends? a 0 or 1 for easy computations
+        var tm;
+        var colFormat;
+        var showWeekNumbers;
+        var weekNumberTitle;
+        var weekNumberFormat;
+        var eventElementHandlers = t.eventElementHandlers;
+
+
+        function renderList(r, c, showNumbers) {
+            rowCnt = r;
+            colCnt = c;
+
+            var firstTime = !body;
+            if (firstTime) {
+                buildTable();
+
+            } else {
+                //clearEvents();
+            }
+
+        }
+
+
+        function buildTable() {
+            t.page = 1;
+            body = true;
+            //t.title = "Page 1"
+            t.title = ""
+        }
+
+
+        function setHeight(height) {
+            viewHeight = height;
+
+            var bodyHeight = viewHeight; //- head.height();
+            //        var rowHeight;
+            //        var rowHeightLast;
+            //        var cell;
+
+
+            //       rowHeight = Math.floor(bodyHeight / rowCnt);
+            //        rowHeightLast = bodyHeight - rowHeight * (rowCnt - 1);
+
+
+            //      unlockHeight();
+        }
+
+
+        function setWidth(width) {
+            viewWidth = width;
+
+
+            //          colWidth = Math.floor((viewWidth - weekNumberWidth) / colCnt);
+
+        }
+
+        var reportEventClear = t.reportEventClear;
+        var getDaySegmentContainer = t.getDaySegmentContainer;
+
+
+        function renderEvents(events, modifiedEventId) {
+            var html = $("<div style='padding:10px;border:1px solid; height:100%; /*overflow:auto;*/ border-radius:3px; border-color:#dadada'></div>");
+            // Fetch and Show events.
+            for (evt in events) {
+                var today_dt, dt, tm;
+                var olddt = dt;
+                var bgColorHTML;
+                var isGoogle;
+
+                //==== get today date
+                var today_date = Date.now();
+
+
+                if (events[evt]) {
+                    var eURL = events[evt].url;
+                    var eLocation = events[evt].location;
+
+                    isGoogle = 0;
+                    if (eURL) {
+                        isGoogle = eURL.indexOf("google");
+                    }
+
+                    var eLocationElem = '';
+                    if(eLocation != '' && eLocation != null) {
+                        eLocationElem = '<div style="color:#454545"><i>'+eLocation+'</i></div>'
+                    }
+
+                    var eVisitSite = '';
+                    if(eURL != '' && eURL != null) {
+                        eVisitSite = '<div style="margin-top: 5px;"><a href="'+eURL+'" target="_blank"><i>Visit Website</i></a></div>';
+                    }
+
+
+                    dt = formatDate(events[evt].start, 'dddd, MMM D, YYYY');
+                    tm = formatDate(events[evt].start, 'hh:mm A');
+
+                    //==== check for previous dates and leave for previous entries
+                    if(events[evt].start < today_date) {
+                        continue;
+                    }
+
+                    var allDay = events[evt].allDay;
+                    var backgroundColor = events[evt].backgroundColor;
+                    var googleLinkTagStart = '';
+                    var googleLinkTagEnd = '';
+                    var eventDesc = events[evt].description;
+                    var eventDescFull = eventDesc;
+                    if(eventDesc !=null && eventDesc.length >= 900) {
+                        eventDesc = eventDesc.substring(0, 900);
+                    }
+                    if(eventDesc ==null) eventDesc = eventDescFull = '';
+
+                    //else eventDescFull = eventDesc = '';
+
+                    var eMoreElem = '';
+                    if(eventDesc !=null && eventDesc.length >= 600) {
+                        //eMoreElem = '<span">&nbsp; <a style="color:black; font-weight: bold; text-decoration: none" href="javascript:void(0);" ><i>Find More >> </i></a></span>';
+                        //eMoreElem = '';
+                    }
+
+                    dtelem = "<div class='pecDate' style=''><b>" + dt + "</b></div>";
+
+
+                    if (isGoogle <= 0) { //If the event is from our DB
+                        bgColorHTML = "<p style='display: inline-block; height: 16px; width: 16px; background-color: " + backgroundColor + "'>&nbsp;</p>";
+                    }
+                    else if (isGoogle > 0) { //If the event is from google
+                        googleLinkTagStart = "<a href='" + eURL + "' target='_blank'>";
+                        googleLinkTagEnd = "</a>";
+                        bgColorHTML = "<p style='display: inline-block; height: 16px; width: 16px; border: 1px solid blue; line-height: 14px;padding-left: 1px'>G</p>";
+                    }
+                    if (allDay == 'on' || allDay == 'true' || allDay == true) {
+                        eventelem = $("<div style='display: inline-block; margin-bottom: 45px; height: auto; width: 100%;'><div class='pecTitle' style=''>" + " " + googleLinkTagStart + "<h2>"+events[evt].title+"</h2>" + googleLinkTagStart +
+                            dtelem + "<div class='pecTime' style='display:inline-block; color:#000000'> <b>All day</b></div>" + eLocationElem + "</div>" +
+                            "<div style='height: auto; float: left; margin-right: 10px;'><img src='http://localhost/highpitch_eventcal/branches/wpplugin/wordpress/wp-content/plugins/php-event-calendar-lite/images/No_Image.jpg'  style='height: 160px; width: 220px; border:1px dotted #d9d9d9;'></div><div style='height: auto; display: inline;'>" + eventDesc + eMoreElem + eVisitSite +"</div></div>").appendTo(html);
+                        if (isGoogle <= 0) eventElementHandlers(events[evt], eventelem);
+                    }
+                    else {
+                        eventelem = $("<div style='display: inline-block; margin-bottom: 45px; height: auto; width: 100%;'><div class='pecTitle' style=''>" + " " + googleLinkTagStart + "<h2>"+events[evt].title+"</h2>" + googleLinkTagStart +
+                            dtelem + "<div class='pecTime' style='display:inline-block; color:black;'> <b>@ " + tm + "</b></div>" + eLocationElem + "</div>" +
+                            "<div style='height: auto; float: left; margin-right: 10px;'><img src='http://localhost/highpitch_eventcal/branches/wpplugin/wordpress/wp-content/plugins/php-event-calendar-lite/images/No_Image.jpg' style='height: 160px; width: 220px; border:1px dotted #d9d9d9;'></div><div style='height: auto; display: inline;'>" + eventDesc + eMoreElem + eVisitSite +"</div></div>").appendTo(html);
+                        if (isGoogle <= 0) eventElementHandlers(events[evt], eventelem);
+                    }
+
+
+                }
+
+
+            }
+
+            $(element).html(html);
+            //    reportEvents(events);
+            //     renderDaySegs(compileSegs(events), modifiedEventId);
+            //    trigger('eventAfterAllRender');
+        }
+
+    }
+    //=== PEC view ended.
 
     setDefaults({
         weekMode: 'fixed'

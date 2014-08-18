@@ -4,6 +4,11 @@ var reminder3Obj;
 var shareForm;
 var calEditForm;
 jQuery(document).ready(function($) {
+//    $("div.pec_holder").jPages({
+//        containerID : "pec_content",
+//        perPage: 2
+//    });
+
     /*
      $.bootstrapGrowl('<div style="text-align: left">This demo is a working preview of the full calendar control that is currently still under heavy development.' +
      'Check back here from time to time to see the latest changes and updates.' +

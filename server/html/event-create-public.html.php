@@ -9,7 +9,7 @@ $calendarProperties = $allCals->calendarProperties;
 $allCalendars = $allCals->allCalendars;
 
 ?>
-<style>
+<style xmlns="http://www.w3.org/1999/html">
     .standard {
         display: none;
     }
@@ -116,11 +116,16 @@ $allCalendars = $allCals->allCalendars;
         margin-bottom:0;
     }
 
+    .event-details{
+        background-color: #eee; padding: 10px; float: left;
+        margin-top:15px;
+    }
+
 </style>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="text-align:left;">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 90%">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -132,71 +137,81 @@ $allCalendars = $allCals->allCalendars;
             <div style="clear: both"></div>
             <form role="form" id="eventForm" class="form-horizontal">
                 <div class="modal-body" style="padding-top: 10px">
-                    <fieldset>
-                        <div class="panel panel-default">
+                    <!--<fieldset>-->
+                        <div class="panel">
                             <div class="panel-body">
 
-                                <div class="form-group">
-                                    <label for="title" class="col-sm-3 control-label">Title</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control guest-view" id="title" name="title" placeholder="Event Title" />
-                                    </div>
-                                </div>
+                                <!--<div class="form-group col-sm-12">
+                                    <img src="<?=plugins_url( '../../images/NoImageHori.png', __FILE__ )?>" style='height: 200px; width: auto; border:1px dotted #d9d9d9; margin: 0 auto;'>
+                                </div>-->
 
-                                <div class="form-group">
-                                    <label for="start-date" class="col-sm-3 control-label">Start</label>
-                                    <div class="input-group col-sm-3" data-date="" data-date-format="yyyy-mm-dd" data-link-field="start" data-link-format="yyyy-mm-dd" >
-                                        <input type="text" class="form-control guest-view" id="start-date-guest" name="start-date" placeholder="Start Date" />
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <input name="start-time" id="start-time" class="form-control guest-view"/>
-                                    </div>
-                                </div>
-
-                                <div class="form-group" id="end-group">
-                                    <label for="end" class="col-sm-3 control-label">End</label>
-                                    <div class="input-group col-sm-3" data-date="" data-date-format="yyyy-mm-dd" data-link-field="end" data-link-format="yyyy-mm-dd" >
-                                        <input type="text" class="form-control guest-view" placeholder="End Date" name="end-date" id="end-date-guest" />
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <input name="end-time" id="end-time" class="form-control guest-view"/>
-                                    </div>
-                                </div>
-
-                                <div class="form-group" id="loc_msg">
-                                    <label for="location" class="col-sm-3 control-label">Location</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control guest-view" id="location" name="location" placeholder="Location" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group" id="url_msg">
-                                    <label for="description" class="col-sm-3 control-label">URL</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control guest-view" id="url" name="url" />
-                                    </div>
-                                </div>
 
                                 <div class="form-group" id="desc_msg">
-                                    <label for="description" class="col-sm-3 control-label">Description</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control guest-view" id="description" name="description" />
+                                    <div class="col-sm-12">
+                                        <div class="guest-view" id="description" name="description"  style="height: auto; width: 95%;"></div>
                                     </div>
                                 </div>
 
-                                <div class="form-group" id="allday_msg">
-                                    <label for="dayAll" class="col-sm-3 control-label">&nbsp;</label>
+                                <div class="event-details col-sm-12">
+                                    <div class="col-sm-4">
+                                        <h6>Start</h6>
+                                        <div class="input-group col-sm-4" data-date="" data-date-format="yyyy-mm-dd" data-link-field="start" data-link-format="yyyy-mm-dd" >
+                                            <input type="text" class="form-control guest-view" id="start-date-guest" name="start-date" placeholder="Start Date" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input name="start-time" id="start-time" class="form-control guest-view"/>
+                                        </div>
 
-                                    <div class="col-sm-9">
-                                        <span id="dayAll" style="font-size: 12px; font-weight: bold;"></span>
+                                        <div id="end-group">
+                                            <h6>End</h6>
+                                            <div class="input-group col-sm-4" data-date="" data-date-format="yyyy-mm-dd" data-link-field="end" data-link-format="yyyy-mm-dd" >
+                                                <input type="text" class="form-control guest-view" placeholder="End Date" name="end-date" id="end-date-guest" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input name="end-time" id="end-time" class="form-control guest-view"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" id="allday_msg">
+                                            <label for="dayAll" class="col-sm-3 control-label">&nbsp;</label>
+
+                                            <div class="col-sm-9">
+                                                <span id="dayAll" style="font-size: 12px; font-weight: bold;"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" id="repeat_msg">
+                                            <label for="repeat_type" class="col-sm-3 control-label">&nbsp;</label>
+
+                                            <div class="col-sm-9">
+                                                <span id="repeat_type" style="font-size: 12px; font-weight: bold;"></span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group" id="repeat_msg">
-                                    <label for="repeat_type" class="col-sm-3 control-label">&nbsp;</label>
+                                    <div class="col-sm-3">
+                                        <div class="form-group" id="loc_msg">
+                                            <h6>Venue</h6>
+                                            <p>
+                                                <input type="text" class="form-control guest-view" id="location" name="location" placeholder="Location" />
+                                            </p>
+                                        </div>
 
-                                    <div class="col-sm-9">
-                                        <span id="repeat_type" style="font-size: 12px; font-weight: bold;"></span>
+                                        <div class="form-group" id="url_msg">
+                                            <h6>URL</h6>
+                                            <p>
+                                                <!-- input type="text" class="form-control guest-view" id="url" name="url" -->
+                                                <a href="" class="guest-view" id="url" name="url"></a>
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-5">
+                                        <div style="overflow:hidden;height:auto;width:400px; margin-left: 30px;">
+                                            <div id="gmap_canvas" style="height:auto; width:400px;"></div>
+                                            <style>#gmap_canvas img{max-width:none!important;background:none!important}</style>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +220,7 @@ $allCalendars = $allCals->allCalendars;
 
                         </div>
 
-                    </fieldset>
+                    <!--</fieldset>-->
                 </div>
                 <div class="modal-footer">
                     <!--<input type="hidden" value="-1" name="update-event" id="update-event" />-->

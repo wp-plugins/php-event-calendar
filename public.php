@@ -30,7 +30,7 @@ $pec->header();
 //$pec->slotMinutes(50);
 //$pec->defaultView('month'); //month,basicWeek,agendaWeek,basicDay,agendaDay
 //$pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Agenda Day','basicDay'=>'Day','basicWeek'=>'Week','month'=>'Month','agendaWeek'=>'Agenda Week'));
-$pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Day','basicDay'=>'Day','month'=>'Month','agendaWeek'=>'Week','list'=>'Agenda'));
+$pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Day','basicDay'=>'Day','month'=>'Month','agendaWeek'=>'Week','list'=>'Agenda','pec'=>'PEC'));
 
 //===Each Event as a form of Array
 $events = array(
@@ -81,14 +81,6 @@ $pec->dragOpacity(.2);
 //$pec->handleWindowResize(true);
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>PHP Event Calendar Lite</title>
-    <?php echo $pec->display('head');?>
     <style>
         .container {
             width: auto;
@@ -121,9 +113,7 @@ $pec->dragOpacity(.2);
         }
 
     </style>
-</head>
 
-<body>
 <?php //require_once(SERVER_HTML_INCLUDE_DIR.'top-navigation.html.php'); ?>
 <div class="container">
     <?php
@@ -152,7 +142,3 @@ $pec->dragOpacity(.2);
 //=====display
 $pec->display('body','public');
 ?>
-
-</body>
-
-</html>

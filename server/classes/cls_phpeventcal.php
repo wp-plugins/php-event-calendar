@@ -191,6 +191,7 @@ class C_PhpEventCal extends C_Core
     private function display_properties_main_public($calendarProperties){
         //$userRol = $_SESSION['userData']['role'];
         $adminURL = admin_url('admin-ajax.php');
+        $noMapURL = plugins_url( '../../images/no-map.jpg', __FILE__ );
 
         echo "
             var ajaxurl = '$adminURL'; //this is required for Wordpress User Facing Pages for AJAX Calls
@@ -291,67 +292,40 @@ class C_PhpEventCal extends C_Core
                             var longdateFormat = '$calendarProperties[longdate_format]';
 
                             $('#myModal').modal({backdrop:'static',keyboard:false});
-                            var modalTitle = 'Event: <b>'+ calEvent.title.toUpperCase() + '</b> <br >' +  $.fullCalendar.moment(calEvent.start).format(longdateFormat+' hh:mm A');
+                            var modalTitle = '<b>'+ calEvent.title.toUpperCase() + '</b> <br >' +  $.fullCalendar.moment(calEvent.start).format(longdateFormat+' hh:mm A');
                             $('#myModalLabel').html(modalTitle);
                             $('#myTab a:first').tab('show');
 
                             //====setting up values
 
                             $('#title').val(calEvent.title);
-                            var startMiliseconds = Date.parse(calEvent.start);
-                            var ds = new Date(startMiliseconds);
-                            var sday = ds.getDate();
-                            var smonth = ds.getMonth()+1;
-                            var syear = ds.getFullYear();
-                            var shour = ds.getHours();
-                            var sminute = ds.getMinutes();
-                            if(parseInt(sday)  <= 9 ) sday = '0'+sday;
-                            if(parseInt(smonth)  <= 9 ) smonth = '0'+smonth;
-                            if(parseInt(shour)  <= 9 ) shour = '0'+shour;
-                            if(parseInt(sminute)  <= 9 ) sminute = '0'+sminute;
 
-                            var sdate = syear + '-' + smonth + '-' + sday;
-                            $('#start-date-guest').val(sdate);
-                            //===convert 24 hours to 12 hours format
-                            var startTime12Format = $.fullCalendar.moment(calEvent.start).format('hh:mm a');
-
-                            $('#start-time').val(startTime12Format);
+                            var startMoment = moment(calEvent.start)
+                            $('#start-date-guest').val(startMoment.format('YYYY-MM-DD'));
+                            $('#start-time').val(startMoment.format('hh:mm A'));
 
                             var endMiliseconds = Date.parse(calEvent.end);
+                            var endMoment = '';
+                            endMoment = moment(calEvent.end);
 
-                            if(calEvent.end == null && calEvent.allDay!='on'){
-                                if(ed.end_date == null){
+                            if(calEvent.end == null && (calEvent.allDay!='on' || ed.allDay!='on'  )){
+                                if(ed.end_date == null || ed.end_date == '' || calEvent.end == null){
                                     var dePrepDate = ed.start_date.split('-');
                                     var dePrepTime = ed.start_time.split(':');
                                     var dePrep = new Date(dePrepDate[0],dePrepDate[1]-1,dePrepDate[2],parseInt(dePrepTime[0])+1,dePrepTime[1],0,0);
-                                    var endMiliseconds = Date.parse(dePrep);
+                                    endMoment = moment(dePrep)
                                 }
                                 else {
                                     var dePrepDate = ed.end_date.split('-');
                                     var dePrepTime = ed.end_time.split(':');
                                     var dePrep = new Date(dePrepDate[0],dePrepDate[1],dePrepDate[2],dePrepTime[0],dePrepTime[1],0,0);
-                                    var endMiliseconds = Date.parse(dePrep);
+                                    endMoment = moment(dePrep)
                                 }
                             }
 
-                            if(!isNaN(endMiliseconds)){
-                                var de = new Date(endMiliseconds);
-                                var eday = de.getDate();
-                                var emonth = de.getMonth()+1;
-                                var eyear = de.getFullYear();
-                                var ehour = de.getHours();
-                                var eminute = de.getMinutes();
-
-                                if(parseInt(eday)  <= 9 ) eday = '0'+eday;
-                                if(parseInt(emonth)  <= 9 ) emonth = '0'+emonth;
-                                if(parseInt(ehour)  <= 9 ) ehour = '0'+ehour;
-                                if(parseInt(eminute)  <= 9 ) eminute = '0'+eminute;
-
-                                var edate = eyear + '-' + emonth + '-' + eday
-                                $('#end-date-guest').val(edate);
-                                // convert end-time into 12 Format
-                                var endTime12Format = $.fullCalendar.moment(calEvent.end).format('hh:mm a');
-                                $('#end-time').val(endTime12Format);
+                            if(calEvent.end != null){
+                                $('#end-date-guest').val(endMoment.format('YYYY-MM-DD'));
+                                $('#end-time').val(endMoment.format('hh:mm A'));
                             }
 
 
@@ -392,18 +366,20 @@ class C_PhpEventCal extends C_Core
                             //$('#select-calendar').attr('disabled','disabled');
 
 
-                            if(ed.location != null) {
-                                $('#loc_msg').show();
-                                $('#location').val(ed.location);
-                            }
-                            else {
+                            if(ed.location == null || ed.location == '') {
                                 $('#loc_msg').hide();
                                 $('#location').val('');
+                            }
+                            else {
+                                $('#loc_msg').show();
+                                $('#location').val(ed.location);
                             }
 
                             if(ed.url != null) {
                                 $('#url_msg').show();
-                                $('#url').val(ed.url);
+                                // $('#url').val(ed.url);
+                                $('#url').text(ed.url);
+                                $('#url').attr('href', ed.url);
                             }
                             else {
                                 $('#url_msg').hide();
@@ -412,7 +388,7 @@ class C_PhpEventCal extends C_Core
 
                             if(ed.description != '') {
                                 $('#desc_msg').show();
-                                $('#description').val(ed.description);
+                                $('#description').html(ed.description);
                             }
                             else {
                                 $('#desc_msg').hide();
@@ -421,7 +397,43 @@ class C_PhpEventCal extends C_Core
 
                             $('#backgroundColor').val(ed.backgroundColor);
 
+                            //==== google maps
+                            //var addr = document.getElementById('location').value;
+                            var address = ed.location;
+                            var geocoder = new google.maps.Geocoder();
+                            if(address == null || address == ''){
 
+                                /*$('#gmap_canvas').html('<img src=\'$noMapURL\' style=\'height: 255px; width: 380px; border:1px dotted #d9d9d9;\'>');*/
+                                $('#gmap_canvas').css('height','auto');
+                            }
+                            else{
+                                $('#gmap_canvas').css('height','300px');
+                                geocoder.geocode({ 'address': address }, function (results, status) {
+
+                                    if (status == google.maps.GeocoderStatus.OK) {
+                                        var latitude = results[0].geometry.location.lat();
+                                        var longitude = results[0].geometry.location.lng();
+                                    }
+
+                                    var myOptions = {
+                                        zoom:17,
+                                        center:new google.maps.LatLng(latitude,longitude),
+                                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                                    };
+                                    map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+                                    marker = new google.maps.Marker({
+                                        map: map,
+                                        position: new google.maps.LatLng(latitude, longitude)
+                                    });
+                                    infowindow = new google.maps.InfoWindow({
+                                        content:address
+                                    });
+                                    google.maps.event.addListener(marker, 'click', function(){
+                                        infowindow.open(map,marker);
+                                    });
+                                    infowindow.open(map,marker);
+                                });
+                            }
 
                         })
                         .fail(function() {

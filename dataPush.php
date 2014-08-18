@@ -2,10 +2,9 @@
 /**
  * Plugin Name: PHP Event Calendar
  * Plugin URI: http://phpeventcalendar.com/
- * Description: PHP Event Calendar can import and display your calendars from PHP Event Calendar, Google Calendar, Microsoft Outlook, Apple Calendar
- * and any other application that export events in standard iCalendar format (file extension .ics) in your WordPress site.
- * Version: 1.1
- * Author: PHPControls Inc.
+ * Description: Easily create, share, and display beautiful and responsive online event calendars through intuitive user interface.
+ * Version: 1.2
+ * Author: PHPControls.com
  * Author URI: http://phpcontrols.com/
  * License: GPL2
  */
@@ -122,8 +121,8 @@ VALUES('1', 1, '$current_user->ID', 'super', '$current_user->user_firstname', '$
 // Create tables on plugin activation
 register_activation_hook(__FILE__, 'table_install');
 
-//require_once 'uninstall.php'; register_uninstall_hook( __FILE__, 'table_uninstall' );
-require_once 'uninstall.php'; register_deactivation_hook( __FILE__, 'table_uninstall' );
+require_once 'uninstall.php'; register_uninstall_hook( __FILE__, 'table_uninstall' );
+//require_once 'uninstall.php'; register_deactivation_hook( __FILE__, 'table_uninstall' );
 
 // Hook for adding admin menus
 add_action('admin_menu', 'mt_add_pages');
@@ -243,7 +242,11 @@ function pec_load_scripts() {
         array( 'bootstrap' )
     );
 
-
+    wp_enqueue_script(
+        'google-map',
+        'http://maps.google.com/maps/api/js?sensor=false',
+        array( 'jquery' )
+    );
 }
 
 add_action( 'admin_enqueue_scripts', 'pec_load_scripts' );

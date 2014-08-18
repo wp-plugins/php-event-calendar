@@ -754,7 +754,7 @@ class C_Events extends C_Calendar
                     //===if ends after X occurrences
                     else if(@$res['repeat_end_after'] > 0){
                         $intervals = $res['repeat_interval']*$res['repeat_end_after'];
-                        $repeatEndDate = strtotime(date('Y-m-d',strtotime("+$intervals week")));
+                        $repeatEndDate = strtotime(date('Y-m-d',strtotime("+$intervals day")));
 
                     }
                     //===if ends on a given date
@@ -764,16 +764,19 @@ class C_Events extends C_Calendar
                     break;
 
                 case 'everyTTDay':
+                    if($res['repeat_type'] == 'everyTTDay') $repeatInterval = $res['repeat_interval'];
                 case 'everyMWFDay':
+                    if($res['repeat_type'] == 'everyMWFDay') $repeatInterval = $res['repeat_interval'];
                 case 'everyWeekDay':
+                    if($res['repeat_type'] == 'everyWeekDay')  $repeatInterval = $res['repeat_interval'];
                 case 'daily':
+                    if($res['repeat_type'] == 'daily') $repeatInterval = $res['repeat_interval'];
                     $sault = 24*60*60;
-                    $repeatInterval = $res['repeat_interval'];
                     //echo '<pre style="margin-top: 20px; text-align: left">';
                     //print_r($res);
                     ///echo '</pre>';
 
-                //===if repeat never ends
+                    //===if repeat never ends
                     if(@$res['repeat_never'] == 1){
                         $repeatEndDate = strtotime(date('Y-m-d',strtotime('+6 year')));
                     }
@@ -781,9 +784,9 @@ class C_Events extends C_Calendar
                     else if(@$res['repeat_end_after'] > 0){
                         $startDate = $repeatParams[$res['id']]['repeat_start_date'];
                         $startDateRaw = strtotime($startDate);
-                        $intervals = $res['repeat_interval']*$res['repeat_end_after'];
+                        $intervals = $repeatInterval*$res['repeat_end_after'];
                         //$repeatEndDate = strtotime(date('Y-m-d',strtotime("+$intervals day")));
-                        $repeatEndDate = $startDateRaw + ($intervals*$sault);
+                        $repeatEndDate = strtotime(date('Y-m-d',strtotime("+10 years")));
                         //$repeatEndDate = strtotime(date('Y-m-d',strtotime("+$intervals day")));
 
                         //echo '<pre style="margin-top: 20px; text-align: left">';
@@ -833,6 +836,7 @@ class C_Events extends C_Calendar
                     else if(@$res['repeat_end_after'] > 0){
                         $intervals = $res['repeat_interval']*$res['repeat_end_after'];
                         $repeatEndDate = strtotime(date('Y-m-d',strtotime("+$intervals month")));
+                        //echo date('Y-m-d',strtotime("+$intervals month"));
                     }
                     //===if ends on a given date
                     else if(@$res['repeat_end_on'] !='0000-01-01'){
@@ -897,10 +901,13 @@ class C_Events extends C_Calendar
             for($repeatLoop=$repeatStartDate; $repeatLoop <=@$repeatEndDate+$sault;){
                 //if($sault > 0)$repeatLoop = $repeatLoop + ($sault);
 
+                /*
                 if(((isset($_POST['action']) && $_POST['action'] == 'LOAD_EVENTS_BASED_ON_CALENDAR_ID' ) || $this->loadEventsOnPageLoad) && $repeatCount == 0 ){
                     $repeatCount ++;
                     continue;
                 }
+                */
+
                 $repeatLoopDay = date('D',$repeatLoop);
                 $repeatLoopMonth = date('m',$repeatLoop);
                 $repeatLoopYear = date('Y',$repeatLoop);
@@ -912,6 +919,18 @@ class C_Events extends C_Calendar
                 //===For weekly repeats
                 switch($res['repeat_type']){
                     case 'weekly':
+                        //==== if no record found for week days then break the loop for this event
+                        if(
+                            @$res['repeat_on_mon'] == 0
+                                && @$res['repeat_on_tue'] == 0
+                                    && @$res['repeat_on_wed'] == 0
+                                        && @$res['repeat_on_thu'] == 0
+                                            && @$res['repeat_on_fri'] == 0
+                                                && @$res['repeat_on_sat'] == 0
+                                                    && @$res['repeat_on_sun'] == 0
+                        ) {
+                            break;
+                        }
 
                         if(isset($res['repeat_end_after']) && $res['repeat_end_after'] > 0){
 
@@ -923,7 +942,11 @@ class C_Events extends C_Calendar
                             $weekEnd = strtotime(date('Y-m-d',mktime(0, 0, 0, date("m",$repeatLoop)  , $weekStart+6, date("Y",$repeatLoop))));
                             //echo date('Y-m-d',$weekStartTime);
 
-                            for($repeatWeekly = $weekStartTime; $repeatWeekly<=$weekEnd;$repeatWeekly=$repeatWeekly+24*60*60){
+                            //for($repeatWeekly = $weekStartTime; $repeatWeekly<=$weekEnd;$repeatWeekly=$repeatWeekly+24*60*60){
+                            $repeatWeekly = $weekStartTime;
+                            for($repeatCount =0; $repeatCount < @$res['repeat_end_after'] ; ){
+
+                                $repeatWeekly=$repeatWeekly+24*60*60;
                                 $repeatLoopIntegerDayWeek = date('d',$repeatWeekly);
                                 $repeatLoopDayWeek = date('D',$repeatWeekly);
 
@@ -932,19 +955,22 @@ class C_Events extends C_Calendar
 
                                 if(
                                     $repeatLoopDayWeek == 'Mon' && @$res['repeat_on_mon'] == 1
-                                        || $repeatLoopDayWeek == 'Tue' && @$res['repeat_on_tue'] == 1
-                                            || $repeatLoopDayWeek == 'Wed' && @$res['repeat_on_wed'] == 1
-                                                || $repeatLoopDayWeek == 'Thu' && @$res['repeat_on_thu'] == 1
-                                                    || $repeatLoopDayWeek == 'Fri' && @$res['repeat_on_fri'] == 1
-                                                        || $repeatLoopDayWeek == 'Sat' && @$res['repeat_on_sat'] == 1
-                                                            || $repeatLoopDayWeek == 'Sun' && @$res['repeat_on_sun'] == 1
+                                    || $repeatLoopDayWeek == 'Tue' && @$res['repeat_on_tue'] == 1
+                                    || $repeatLoopDayWeek == 'Wed' && @$res['repeat_on_wed'] == 1
+                                    || $repeatLoopDayWeek == 'Thu' && @$res['repeat_on_thu'] == 1
+                                    || $repeatLoopDayWeek == 'Fri' && @$res['repeat_on_fri'] == 1
+                                    || $repeatLoopDayWeek == 'Sat' && @$res['repeat_on_sat'] == 1
+                                    || $repeatLoopDayWeek == 'Sun' && @$res['repeat_on_sun'] == 1
+                                    //|| strstr($rSTDateWeek,$res['repeat_start_date'])
+
                                 ) {
                                     $eventValues['start']  = $rSTDateWeek;
                                     $eventValues['end']    = $rENDateWeek;
                                     $myEvents[$this->eventIndex] = $eventValues;
-
                                     $this->eventIndex++;
+                                    $repeatCount ++;
                                 }
+
                             }
 
                             //echo $repeatCount;
@@ -954,12 +980,13 @@ class C_Events extends C_Calendar
                         else {
                             if(
                                 $repeatLoopDay == 'Mon' && @$res['repeat_on_mon'] == 1
-                                    || $repeatLoopDay == 'Tue' && @$res['repeat_on_tue'] == 1
-                                        || $repeatLoopDay == 'Wed' && @$res['repeat_on_wed'] == 1
-                                            || $repeatLoopDay == 'Thu' && @$res['repeat_on_thu'] == 1
-                                                || $repeatLoopDay == 'Fri' && @$res['repeat_on_fri'] == 1
-                                                    || $repeatLoopDay == 'Sat' && @$res['repeat_on_sat'] == 1
-                                                        || $repeatLoopDay == 'Sun' && @$res['repeat_on_sun'] == 1
+                                || $repeatLoopDay == 'Tue' && @$res['repeat_on_tue'] == 1
+                                || $repeatLoopDay == 'Wed' && @$res['repeat_on_wed'] == 1
+                                || $repeatLoopDay == 'Thu' && @$res['repeat_on_thu'] == 1
+                                || $repeatLoopDay == 'Fri' && @$res['repeat_on_fri'] == 1
+                                || $repeatLoopDay == 'Sat' && @$res['repeat_on_sat'] == 1
+                                || $repeatLoopDay == 'Sun' && @$res['repeat_on_sun'] == 1
+                                //|| strstr($rSTDate,$res['repeat_start_date'])
                             ) {
                                 $eventValues['start']  = $rSTDate;
                                 $eventValues['end']    = $rENDate;
@@ -981,20 +1008,21 @@ class C_Events extends C_Calendar
                         $this->eventIndex++;
                         $repeatLoop = $repeatLoop + $repeatInterval*(24*60*60)*1;
                         //$repeatLoop = $repeatLoop + ($sault);
+                        $repeatCount ++;
 
                         break;
                     case 'everyWeekDay':
                         if(
                             $repeatLoopDay == 'Mon'
-                                || $repeatLoopDay == 'Tue'
-                                    || $repeatLoopDay == 'Wed'
-                                        || $repeatLoopDay == 'Thu'
-                                            || $repeatLoopDay == 'Fri'
+                            || $repeatLoopDay == 'Tue'
+                            || $repeatLoopDay == 'Wed'
+                            || $repeatLoopDay == 'Thu'
+                            || $repeatLoopDay == 'Fri'
                         ) {
                             $eventValues['start']  = $rSTDate;
                             $eventValues['end']    = $rENDate;
                             $myEvents[$this->eventIndex] = $eventValues;
-
+                            $repeatCount ++;
                             $this->eventIndex++;
                         }
                         $repeatLoop = $repeatLoop + $repeatInterval*(24*60*60)*1;
@@ -1003,13 +1031,13 @@ class C_Events extends C_Calendar
                     case 'everyMWFDay':
                         if(
                             $repeatLoopDay == 'Mon'
-                                    || $repeatLoopDay == 'Wed'
-                                            || $repeatLoopDay == 'Fri'
+                            || $repeatLoopDay == 'Wed'
+                            || $repeatLoopDay == 'Fri'
                         ) {
                             $eventValues['start']  = $rSTDate;
                             $eventValues['end']    = $rENDate;
                             $myEvents[$this->eventIndex] = $eventValues;
-
+                            $repeatCount ++;
                             $this->eventIndex++;
                         }
                         $repeatLoop = $repeatLoop + $repeatInterval*(24*60*60)*1;
@@ -1023,7 +1051,7 @@ class C_Events extends C_Calendar
                             $eventValues['start']  = $rSTDate;
                             $eventValues['end']    = $rENDate;
                             $myEvents[$this->eventIndex] = $eventValues;
-
+                            $repeatCount ++;
                             $this->eventIndex++;
                         }
                         $repeatLoop = $repeatLoop + $repeatInterval*(24*60*60)*1;
@@ -1031,8 +1059,9 @@ class C_Events extends C_Calendar
 
                     case 'monthly':
                         //===Example: Monthly on day 05
+                        $totalDaysInTheMonth = (int)date('t',$repeatLoop);
+
                         if($repeatBy == 'repeat_by_day_of_the_month'){
-                            $totalDaysInTheMonth = (int)date('t',$repeatLoop);
                             if((int)$stdOfMonth <= $totalDaysInTheMonth){
                                 $rSTDateMonth = date("Y-m-d", mktime(0, 0, 0, date("m",$repeatLoop), $stdOfMonth, date("Y",$repeatLoop))).' '.$start_time;
                                 $rENDateMonth = date("Y-m-d", mktime(0, 0, 0, date("m",$repeatLoop), $stdOfMonth, date("Y",$repeatLoop))).' '.$end_time;
@@ -1042,8 +1071,10 @@ class C_Events extends C_Calendar
                                 $myEvents[$this->eventIndex] = $eventValues;
 
                                 $this->eventIndex++;
+                                $repeatCount ++;
+
                             }
-                            $repeatLoop = $repeatLoop + $repeatInterval*(24*60*60)*30;
+                            $repeatLoop = $repeatLoop + $repeatInterval*(24*60*60)*$totalDaysInTheMonth;
                         }
                         //===Example: Monthly on the third Wednesday
                         else if($repeatBy == 'repeat_by_day_of_the_week'){
@@ -1073,7 +1104,9 @@ class C_Events extends C_Calendar
                             $myEvents[$this->eventIndex] = $eventValues;
 
                             $this->eventIndex++;
-                            $repeatLoop = $repeatLoop + $repeatInterval*(24*60*60)*30;
+                            $repeatCount ++;
+
+                            $repeatLoop = $repeatLoop + $repeatInterval*(24*60*60)*$totalDaysInTheMonth;
                         }
                         break;
 
@@ -1083,6 +1116,7 @@ class C_Events extends C_Calendar
                         $myEvents[$this->eventIndex] = $eventValues;
 
                         $this->eventIndex++;
+                        $repeatCount ++;
                         $repeatLoop = $repeatLoop + $repeatInterval*(24*60*60)*365;
                         break;
 
@@ -1097,7 +1131,7 @@ class C_Events extends C_Calendar
                     if($repeatCount == $res['repeat_end_after']) break;
                 }
 
-                $repeatCount++;
+                //$repeatCount++;
             }
         }
 
@@ -1126,6 +1160,8 @@ class C_Events extends C_Calendar
             $id = $res['id'];
             //$title = htmlspecialchars($res['title'],ENT_QUOTES);
             $title = $res['title'];
+            $url = $res['url'];
+            $location = $res['location'];
             $start_date = $res['start_date'];
             $start_time = $res['start_time'];
             $start_timestamp = $res['start_timestamp'];
@@ -1145,16 +1181,20 @@ class C_Events extends C_Calendar
             $textColor = $res['textColor'];
             $backgroundColor = $res['backgroundColor'];
             $allDay = isset($res['allDay']) ? $res['allDay'] : '';
+            $desc = $res['description'];
 
             $eventValues = array(
                 'id' => $id,
                 'title' => $title,
+                //'url' => $url,
+                'location' => $location,
                 'start' => '',
                 'end' => '',
                 'borderColor' => $borderColor,
                 'textColor' => $textColor,
                 'backgroundColor' => $backgroundColor,
-                'allDay' => $allDay
+                'allDay' => $allDay,
+                'description' => $desc
             );
 
             //==== Handling Repeating Events

@@ -3,31 +3,41 @@ Contributors: chenster
 Donate link: http://phpeventcalendar.com/
 Tags: events, calendar, event, scheduler, dates, date, meeting, seminar, class
 Requires at least: 3.0.1
-Tested up to: 3.9.1
+Tested up to: 3.9.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-PHP Event Calendar for WordPress lets you easily create, share, and display beautiful, responsive online event calendars.
+Easily create, share, and display beautiful and responsive online event calendars through intuitive user interface.
 
 == Description ==
 
-The plugin is built with FREE [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar") Lite, a modern, responsive, multi-user calendar/scheduling application. It can be used right out of the box as a standalone event calendar application or can be customized easily to seamlessly integrate into your own environment. The calendar supports multiple calendars, shared and public calendars, repeating/recurring events, event drag and drop, Google Calendar import, email reminder, and many other features.
+The plugin is built with FREE [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar") Lite, a modern, responsive, multi-user calendar/scheduling application. It can be used right out of the box as a standalone event calendar application or can be customized easily to seamlessly integrate into your own environment. The calendar shared and public calendars, event drag and drop, Google Calendar import, event color.
 
 PHP Event Calendar supports all major desktop web browsers as well as iOS and Android devices.
 
 = Intuitive Event Management GUI = 
 
-The calendar is designed for simplicity and easy of use. Users can create new events and edit existing events through a familiar calendar graphic interface instead of a traditional WordPress table editor. Managing events is interactive and intuitive. It's perfect for people who are not tech savvy to manage an type of events online. 
+The calendar is designed for simplicity and easy of use. Users can create new events and edit existing events through a familiar calendar graphic interface instead of a traditional WordPress table editor. Managing events is interactive and intuitive. It's perfect for people who are not tech savvy and need to manage online events.
 
 = Features: =
 
-* Drag & Drop - Update events date and time with mouse drag & drop.
+* Intuitive event management user interface - Manage events directly in calendar instead of old-school table editor
+* Multiple Views - Supports Day, Week, Month as well as upcoming Resource views
+* Event Import - Imports events from all major event calendar software including Google Calendar and Microsoft Outlook
 * Mobile Support - Supports mobile device via responsive user interface.
 * Bootstrap Ready - Built with the most popular front-end framework for web and mobile
-* Multiple Calendar Views - Supports Day, Week, Month as well as upcoming Resource views
-* Repeating Calendar Events - Fully customizable daily, weekly, monthly repeating events.
+* Event Color - Pick from a dozen of colors and bring events to life!
+* Professionally crafted - Professionally designed and tested!
+
+= Looking for more features? =
+
+Premium edition is also available with additional features:
+
+* Event Drag & Drop - Update events date and time with mouse drag & drop.
 * Multiple Calendars - Multiple calendars with different colors, toggled with one click.
+* Repeating Events - Fully customizable daily, weekly, monthly repeating events.
+* Email reminder - Send users events reminder through email.
 
 More information on [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar").
 
@@ -88,6 +98,13 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 9. Events Management UI - Week View
 
 == Changelog ==
+
+= 1.2 =
+* Added front-end individual event view
+* Google Map integration
+* Display URL as hyperlink in front-end event view
+* UI enhancement that addresses unwanted border in calendar navigation
+* Minor Bug fixes
 
 = 1.1 =
 * Interactive event management admin dashboard is now available!

@@ -496,7 +496,7 @@ class C_Properties
         if ($param == '') $this->header = "{
                                                 center:   'title',
                                                 //right: 'basicDay, basicWeek, month, agendaDay, agendaWeek',
-                                                right: 'agendaDay, month, agendaWeek ',
+                                                right: 'agendaDay, month, agendaWeek, pec',
                                                 left:  'today prev,next'
                                             }";
         else $this->header = $param;

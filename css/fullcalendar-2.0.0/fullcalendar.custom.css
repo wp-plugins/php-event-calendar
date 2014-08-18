@@ -23,8 +23,19 @@ td.day.active{
     color: #938039; width: 300px; display:inline-block;
 }
 
+.pecDate{
+    color: black;
+    display: inline-block;
+    font-size: 12px;
+}
+
 .agendaTime{
     margin-left: 50px;
+}
+
+.pecTime{
+    margin-left: 20px;
+    font-size: 12px;
 }
 
 .agendaTitle{
@@ -32,6 +43,15 @@ td.day.active{
 }
 
 .agendaTitle:hover{
+    cursor: pointer;
+    opacity: 0.70;
+}
+
+.pecTitle{
+    color: #25a7ca; font-family: "Open Sans",Helvetica,Arial,sans-serif; margin-left: 0px;
+}
+
+.pecTitle:hover{
     cursor: pointer;
     opacity: 0.70;
 }
@@ -102,6 +122,10 @@ td.day.active{
 }
 
 .fc-button-agendaWeek.fc-state-default.fc-corner-right {
+    border-radius: 0;
+}
+
+.fc-button-pec.fc-state-default.fc-corner-right {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
 }

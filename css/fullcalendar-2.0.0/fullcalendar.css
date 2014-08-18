@@ -92,7 +92,7 @@ html .fc,
 
 .fc-header .fc-state-active,
 .fc-header .ui-state-active {
-	z-index: 4;
+	z-index: 0;
 	}
 	
 	
@@ -615,4 +615,9 @@ table.fc-border-separate {
 
 .fc-content {
     background: none repeat scroll 0 0 white;
+}
+
+.pecTitle h2, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0;
 }

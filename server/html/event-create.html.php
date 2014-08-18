@@ -517,7 +517,7 @@ $allCalendars = $allCals->allCalendars;
                                 <div class="form-group">
                                     <label for="backgroundColor" class="col-sm-3 control-label">Event Color</label>
                                     <div class="col-sm-9">
-                                        <div class="form-control" style="padding-bottom: 2px;">
+                                        <div class="form-control" style="padding-bottom: 2px;white-space:nowrap">
                                             <span style="background-color: #3a87ad" class="color-box color-box-selected" data-color="#3a87ad" id="cid_3a87ad">&nbsp;</span>
                                             <span style="background-color: #eaff00" class="color-box" data-color="#eaff00" id="cid_eaff00">&nbsp;</span>
                                             <span style="background-color: #f903a5" class="color-box" data-color="#f903a5" id="cid_f903a5">&nbsp;</span>
