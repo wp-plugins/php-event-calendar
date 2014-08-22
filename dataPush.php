@@ -3,7 +3,7 @@
  * Plugin Name: PHP Event Calendar
  * Plugin URI: http://phpeventcalendar.com/
  * Description: Easily create, share, and display beautiful and responsive online event calendars through intuitive user interface.
- * Version: 1.2
+ * Version: 1.2.1
  * Author: PHPControls.com
  * Author URI: http://phpcontrols.com/
  * License: GPL2
