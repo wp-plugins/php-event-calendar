@@ -508,7 +508,13 @@ if(isset($_POST['action']) && $_POST['action'] == 'LOAD_EVENTS_BASED_ON_CALENDAR
 if(isset($_POST['action']) && $_POST['action'] == 'LOAD_SINGLE_EVENT_BASED_ON_EVENT_ID'){
     //=== load event data
     $eventData = C_Events::loadSingleEventData($_POST['eventID']);
-    //== load reminder data if any
+
+    //=== strip slashes
+    $eventData['title'] = stripslashes($eventData['title']);
+    $eventData['location'] = stripslashes($eventData['location']);
+    $eventData['description'] = stripslashes($eventData['description']);
+
+    //=== load reminder data if any
     $reminderData = C_Reminder::loadReminders($_POST['eventID']);
     if($reminderData != NULL) $eventData = array_merge($eventData,array('reminderData'=>$reminderData));
 
@@ -526,9 +532,15 @@ if(isset($_POST['action']) && $_POST['action'] == 'LOAD_SINGLE_EVENT_BASED_ON_EV
 |*=====================================================================================*/
 if(isset($_POST['action']) && $_POST['action'] == 'LOAD_SINGLE_EVENT_BASED_ON_EVENT_ID_PUBLIC'){
     $eventData = C_Events::loadSingleEventData($_POST['eventID']);
+    //=== strip slashes
+    $eventData['title'] = stripslashes($eventData['title']);
+    $eventData['location'] = stripslashes($eventData['location']);
+    $eventData['description'] = stripslashes($eventData['description']);
+
     if($eventData == NULL) echo '[{title:NO___EVENT___FOUND}]';
     else wp_send_json($eventData);
 }
+
 
 
 /*=====================================================================================

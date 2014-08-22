@@ -99,6 +99,9 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 
 == Changelog ==
 
+= 1.2.1 =
+* strip slashes when display escaping single quote from database
+
 = 1.2 =
 * Added front-end individual event view
 * Google Map integration

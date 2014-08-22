@@ -1159,9 +1159,9 @@ class C_Events extends C_Calendar
 
             $id = $res['id'];
             //$title = htmlspecialchars($res['title'],ENT_QUOTES);
-            $title = $res['title'];
+            $title = stripslashes($res['title']);
             $url = $res['url'];
-            $location = $res['location'];
+            $location = stripslashes($res['location']);
             $start_date = $res['start_date'];
             $start_time = $res['start_time'];
             $start_timestamp = $res['start_timestamp'];
@@ -1181,7 +1181,7 @@ class C_Events extends C_Calendar
             $textColor = $res['textColor'];
             $backgroundColor = $res['backgroundColor'];
             $allDay = isset($res['allDay']) ? $res['allDay'] : '';
-            $desc = $res['description'];
+            $desc = stripslashes($res['description']);
 
             $eventValues = array(
                 'id' => $id,
