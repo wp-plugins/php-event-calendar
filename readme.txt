@@ -39,7 +39,7 @@ Premium edition is also available with additional features:
 * Repeating Events - Fully customizable daily, weekly, monthly repeating events.
 * Email reminder - Send users events reminder through email.
 
-More information on [PHP Event Calendar Premium Add-ons](http://phpeventcalendar.com/50-off-limited-time-offer-complete-add-on-bundle/ "PHP Event Calendar" Premium Add-ons).
+More information on <a href="http://phpeventcalendar.com/50-off-limited-time-offer-complete-add-on-bundle/">PHP Event Calendar Premium Add-ons</a>.
 
 == Installation ==
 
@@ -99,7 +99,7 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 
 == Changelog ==
 
-= 1.3
+= 1.3 = 
 * Event image upload using Uploadify
 * Upcoming events view
 * Front-end CSS enhancement
