@@ -173,11 +173,12 @@ $pec->dragOpacity(.2);
                             </div>
                         </div>
 
-                        <div id="foo">
-                            <a href="http://phpeventcalendar.uservoice.com/" target="_new">Send us your feedback!</a>.
-
+                        <br />
+                        <div>
+                            <a href="http://phpeventcalendar.com/50-off-limited-time-offer-complete-add-on-bundle/"><img src="<?php echo plugins_url( 'images/addon-all.png',  __FILE__ ) ?>" width="220"></a>
+                            <!-- a href="http://phpeventcalendar.uservoice.com/" target="_new">Send us your feedback!</a -->
                         </div>
-                        add pec logo and slogen, link to help file, and shortcode
+
 
                     </div>
                     <div class="col-md-10" style="overflow:hidden;float:inherit;width:inherit">
