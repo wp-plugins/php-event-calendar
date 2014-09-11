@@ -30,7 +30,7 @@ $pec->header();
 //$pec->slotMinutes(50);
 //$pec->defaultView('month'); //month,basicWeek,agendaWeek,basicDay,agendaDay
 //$pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Agenda Day','basicDay'=>'Day','basicWeek'=>'Week','month'=>'Month','agendaWeek'=>'Agenda Week'));
-$pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Day','basicDay'=>'Day','month'=>'Month','agendaWeek'=>'Week','list'=>'Agenda','pec'=>'PEC'));
+$pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Day','basicDay'=>'Day','month'=>'Month','agendaWeek'=>'Week','list'=>'Agenda','pec'=>'Upcoming'));
 
 //===Each Event as a form of Array
 $events = array(

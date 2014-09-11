@@ -33,7 +33,7 @@ if(isset($_SESSION['currentView']) && $_SESSION['currentView']!=''){
 }
 
 //$pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Agenda Day','basicDay'=>'Day','basicWeek'=>'Week','month'=>'Month','agendaWeek'=>'Agenda Week'));
-$pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Day','basicDay'=>'Day','month'=>'Month','agendaWeek'=>'Week','list'=>'Agenda','pec'=>'PEC'));
+$pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Day','basicDay'=>'Day','month'=>'Month','agendaWeek'=>'Week','list'=>'Agenda','pec'=>'Upcoming'));
 
 //===Each Event as a form of Array
 $events = array(
@@ -135,6 +135,9 @@ $pec->dragOpacity(.2);
                             <button type="button" class="btn btn-success" id="create-new-event" style="display:none">Create New Event</button>
                         </div>
                         <div style="clear: both; height: 17px; display: none"></div>
+
+                        <img class="pec-logo" src="<?php echo plugins_url( 'images/pec-logo.png',  __FILE__ ) ?>" /><br /><br />
+
                         <!-- Date Picker -->
                         <div id="date-picker" style="border: 1px solid #d9d9d9; margin-left: 3px; margin-top: 0; padding-top: 0; border-radius: 2px"></div>
 
@@ -169,6 +172,13 @@ $pec->dragOpacity(.2);
                                 <?php } ?>
                             </div>
                         </div>
+
+                        <div id="foo">
+                            <a href="http://phpeventcalendar.uservoice.com/" target="_new">Send us your feedback!</a>.
+
+                        </div>
+                        add pec logo and slogen, link to help file, and shortcode
+
                     </div>
                     <div class="col-md-10" style="overflow:hidden;float:inherit;width:inherit">
                         <?php
@@ -187,4 +197,9 @@ $pec->dragOpacity(.2);
     <?php
     //=====display
     $pec->display();
+    ?>
+
+    <?php
+    //======display debug info
+    $pec->display_debug();
     ?>

@@ -101,10 +101,10 @@ $allCalendars = $allCals->allCalendars;
     }
 
     .guest-view {
-        border: 0px none;
-        box-shadow: none;
-        padding-left: 0px;
-        padding-right: 0px;
+        border: 0px none !important;
+        box-shadow: none !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;;
     }
 
     .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
@@ -119,6 +119,11 @@ $allCalendars = $allCals->allCalendars;
     .event-details{
         background-color: #eee; padding: 10px; float: left;
         margin-top:15px;
+    }
+
+    .event-details h6{
+        font-weight: bold;
+        margin-top: 0px;
     }
 
 </style>
@@ -141,9 +146,10 @@ $allCalendars = $allCals->allCalendars;
                         <div class="panel">
                             <div class="panel-body">
 
-                                <!--<div class="form-group col-sm-12">
-                                    <img src="<?=plugins_url( '../../images/NoImageHori.png', __FILE__ )?>" style='height: 200px; width: auto; border:1px dotted #d9d9d9; margin: 0 auto;'>
-                                </div>-->
+
+                                <div class="form-group col-sm-12 event-image">
+                                    <img id="image-src" src="" style='height: 200px; width: auto; border:1px dotted #d9d9d9; margin: 0 auto;'>
+                                </div>
 
 
                                 <div class="form-group" id="desc_msg">

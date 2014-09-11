@@ -532,6 +532,18 @@ $allCalendars = $allCals->allCalendars;
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="eventImage" class="col-sm-3 control-label">Image</label>
+                                    <div class="col-sm-6">
+                                        <input type="file" name="eventImage" id="eventImage" class="" />
+                                        <!--a href="javascript:jQuery('#eventImage').uploadify('cancel')" id="cancel-file">Cancel File</a-->
+                                        <input type="hidden" id="imageName" name="imageName" value="" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <img id="img-preview" src="" width="100px" style="display: none" alt="No Image">
+                                    </div>
+                                </div>
+
 
                                 <div class="form-group" style="display:none">
                                     <label for="free_busy" class="col-sm-3 control-label">Show as</label>

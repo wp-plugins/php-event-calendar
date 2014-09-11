@@ -192,6 +192,11 @@ class C_PhpEventCal extends C_Core
         //$userRol = $_SESSION['userData']['role'];
         $adminURL = admin_url('admin-ajax.php');
         $noMapURL = plugins_url( '../../images/no-map.jpg', __FILE__ );
+        $upload = wp_upload_dir();
+        $slashes = '\\\\';
+        $upload_dir = str_replace('\\','\\\\',$upload['basedir']);
+        $upload_url = $upload['baseurl'].'/';
+
 
         echo "
             var ajaxurl = '$adminURL'; //this is required for Wordpress User Facing Pages for AJAX Calls
@@ -375,6 +380,14 @@ class C_PhpEventCal extends C_Core
                                 $('#location').val(ed.location);
                             }
 
+                            if(ed.image == null || ed.image == '') {
+                                $('.event-image').hide();
+                            }
+                            else {
+                                $('.event-image').show();
+                                $('#image-src').attr('src','$upload_url'+ed.image);
+                            }
+
                             if(ed.url != null) {
                                 $('#url_msg').show();
                                 // $('#url').val(ed.url);
@@ -452,13 +465,39 @@ class C_PhpEventCal extends C_Core
     private function display_properties_main($calendarProperties)
     {
         $userRol = $_SESSION['userData']['role'];
-
+        $upload_swf = plugins_url( 'uploadify.swf', __FILE__ );
+        $upload_php = plugins_url( 'uploadify.php', __FILE__ );
+        $upload_cancel = plugins_url( 'uploadify-cancel.png', __FILE__ );
+        $upload = wp_upload_dir();
+        $upload_dir = str_replace('\\','\\\\',$upload['basedir']);
+        $upload_url = $upload['baseurl'];
         echo "
             //==================Custom JS=============================
             $('#eventForm').click(function (){
 
             });
 
+            $('#eventImage').uploadify({
+                'auto'     : true,
+                'formData' : {'targetFolder': '$upload_dir', 'user_id': PEC_JS_OBJECT.PEC_PLUGIN_USER_ID_FOR_JS },
+                'method'   : 'post',
+                'multi'    : false,
+                'onUploadComplete' : function(file) {
+                    $('#imageName').val(PEC_JS_OBJECT.PEC_PLUGIN_USER_ID_FOR_JS+'_'+file.name);
+                    $('#img-preview').show().attr('src','$upload_url'+'/'+PEC_JS_OBJECT.PEC_PLUGIN_USER_ID_FOR_JS+'_'+file.name);
+                    $('.create-event').show();
+                },
+                'onUploadProgress' : function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
+                    $('.create-event').hide();
+                },
+                'onCancel' : function(file) {
+                    $('#cancel-file').val('');
+                    $('#img-preview').attr('src','').hide();
+                } ,
+                'swf'      : '$upload_swf',
+                'uploader' : '$upload_php'
+                // Your options here
+            });
             //==================Event Calander Script=================
             //alert('$this->handleWindowResize');
             var date = new Date();
@@ -691,11 +730,35 @@ class C_PhpEventCal extends C_Core
     }
 
     /**
-     * Not in use
+     * Display debug window when DEBUG flag is on (conf.php)
      * @ignore
      */
-    private function display_debug()
+    public function display_debug()
     {
+        if(DEBUG){
+            echo '<div>AJAX RESPONSE</div>
+                  <pre id="_ajaxdebug" style="text-align: left"></pre>';
+
+            print('<div style="cursor:pointer">PEC OBJECT</div>');
+            print("<pre style='border:1pt dotted black;padding:5pt;background:#33DAFA;display:block;text-align: left'>");
+            print_r($this);
+            print("</pre>");
+
+            print('<div style="cursor:pointer">SESSION OBJECT</div>');
+            print("<pre style='border:1pt dotted black;padding:5pt;background:#FFDAFA;display:block;text-align: left'>");
+            print("<br />SESSION NAME: ". session_name());
+            print("<br />SESSION ID: ". session_id() ."<br />");
+            print_r(C_Utility::indent_json(str_replace("\u0000", " ", json_encode($_SESSION)))); // \u0000 NULL
+            print("</pre>");
+
+            echo
+            '<script>
+            jQuery( document ).ajaxComplete(function( event, xhr, settings ) {
+                jQuery( "#_ajaxdebug" ).text(settings.url);
+                jQuery( "#_ajaxdebug" ).text(jQuery( "#_ajaxdebug" ).text() + "\n" + JSON.stringify(xhr , null, 4));
+            });
+            </script>';
+        }
     }
 
     /**

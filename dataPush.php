@@ -3,8 +3,8 @@
  * Plugin Name: PHP Event Calendar
  * Plugin URI: http://phpeventcalendar.com/
  * Description: Easily create, share, and display beautiful and responsive online event calendars through intuitive user interface.
- * Version: 1.2.1
- * Author: PHPControls.com
+ * Version: 1.3
+ * Author: PHPControls Inc.
  * Author URI: http://phpcontrols.com/
  * License: GPL2
  */
@@ -24,6 +24,8 @@ function pec_admin_settings_style()
 
         // For either a plugin or a theme, you can then enqueue the style:
         wp_enqueue_style( 'pec-wp-admin-settings' );
+        wp_register_style( 'pec-wp-common', plugins_url( 'css/pec-wp-common.css', __FILE__ ));
+        wp_enqueue_style( 'pec-wp-common' );
     }
 }
 add_action( 'admin_enqueue_scripts', 'pec_admin_settings_style' );
@@ -34,10 +36,11 @@ function pec_wp_user_style()
         // Register the style like this for a plugin:
         wp_register_style( 'pec-wp-user', plugins_url( 'css/pec-wp-user.css', __FILE__ ));
         wp_enqueue_style( 'pec-wp-user' );
+        wp_register_style( 'pec-wp-common', plugins_url( 'css/pec-wp-common.css', __FILE__ ));
+        wp_enqueue_style( 'pec-wp-common' );
     }
 }
 add_action( 'wp_enqueue_scripts', 'pec_wp_user_style' );
-
 
 function table_install() {
     $dir = plugin_dir_path( __FILE__ );
@@ -130,9 +133,10 @@ add_action('admin_menu', 'mt_add_pages');
 // action function for above hook
 function mt_add_pages() {
     // Add a new top-level menu (ill-advised):
-    add_menu_page(__('PHP Event Calendar','menu-pec'), __('Event Calendar','menu-pec'), 'manage_options', 'mt-top-level-handle', 'mt_settings_page', plugins_url( 'images/pec-logo-icon-20x20.png', __FILE__ ) );
-    add_submenu_page('mt-top-level-handle', __('Imports','menu-pec'), __('Imports','menu-pec'), 'manage_options', 'mt-top-level-handle', 'mt_settings_page');
-    add_submenu_page('mt-top-level-handle', 'Events Management', 'Events Management', 'manage_options', 'mt-sub-level-handle', 'admin_calendar');
+    add_menu_page(__( 'PHP Event Calendar','menu-pec'), __('Event Calendar','menu-pec'), 'manage_options', 'mt-top-level-handle', 'admin_calendar', plugins_url( 'images/pec-logo-icon-20x20.png', __FILE__ ) );
+    add_submenu_page( 'mt-top-level-handle', 'Events Management', 'Events Management', 'manage_options', 'mt-top-level-handle', 'admin_calendar');
+    add_submenu_page( 'mt-top-level-handle', __('Imports','menu-pec'), __('Imports','menu-pec'), 'manage_options', 'mt-sub-level-handle', 'mt_settings_page');
+    add_submenu_page( 'mt-top-level-handle', 'PHP Event Calendar Premium Add-on', 'Premium Add-Ons', 'manage_options', 'pec-premium-add-ons', 'premium_addons');
 }
 
 /*######################*/
@@ -144,6 +148,11 @@ function mt_settings_page() {
 //=== Admin view calendar
 function admin_calendar(){
     include('calendar.php');
+}
+
+//=== Premium Add-Ons
+function premium_addons(){
+    include('addons.php');
 }
 
 //=== Public view calendar
@@ -158,6 +167,7 @@ function pec_load_scripts_20(){
     wp_enqueue_style( 'fullcalendar', plugins_url( '/css/fullcalendar-2.0.0/fullcalendar.css' , __FILE__ ));
     wp_enqueue_style( 'fullcalendar-print', plugins_url( '/css/fullcalendar-2.0.0/fullcalendar.print.css' , __FILE__ ), false, false, 'print' );
     wp_enqueue_style( 'fullcalendar-custom', plugins_url( '/css/fullcalendar-2.0.0/fullcalendar.custom.css' , __FILE__ ) );
+    wp_enqueue_style( 'uploadify', plugins_url( '/css/uploadify.css' , __FILE__ ));
 }
 
 function pec_load_scripts() {
@@ -188,11 +198,24 @@ function pec_load_scripts() {
         array( 'jquery','moment' )
     );
 
+    $upload_dir_params = wp_upload_dir();
+    $user_ID = get_current_user_id();
+
+    $translation_array = array( 'PEC_PLUGIN_URL_FOR_JS' => plugins_url( '' , __FILE__ ),'PEC_PLUGIN_UPLOAD_URL_FOR_JS'=>str_replace('\\','/',$upload_dir_params['baseurl']), 'PEC_PLUGIN_USER_ID_FOR_JS'=>$user_ID);
+    wp_localize_script( 'fullcalendar', 'PEC_JS_OBJECT', $translation_array );
+
+    wp_enqueue_script(
+        'pec-uploadify',
+        plugins_url( '/js/jquery.uploadify.js' , __FILE__ ),
+        array( 'jquery' )
+    );
+
     wp_enqueue_script(
         'pec-calendar-custom',
         plugins_url( '/js/custom/calendar.js' , __FILE__ ),
-        array('jquery', 'fullcalendar' )
+        array('jquery', 'fullcalendar', 'pec-uploadify')
     );
+
 
 
     wp_enqueue_script(

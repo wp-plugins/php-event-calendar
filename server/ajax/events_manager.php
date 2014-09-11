@@ -37,6 +37,7 @@ if(isset($_POST['update-event']) && $_POST['action'] == 'PEC_CREATE_EVENT'){
     $borderColor = (isset($_POST['borderColor']) && $_POST['borderColor'] != '') ? $_POST['borderColor'] : '';
     $textColor = (isset($_POST['textColor']) && $_POST['textColor'] != '') ? $_POST['textColor'] : '';
     $description = (isset($_POST['description']) && $_POST['description'] != '') ? $_POST['description'] : '';
+    $image = (isset($_POST['imageName']) && $_POST['imageName'] != '') ? $_POST['imageName'] : '';
 
     $location = (isset($_POST['location']) && $_POST['location'] != '') ? $_POST['location'] : '';
     $privacy = (isset($_POST['privacy']) && $_POST['privacy'] != '') ? $_POST['privacy'] : '';
@@ -92,7 +93,7 @@ if(isset($_POST['update-event']) && $_POST['action'] == 'PEC_CREATE_EVENT'){
         $durationEditable,$source,$color, $backgroundColor,$borderColor,$textColor,$description,
         $free_busy,$location,$privacy,$repeat_start_date, $repeat_end_on, $repeat_end_after,
         $repeat_never,$repeat_by,$repeat_type, $repeat_interval,
-        $repeat_on_sun,$repeat_on_mon,$repeat_on_tue,$repeat_on_wed,$repeat_on_thu,$repeat_on_fri,$repeat_on_sat);
+        $repeat_on_sun,$repeat_on_mon,$repeat_on_tue,$repeat_on_wed,$repeat_on_thu,$repeat_on_fri,$repeat_on_sat,$image);
 
     //==== Create Params Array for saving
     $params['title'] = $eventObj->title;
@@ -105,6 +106,7 @@ if(isset($_POST['update-event']) && $_POST['action'] == 'PEC_CREATE_EVENT'){
     $params['backgroundColor'] = $eventObj->backgroundColor;
     $params['textColor'] = $eventObj->textColor;
     $params['description'] = $eventObj->description;
+    $params['image'] = $eventObj->image;
     $params['free_busy'] = $eventObj->free_busy;
     $params['location'] = $eventObj->location;
     $params['privacy'] = $eventObj->privacy;
@@ -540,7 +542,6 @@ if(isset($_POST['action']) && $_POST['action'] == 'LOAD_SINGLE_EVENT_BASED_ON_EV
     if($eventData == NULL) echo '[{title:NO___EVENT___FOUND}]';
     else wp_send_json($eventData);
 }
-
 
 
 /*=====================================================================================

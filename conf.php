@@ -23,7 +23,7 @@ else {
 define('WP_PEC_PLUGIN_SITE_URL',WP_SITE_URL.PEC_PLUGIN_DIR);
 //define('PEC_PATH', '/highpitch_eventcal/branches/wpplugin/wordpress/wp-content/plugins/eventcal');
 //============Generatl Settings
-define('DEBUG',true);
+define('DEBUG',false);
 
 
 //============DB Settings

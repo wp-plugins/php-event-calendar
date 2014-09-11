@@ -129,3 +129,13 @@ td.day.active{
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
 }
+
+
+
+.ris_pagination_item_hide {
+    display: none;
+}
+
+.ris_pagination_item_show {
+    display: inline-block;
+}

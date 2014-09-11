@@ -1506,6 +1506,8 @@ function eventRenderer(calEvent,jsEvent,view,userRole,shortdateFormat, longdateF
             $('#backgroundColor').val(calEvent.backgroundColor);
             $('#borderColor').val(calEvent.borderColor);
             $('#textColor').val(calEvent.textColor);
+            $('#imageName').val(calEvent.image);
+            $('#img-preview').show().attr('src',PEC_JS_OBJECT.PEC_PLUGIN_UPLOAD_URL_FOR_JS+'/'+calEvent.image);
 
             $('#create-event').html('Update Event');
             $('#update-event').val(calEvent.id);

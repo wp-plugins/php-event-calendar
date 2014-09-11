@@ -3211,8 +3211,86 @@
 
     function PecView(element, calendar, viewName) {
         var t = this;
+        //====pagination variables
+        var totalItems;
+        var pCounter;
+        var pLimitToDisplay = 1;
+        var pStartToDisplay = 0;
+        var currentPage = 1;
+        var perPage = 7;
+        var totalPage;
+        var noImageURL = PEC_JS_OBJECT.PEC_PLUGIN_URL_FOR_JS+'/images/No_Image.jpg';
+
+        $('.fc-button-today').click(function (){
+            pLimitToDisplay = 1;
+            pStartToDisplay = 0;
+            currentPage = 1;
+        });
+
+        $('.fc-button-next').click(function (){
+            if(totalItems <= perPage) return;
+
+            //alert(currentPage + ' -- ' + totalPage)
+
+            pLimitToDisplay = (currentPage+1) * perPage;
+            pStartToDisplay = (currentPage) * perPage;
+
+            if(currentPage < totalPage) {
+                currentPage = currentPage + 1;
+            }
+
+            //alert(pStartToDisplay)
+            //alert(pLimitToDisplay)
+
+            var tempPCounter = 1;
+
+            $('.ris_pagination_items').removeClass('ris_pagination_item_show');
+            $('.ris_pagination_items').removeClass('ris_pagination_item_hide');
+
+            $('.ris10_pagination > div').each(function (){
+                //alert(tempPCounter)
+                $(this).addClass('ris_pagination_item_hide');
+                $(this).removeClass('ris_pagination_item_show');
+
+                if(tempPCounter > pStartToDisplay  && tempPCounter <= pLimitToDisplay) {
+                    $(this).addClass('ris_pagination_item_show');
+                    $(this).removeClass('ris_pagination_item_hide');
+                }
+                tempPCounter = tempPCounter + 1;
+            });
 
 
+        });
+
+        $('.fc-button-prev').click(function (){
+            if(currentPage > 1) {
+                currentPage = currentPage - 1;
+            }
+            pLimitToDisplay = currentPage * perPage;
+            pStartToDisplay = (currentPage-1) * perPage;
+
+
+            //alert(pStartToDisplay)
+            //alert(pLimitToDisplay)
+
+            var tempPCounter = 1;
+
+            $('.ris_pagination_items').removeClass('ris_pagination_item_show');
+            $('.ris_pagination_items').removeClass('ris_pagination_item_hide');
+
+            $('.ris10_pagination > div').each(function (){
+                //alert(tempPCounter)
+                $(this).addClass('ris_pagination_item_hide');
+                $(this).removeClass('ris_pagination_item_show');
+
+                if(tempPCounter > pStartToDisplay  && tempPCounter <= pLimitToDisplay) {
+                    $(this).addClass('ris_pagination_item_show');
+                    $(this).removeClass('ris_pagination_item_hide');
+                }
+                tempPCounter = tempPCounter + 1;
+            });
+
+        });
         // exports
         t.renderList = renderList;
         t.setHeight = setHeight;
@@ -3333,7 +3411,7 @@
 
 
         function renderEvents(events, modifiedEventId) {
-            var html = $("<div style='padding:10px;border:1px solid; height:100%; /*overflow:auto;*/ border-radius:3px; border-color:#dadada'></div>");
+            var html = $("<div class='ris10_pagination' style='padding:10px;border:1px solid; height:100%; /*overflow:auto;*/ border-radius:3px; border-color:#dadada'></div>");
             // Fetch and Show events.
             for (evt in events) {
                 var today_dt, dt, tm;
@@ -3356,7 +3434,7 @@
 
                     var eLocationElem = '';
                     if(eLocation != '' && eLocation != null) {
-                        eLocationElem = '<div style="color:#454545"><i>'+eLocation+'</i></div>'
+                        eLocationElem = '<div class="pec-upcoming-loc">'+eLocation+'</div>'
                     }
 
                     var eVisitSite = '';
@@ -3384,15 +3462,21 @@
                     }
                     if(eventDesc ==null) eventDesc = eventDescFull = '';
 
-                    //else eventDescFull = eventDesc = '';
+                    if( events[evt].image != null && events[evt].image != '' ){
+                        noImageURL = PEC_JS_OBJECT.PEC_PLUGIN_UPLOAD_URL_FOR_JS+'/'+ events[evt].image;
+                    }
+                    else{
+                        noImageURL = '';// PEC_JS_OBJECT.PEC_PLUGIN_URL_FOR_JS+'/images/No_Image.jpg';
+                    }
 
                     var eMoreElem = '';
                     if(eventDesc !=null && eventDesc.length >= 600) {
                         //eMoreElem = '<span">&nbsp; <a style="color:black; font-weight: bold; text-decoration: none" href="javascript:void(0);" ><i>Find More >> </i></a></span>';
                         //eMoreElem = '';
                     }
+                    eventDesc = eventDesc.replace(/(?:\r\n|\r|\n)/g, '<br />'); // replace new line with <br />
 
-                    dtelem = "<div class='pecDate' style=''><b>" + dt + "</b></div>";
+                    dtelem = "<div class='pec-upcoming-date'>" + dt + "</div>";
 
 
                     if (isGoogle <= 0) { //If the event is from our DB
@@ -3403,16 +3487,18 @@
                         googleLinkTagEnd = "</a>";
                         bgColorHTML = "<p style='display: inline-block; height: 16px; width: 16px; border: 1px solid blue; line-height: 14px;padding-left: 1px'>G</p>";
                     }
+
+                    var imgelem = (noImageURL!='') ? "<img src='"+noImageURL+"' />" : "";
                     if (allDay == 'on' || allDay == 'true' || allDay == true) {
-                        eventelem = $("<div style='display: inline-block; margin-bottom: 45px; height: auto; width: 100%;'><div class='pecTitle' style=''>" + " " + googleLinkTagStart + "<h2>"+events[evt].title+"</h2>" + googleLinkTagStart +
-                            dtelem + "<div class='pecTime' style='display:inline-block; color:#000000'> <b>All day</b></div>" + eLocationElem + "</div>" +
-                            "<div style='height: auto; float: left; margin-right: 10px;'><img src='http://localhost/highpitch_eventcal/branches/wpplugin/wordpress/wp-content/plugins/php-event-calendar-lite/images/No_Image.jpg'  style='height: 160px; width: 220px; border:1px dotted #d9d9d9;'></div><div style='height: auto; display: inline;'>" + eventDesc + eMoreElem + eVisitSite +"</div></div>").appendTo(html);
+                        eventelem = $("<div class='pec-upcoming-event ris_pagination_items ris_pagination_item_show'><div class='pecTitle'>" + " " + googleLinkTagStart + "<h2>"+events[evt].title+"</h2>" + googleLinkTagStart +
+                            "<div class='pec-upcoming-datetime'>" + dtelem +  " <div class='pec-upcoming-time'>All day</div></div>" + eLocationElem + "</div>" +
+                            "<div class='pec-upcoming-img'>" + imgelem + "</div><div class='pec-upcoming-desc'>" + eventDesc + eMoreElem + eVisitSite +"</div></div>").appendTo(html);
                         if (isGoogle <= 0) eventElementHandlers(events[evt], eventelem);
                     }
                     else {
-                        eventelem = $("<div style='display: inline-block; margin-bottom: 45px; height: auto; width: 100%;'><div class='pecTitle' style=''>" + " " + googleLinkTagStart + "<h2>"+events[evt].title+"</h2>" + googleLinkTagStart +
-                            dtelem + "<div class='pecTime' style='display:inline-block; color:black;'> <b>@ " + tm + "</b></div>" + eLocationElem + "</div>" +
-                            "<div style='height: auto; float: left; margin-right: 10px;'><img src='http://localhost/highpitch_eventcal/branches/wpplugin/wordpress/wp-content/plugins/php-event-calendar-lite/images/No_Image.jpg' style='height: 160px; width: 220px; border:1px dotted #d9d9d9;'></div><div style='height: auto; display: inline;'>" + eventDesc + eMoreElem + eVisitSite +"</div></div>").appendTo(html);
+                        eventelem = $("<div class='pec-upcoming-event ris_pagination_items ris_pagination_item_show'><div class='pecTitle'>" + " " + googleLinkTagStart + "<h2>"+events[evt].title+"</h2>" + googleLinkTagStart +
+                            "<div class='pec-upcoming-datetime'>" + dtelem +  " <div class='pec-upcoming-time'>@ " + tm + "</div></div>" + eLocationElem + "</div>" +
+                            "<div class='pec-upcoming-img'>" + imgelem + "</div><div class='pec-upcoming-desc'>" + eventDesc + eMoreElem + eVisitSite +"</div></div>").appendTo(html);
                         if (isGoogle <= 0) eventElementHandlers(events[evt], eventelem);
                     }
 
@@ -3423,6 +3509,24 @@
             }
 
             $(element).html(html);
+
+
+            //==== custom pagination soruce by RIS (mostanser billah)
+            totalItems = $('.ris10_pagination > div').length;
+            totalPage = Math.floor(totalItems/perPage);
+            pCounter = 1;
+            $('.ris10_pagination > div').each(function (){
+                if(pCounter > perPage) {
+                    $(this).removeClass('ris_pagination_item_show');
+                    $(this).addClass('ris_pagination_item_hide');
+                }
+
+                else {
+                    pCounter = pCounter + 1;
+                }
+            });
+
+
             //    reportEvents(events);
             //     renderDaySegs(compileSegs(events), modifiedEventId);
             //    trigger('eventAfterAllRender');

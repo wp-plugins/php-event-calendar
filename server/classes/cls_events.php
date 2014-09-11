@@ -104,6 +104,12 @@ class C_Events extends C_Calendar
     public $url;
 
     /**
+     * @var string $image
+     * String. Optional. A Image that will be viewed when this event is clicked by the user. For more information on controlling this behavior, see the eventClick callback.
+     */
+    public $image;
+
+    /**
      * @var string $className
      * String/Array. Optional. A CSS class (or array of classes) that will be attached to this event's element.
      */
@@ -385,7 +391,7 @@ class C_Events extends C_Calendar
                                 $durationEditable = '', $source = '', $color = '', $backgroundColor = '', $borderColor = '', $textColor = '', $description = '',
                                 $free_busy = 'free', $location = '', $privacy = 'public',                $repeat_start_date = '', $repeat_end_on = '', $repeat_end_after = '',
                                 $repeat_never = '', $repeat_by='',                  $repeat_type = 'none', $repeat_interval = '',
-                                $repeat_on_sun = 0, $repeat_on_mon = 0, $repeat_on_tue = 0, $repeat_on_wed = 0, $repeat_on_thu = 0, $repeat_on_fri = 0, $repeat_on_sat = 0)
+                                $repeat_on_sun = 0, $repeat_on_mon = 0, $repeat_on_tue = 0, $repeat_on_wed = 0, $repeat_on_thu = 0, $repeat_on_fri = 0, $repeat_on_sat = 0, $image='')
     {
 
         if ($title == 'LOAD_MY_EVENTS') {
@@ -499,6 +505,7 @@ class C_Events extends C_Calendar
             $this->end_time = date('H:i',$this->end_timestamp);
 
             $this->url = $url;
+            $this->image = $image;
             $this->allDay = $allDay;
             $this->className = $className;
             $this->editable = $editable;
@@ -1162,6 +1169,7 @@ class C_Events extends C_Calendar
             $title = stripslashes($res['title']);
             $url = $res['url'];
             $location = stripslashes($res['location']);
+            $image = stripslashes($res['image']);
             $start_date = $res['start_date'];
             $start_time = $res['start_time'];
             $start_timestamp = $res['start_timestamp'];
@@ -1188,6 +1196,7 @@ class C_Events extends C_Calendar
                 'title' => $title,
                 //'url' => $url,
                 'location' => $location,
+                'image' => $image,
                 'start' => '',
                 'end' => '',
                 'borderColor' => $borderColor,
@@ -1270,7 +1279,7 @@ class C_Events extends C_Calendar
      */
     public function saveEvent($params = array())
     {
-        return ($this->db->AutoExecute('pec_events', $params, 'INSERT') && isset($this->db->_connectionID->insert_id)) ? $this->db->_connectionID->insert_id : false;
+        return ($this->db->AutoExecute('pec_events', $params, 'INSERT') && isset($this->db->_connectionID->insert_id)) ? $this->db->_connectionID->insert_id : $this->db->Insert_ID();
     }
 
 

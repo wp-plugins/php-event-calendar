@@ -116,7 +116,7 @@ if( isset($_FILES['fupload'])) {
 
 
 // top
-echo '<h2>PHP Event Calendar Settings</h2>';
+echo '<h2> <img class="pec-logo" src="'.  plugins_url( 'images/pec-logo.png',  __FILE__ ) .'" /> Imports</h2>';
 
 // container
 
@@ -128,8 +128,8 @@ echo '<div id="pec-settings-main" style="width:800px;float:left">';
 
 // info
 
-echo '<div id="pec-settings-info" class="wrap">
-                    <img src="'.  plugins_url( 'images/pec-logo.png',  __FILE__ ) .'" width="200" /><br />
+/* echo '<div id="pec-settings-info" class="wrap">
+                    <img class="pec-logo" src="'.  plugins_url( 'images/pec-logo.png',  __FILE__ ) .'" width="200" /><br />
 
                     <p>
                     This plugin is built with FREE <a href="http://phpeventcalendar.com">PHP Event Calendar</a> Lite edition! 
@@ -144,7 +144,7 @@ echo '<div id="pec-settings-info" class="wrap">
                     The  full version has no those limitations. <a href="http://phpeventcalendar.com">Learn more...</a>
                     </p>
                   </div>';
-
+*/
 // export instruction
 
 echo '<div>
@@ -228,7 +228,7 @@ echo "<h4>" . __( 'Or upload from web URL', 'menu-pec' ) . "</h4>";
     <h3>All Done! Well, you still need help?</h3>
 
     <p style="padding-left:12px">
-        Feel free to <a href="http://phpeventcalendar.com/contact/" target="_new">send us your feedback and suggestions</a>.
+        Feel free to <a href="http://phpeventcalendar.uservoice.com/" target="_new">send us your feedback and suggestions</a>.
     </p>
 </div>
 

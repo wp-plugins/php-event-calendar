@@ -3,7 +3,7 @@ Contributors: chenster
 Donate link: http://phpeventcalendar.com/
 Tags: events, calendar, event, scheduler, dates, date, meeting, seminar, class
 Requires at least: 3.0.1
-Tested up to: 3.9.2
+Tested up to: 4.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -39,7 +39,7 @@ Premium edition is also available with additional features:
 * Repeating Events - Fully customizable daily, weekly, monthly repeating events.
 * Email reminder - Send users events reminder through email.
 
-More information on [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar").
+More information on [PHP Event Calendar Premium Add-ons](http://phpeventcalendar.com/50-off-limited-time-offer-complete-add-on-bundle/ "PHP Event Calendar" Premium Add-ons).
 
 == Installation ==
 
@@ -89,15 +89,24 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 
 1. Event Import Admin View
 2. Month View
-3. Day View
-4. Week View
-5. Event Detail View
+3. Week View
+4. Upcoming event view
+5. Individual Event Detail View
 6. Month View with Sidebar 
 7. Month View (Full Width Responsive)
 8. Events Management UI - Event Edit Window
 9. Events Management UI - Week View
 
 == Changelog ==
+
+= 1.3
+* Event image upload using Uploadify
+* Upcoming events view
+* Front-end CSS enhancement
+* Better small screen sizen and mobile support
+* Introducing priemum add-ons
+* Individual event detail view update to prevent CSS conflict
+* Tested up to WordPress 4.0!
 
 = 1.2.1 =
 * strip slashes when display escaping single quote from database
