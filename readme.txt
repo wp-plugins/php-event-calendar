@@ -12,32 +12,35 @@ Easily create, share, and display beautiful and responsive online event calendar
 
 == Description ==
 
-The plugin is built with FREE [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar") Lite, a modern, responsive, multi-user calendar/scheduling application. It can be used right out of the box as a standalone event calendar application or can be customized easily to seamlessly integrate into your own environment. The calendar shared and public calendars, event drag and drop, Google Calendar import, event color.
+The plugin is built with FREE [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar") Lite, a modern, responsive, multi-user calendar/scheduling application. It can be used right out of the box as a standalone event calendar application or can be customized easily to seamlessly integrate into your own environment.
 
-PHP Event Calendar supports all major desktop web browsers as well as iOS and Android devices.
+PHP Event Calendar supports all major desktop web browsers and works well on mobile and tablet devices.
 
 = Intuitive Event Management GUI = 
 
-The calendar is designed for simplicity and easy of use. Users can create new events and edit existing events through a familiar calendar graphic interface instead of a traditional WordPress table editor. Managing events is interactive and intuitive. It's perfect for people who are not tech savvy and need to manage online events.
+The calendar is designed for simplicity and easy of use. Users can create new and edit existing events, change calendar settings, through graphic user interface instead of traditional WordPress table editors. Managing events is easy and intuitive. It's perfect for people who are not tech savvy but wish to manage events in WordPress.
 
 = Features: =
 
-* Intuitive event management user interface - Manage events directly in calendar instead of old-school table editor
-* Multiple Views - Supports Day, Week, Month as well as upcoming Resource views
-* Event Import - Imports events from all major event calendar software including Google Calendar and Microsoft Outlook
-* Mobile Support - Supports mobile device via responsive user interface.
+* Intuitive event management user interface - Manage events directly in calendar instead of old-school table editors
+* Multiple Views - Day, Week, Month, Upcoming views
+* Event Import - Imports events from major calendar software including Google Calendar and Microsoft Outlook
+* Mobile Support - Supports mobile devices via responsive user interface.
 * Bootstrap Ready - Built with the most popular front-end framework for web and mobile
-* Event Color - Pick from a dozen of colors and bring events to life!
+* Event Color - Pick from a dozens of colors and bring events to life!
 * Professionally crafted - Professionally designed and tested!
 
 = Looking for more features? =
 
-Premium edition is also available with additional features:
+Premium add-ons are also available:
 
-* Event Drag & Drop - Update events date and time with mouse drag & drop.
 * Multiple Calendars - Multiple calendars with different colors, toggled with one click.
 * Repeating Events - Fully customizable daily, weekly, monthly repeating events.
-* Email reminder - Send users events reminder through email.
+* Double Booking Prevention - Never have scheduling conflict again!
+* Agenda View - A glance at a list of upcoming events
+* Email Reminders - Send users events reminder through email.
+* Subscribe to 3rd party Calendars - Subscribe and forget! No more importing events by entering them manually again.
+* More to come...
 
 More information on <a href="http://phpeventcalendar.com/50-off-limited-time-offer-complete-add-on-bundle/">PHP Event Calendar Premium Add-ons</a>.
 
