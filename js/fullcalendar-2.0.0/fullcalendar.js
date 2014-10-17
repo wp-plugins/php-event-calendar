@@ -2909,8 +2909,8 @@
 
     function listView(element, calendar) {
 
-       // $('.fc-header-left span.fc-button-prev').addClass('fc-state-disabled');
-       // $('.fc-header-left span.fc-button-next').addClass('fc-state-disabled');
+        // $('.fc-header-left span.fc-button-prev').addClass('fc-state-disabled');
+        // $('.fc-header-left span.fc-button-next').addClass('fc-state-disabled');
 
         var t = this;
 
@@ -3088,6 +3088,9 @@
                 var olddt = dt;
                 var bgColorHTML;
                 var isGoogle;
+                //==== get today date
+                var today_date = Date.now();
+
                 if (events[evt]) {
                     var eURL = events[evt].url;
 
@@ -3098,7 +3101,10 @@
                     dt = formatDate(events[evt].start, 'dddd, MMM D, YYYY');
                     tm = formatDate(events[evt].start, 'hh:mm A');
 
-
+                    //==== check for previous dates and leave for previous entries
+                    if(events[evt].start < today_date) {
+                        continue;
+                    }
                     var allDay = events[evt].allDay;
                     var backgroundColor = events[evt].backgroundColor;
                     var googleLinkTagStart = '';

@@ -30,7 +30,7 @@ $pec->header();
 //$pec->slotMinutes(50);
 //$pec->defaultView('month'); //month,basicWeek,agendaWeek,basicDay,agendaDay
 //$pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Agenda Day','basicDay'=>'Day','basicWeek'=>'Week','month'=>'Month','agendaWeek'=>'Agenda Week'));
-$pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Day','basicDay'=>'Day','month'=>'Month','agendaWeek'=>'Week','list'=>'Agenda','pec'=>'Upcoming'));
+$pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Day','basicDay'=>'Day','month'=>'Month','agendaWeek'=>'Week','pec'=>'Upcoming'));
 
 //===Each Event as a form of Array
 $events = array(
@@ -110,6 +110,10 @@ $pec->dragOpacity(.2);
         .unselect-calendar:hover {
             text-shadow: 0 2px 5px black;
             color: maroon;
+        }
+
+        a#cal-settings-link{
+            display: none;
         }
 
     </style>

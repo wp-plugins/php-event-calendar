@@ -248,14 +248,14 @@ class C_Calendar extends C_Calendar_Settings
 
             //==== load session calendar properties
             $this->calendarProperties = $this->loadCalendarSettings($userID);
-            $_SESSION['calendarData']['properties'] = $this->calendarProperties;
+            $cal_properties = $this->calendarProperties;
             //==== update calendar settings
-            $id = $_SESSION['calendarData']['properties']['id'];
+            $id = $cal_properties['id'];
             $settingsID = $this->updateCalendarSettings($params, $id);
 
             //==== load calendar settings again once after update is done
-            $this->calendarProperties = $this->loadCalendarSettings($userID);
-            $_SESSION['calendarData']['properties'] = $this->calendarProperties;
+            //$this->calendarProperties = $this->loadCalendarSettings($userID);
+            //$_SESSION['calendarData']['properties'] = $this->calendarProperties;
         } //==== setting up the default calendar properties
         else if ($name == 'LOAD_PUBLIC_CALENDARS'){
             $this->calendarProperties = $this->loadPublicCalendarSettings();

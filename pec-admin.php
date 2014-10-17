@@ -116,7 +116,7 @@ if( isset($_FILES['fupload'])) {
 
 
 // top
-echo '<h2> <img class="pec-logo" src="'.  plugins_url( 'images/pec-logo.png',  __FILE__ ) .'" /> Imports</h2>';
+echo '<h2> <img class="pec-logo" src="'.  plugins_url( 'images/pec-logo.png',  __FILE__ ) .'" /> PHP Event Calendar Imports</h2>';
 
 // container
 
@@ -128,9 +128,7 @@ echo '<div id="pec-settings-main" style="width:800px;float:left">';
 
 // info
 
-/* echo '<div id="pec-settings-info" class="wrap">
-                    <img class="pec-logo" src="'.  plugins_url( 'images/pec-logo.png',  __FILE__ ) .'" width="200" /><br />
-
+echo '<div id="pec-settings-info" class="wrap">
                     <p>
                     This plugin is built with FREE <a href="http://phpeventcalendar.com">PHP Event Calendar</a> Lite edition! 
                     PHP Event Calendar is a modern, AJAX based, multi-user calendar/scheduling application. 
@@ -144,7 +142,7 @@ echo '<div id="pec-settings-main" style="width:800px;float:left">';
                     The  full version has no those limitations. <a href="http://phpeventcalendar.com">Learn more...</a>
                     </p>
                   </div>';
-*/
+
 // export instruction
 
 echo '<div>

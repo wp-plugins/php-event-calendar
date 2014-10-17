@@ -165,7 +165,7 @@ $allCalendars = $allCals->allCalendars;
                                             <input type="text" class="form-control guest-view" id="start-date-guest" name="start-date" placeholder="Start Date" />
                                         </div>
                                         <div class="col-sm-3">
-                                            <input name="start-time" id="start-time" class="form-control guest-view"/>
+                                            <input type="text" name="start-time" id="start-time" class="form-control guest-view"/>
                                         </div>
 
                                         <div id="end-group">
@@ -174,7 +174,7 @@ $allCalendars = $allCals->allCalendars;
                                                 <input type="text" class="form-control guest-view" placeholder="End Date" name="end-date" id="end-date-guest" />
                                             </div>
                                             <div class="col-sm-3">
-                                                <input name="end-time" id="end-time" class="form-control guest-view"/>
+                                                <input type="text" name="end-time" id="end-time" class="form-control guest-view"/>
                                             </div>
                                         </div>
 
@@ -198,8 +198,9 @@ $allCalendars = $allCals->allCalendars;
                                     <div class="col-sm-3">
                                         <div class="form-group" id="loc_msg">
                                             <h6>Venue</h6>
-                                            <p>
-                                                <input type="text" class="form-control guest-view" id="location" name="location" placeholder="Location" />
+                                            <p class="" id="location">
+                                                <!-- input text not to be used -->
+                                                <!--input type="text" class="form-control guest-view" id="location" name="location" placeholder="Location" /-->
                                             </p>
                                         </div>
 

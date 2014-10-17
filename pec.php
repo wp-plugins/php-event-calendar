@@ -33,6 +33,8 @@ require_once(dirname(__FILE__) .'/server/classes/cls_calendar_settings.php');
 require_once(dirname(__FILE__) .'/server/classes/cls_calendars.php');
 require_once(dirname(__FILE__) .'/server/classes/cls_events.php');
 require_once(dirname(__FILE__) .'/server/classes/cls_reminder.php');
+require_once(dirname(__FILE__) .'/server/classes/cls_organizer.php');
+require_once(dirname(__FILE__) .'/server/classes/cls_venue.php');
 
 define('PEC_SESSION_KEY', '_oPEC');
 define('FULL_CALENDAR_VERSION','/fullcalendar-2.0.0'); //===preceding / is required

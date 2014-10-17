@@ -87,9 +87,26 @@ if(isset($_POST['update-event']) && $_POST['action'] == 'PEC_CREATE_EVENT'){
     $guests = (isset($_POST['guests']) && $_POST['guests'] != '') ? $_POST['guests'] : '';
 
 
+    if(isset($_POST['organizer_new']) && $_POST['organizer_new'] != ''){
+        $organizerObj = new C_Organizer(PEC_USER_ID, $_POST['organizer_new'], date('Y-m-d'));
+        $organizerObj->saveOrganizers();
+        $organizer = $organizerObj->loadOrganizers();
+    }
+    else{
+        $organizer = (isset($_POST['organizer']) && $_POST['organizer'] != '') ? $_POST['organizer'] : '';
+    }
+
+    if(isset($_POST['venue_name']) && $_POST['venue_name'] != ''){
+        $venueObj = new C_Venue(PEC_USER_ID, date('Y-m-d'), $_POST['venue_name'], $_POST['address'], $_POST['city'], $_POST['country'], $_POST['state'], $_POST['post_code'], $_POST['phone'], $_POST['website']);
+        $venueObj->saveVenues();
+        $venue = $venueObj->loadVenues();
+    }
+    else{
+        $venue = (isset($_POST['venue']) && $_POST['venue'] != '') ? $_POST['venue'] : '';
+    }
     //==== Load Event Manager
 
-    $eventObj = new C_Events(0,$title, $start, $end, $url, $allDay, $className, $editable, $startEditable,
+    $eventObj = new C_Events(0,$title, $start, $end, $url, $organizer, $venue, $allDay, $className, $editable, $startEditable,
         $durationEditable,$source,$color, $backgroundColor,$borderColor,$textColor,$description,
         $free_busy,$location,$privacy,$repeat_start_date, $repeat_end_on, $repeat_end_after,
         $repeat_never,$repeat_by,$repeat_type, $repeat_interval,
@@ -141,6 +158,8 @@ if(isset($_POST['update-event']) && $_POST['action'] == 'PEC_CREATE_EVENT'){
         $params['borderColor'] = '';
 
     $params['url'] = $eventObj->url;
+    $params['organizer'] = $eventObj->organizer;
+    $params['venue'] = $eventObj->venue;
     $params['allDay'] = $eventObj->allDay;
 
     //==================================================================================================================
@@ -539,6 +558,9 @@ if(isset($_POST['action']) && $_POST['action'] == 'LOAD_SINGLE_EVENT_BASED_ON_EV
     $eventData['location'] = stripslashes($eventData['location']);
     $eventData['description'] = stripslashes($eventData['description']);
 
+    //$venueData = C_Events::loadVenueData($eventData['venue']);
+    //$venueInfo = $venueData['venue_name'].', '.$venueData['address'].', '.$venueData['city'].', '.$venueData['country'].', '.$venueData['post_code'];
+    //$eventData['location'] = ($venueInfo == ', , , , ') ? '' : $venueInfo ;
     if($eventData == NULL) echo '[{title:NO___EVENT___FOUND}]';
     else wp_send_json($eventData);
 }
@@ -580,6 +602,21 @@ if(isset($_POST['action']) && $_POST['action'] == 'REMOVE_THIS_EVENT'){
         if($isDelete) echo $eventID;
     }
     else echo 'NO_SELECTED_EVENT_FOUND';
+}
+
+
+/*=====================================================================================
+| Check Conflict
+|*=====================================================================================*/
+if(isset($_POST['action']) && $_POST['action'] == 'CHECK_CONFLICT'){
+    $start = $_POST['startDate'].' '.$_POST['startTime'];
+    $start = strtotime($start);
+
+    $end = $_POST['endDate'].' '.$_POST['endTime'];
+    $end = strtotime($end);
+
+    $conflict = C_Events::checkConflict($start, $end);
+    echo wp_send_json(array('title'=>$conflict));
 }
 
 

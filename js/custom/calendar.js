@@ -76,6 +76,40 @@ jQuery(document).ready(function($) {
         }
     });
 
+    //=== Add Organizer
+    $('#add_organizer').click(function(){
+        $('#selector').hide();
+        $('#organizer-input').show();
+        $('#add_organizer').hide();
+        $('#cancel_organizer').show();
+        $('#new-organizer').val(1);
+    });
+
+    //=== Cancel Organizer
+    $('#cancel_organizer').click(function(){
+        $('#selector').show();
+        $('#organizer-input').hide();
+        $('#add_organizer').show();
+        $('#cancel_organizer').hide();
+        $('#new-organizer').val(0);
+    });
+
+    //=== Add venue
+    $('#add_venue').click(function(){
+        $('#venue-select').hide();
+        $('#venue-holder').show();
+        $('#add_venue').hide();
+        $('#cancel_venue').show();
+    });
+
+    //=== Cancel venue
+    $('#cancel_venue').click(function(){
+        $('#venue-select').show();
+        $('#venue-holder').hide();
+        $('#add_venue').show();
+        $('#cancel_venue').hide();
+    });
+
 
     //==== reminder panel setup
     reminder2Obj = $('#reminder2').detach();
@@ -166,99 +200,8 @@ jQuery(document).ready(function($) {
                 l.stop();
             }, "json");
     }*/
-
-    //====validating
-    function validateEventCreateForm() {
-        var errMsg = '';
-        var errMsgTitle = '';
-
-        var title = $('#title').val();
-        if (title == '') errMsgTitle = "Title is required!<br/>";
-
-        var start = moment($('#start-date').val());
-        var end = moment($('#end-date').val());
-
-        var startDate = start.format('X');
-        var endDate = end.format('X');
-        //alert(startDate);
-        //alert(endDate);
-        var allDay = $('#allDay').prop('checked');
-        var startTime = parseInt(timeFrom12To124Hours($('#start-time').val()).replace(/:/, ''));
-        var endTime = parseInt(timeFrom12To124Hours($('#end-time').val()).replace(/:/, ''));
-
-        if (startDate > endDate && allDay == false) errMsg = errMsg + "End Date must need to set after Start Date!<br />";
-        else if ((startTime > endTime) && (startDate >= endDate) && (allDay != 'on' || allDay != true)) errMsg = errMsg + "Sorry, you can't create an event that ends before it starts!<br />";
-        if ((startTime == 2300 && endTime == 0) || (startTime == 2330 && endTime == 30) || (startTime == 2300 && endTime == 2330)) errMsg = '';
-        if (startTime != 0 && endTime == 0) errMsg = '';
-        if (startTime == endTime && allDay == false && startDate == endDate) errMsg = errMsg + "Sorry, start and end times can't be equal<br />";
-
-        //=== if allDay is set to true, then empty the the time for last date
-        if (allDay == true) $('#end-time').val('');
-
-        return errMsg + errMsgTitle;
-    }
-
-    $('.repeat_on_day').click(function () {
-        var tid = this.id;
-        var tcheck = this.checked;
-
-        if (tid == 'repeat_on_sun' && tcheck == false) repeat_on_sun = 0;
-        if (tid == 'repeat_on_sun' && tcheck == true) repeat_on_sun = 1;
-
-        if (tid == 'repeat_on_mon' && tcheck == false) repeat_on_mon = 0;
-        if (tid == 'repeat_on_mon' && tcheck == true) repeat_on_mon = 1;
-
-        if (tid == 'repeat_on_tue' && tcheck == false) repeat_on_tue = 0;
-        if (tid == 'repeat_on_tue' && tcheck == true) repeat_on_tue = 1;
-
-        if (tid == 'repeat_on_wed' && tcheck == false) repeat_on_wed = 0;
-        if (tid == 'repeat_on_wed' && tcheck == true) repeat_on_wed = 1;
-
-        if (tid == 'repeat_on_thu' && tcheck == false) repeat_on_thu = 0;
-        if (tid == 'repeat_on_thu' && tcheck == true) repeat_on_thu = 1;
-
-        if (tid == 'repeat_on_fri' && tcheck == false) repeat_on_fri = 0;
-        if (tid == 'repeat_on_fri' && tcheck == true) repeat_on_fri = 1;
-
-        if (tid == 'repeat_on_sat' && tcheck == false) repeat_on_sat = 0;
-        if (tid == 'repeat_on_sat' && tcheck == true) repeat_on_sat = 1;
-
-    });
-
-    $('#myModal').on('hide.bs.modal', function (e) {
-        $('#reminder_type_1').val('email');
-        $('#reminder_time_1').val('1');
-        $('#reminder_time_unit_1').val('minute');
-
-        $('#reminder_type_2').val('email');
-        $('#reminder_time_2').val('1');
-        $('#reminder_time_unit_2').val('minute');
-
-        $('#reminder_type_3').val('email');
-        $('#reminder_time_3').val('1');
-        $('#reminder_time_unit_3').val('minute');
-
-        hideReminder2();
-        hideReminder3();
-        $('#guest-list div').remove();
-        serial = 1; //reset event reminder guest serial
-    })
-
-    $('#create-event').click(function () {
-        //==== start JS validating
-        var errMsg = '';
-        errMsg = validateEventCreateForm();
-
-        //==== display error message if there is any error
-        if (errMsg != '') {
-            $.bootstrapGrowl("<div style='text-align: left'>" + errMsg + "</div>", {
-                type: 'warning',
-                width: 450
-            });
-
-            return false;
-        }
-
+    //==== event Create or Update
+    function eventCreateUpdate(){
         //==== check repeat week days are checked at least one, if none is checked, then check one by default
         var repeat_type;
         if (repeatChecked == true) {
@@ -379,6 +322,143 @@ jQuery(document).ready(function($) {
                     width: 350
                 });
             })
+    }
+    //====validating
+    function validateEventCreateForm() {
+        var errMsg ='';
+        var errMsgTitle ='';
+
+        var title = $('#title').val();
+        if (title == '') errMsgTitle = "Title is required!<br/>";
+
+        var start = moment($('#start-date').val());
+        var end = moment($('#end-date').val());
+
+        var startDate = start.format('X');
+        var endDate = end.format('X');
+        var startDateConflict = start.format('YYYY-MM-DD');
+        var endDateConflict = end.format('YYYY-MM-DD');
+        //alert(startDate);
+        //alert(endDate);
+        var allDay = $('#allDay').prop('checked');
+        var startTimeConflict = timeFrom12To124Hours($('#start-time').val());
+        var endTimeConflict = timeFrom12To124Hours($('#end-time').val());
+        var startTime = parseInt(timeFrom12To124Hours($('#start-time').val()).replace(/:/, ''));
+        var endTime = parseInt(timeFrom12To124Hours($('#end-time').val()).replace(/:/, ''));
+
+        if (startDate > endDate && allDay == false) errMsg = errMsg + "End Date must need to set after Start Date!<br />";
+        else if ((startTime > endTime) && (startDate >= endDate) && (allDay != 'on' || allDay != true)) errMsg = errMsg + "Sorry, you can't create an event that ends before it starts!<br />";
+        if ((startTime == 2300 && endTime == 0) || (startTime == 2330 && endTime == 30) || (startTime == 2300 && endTime == 2330)) errMsg = '';
+        if (startTime != 0 && endTime == 0) errMsg = '';
+        if (startTime == endTime && allDay == false) errMsg = errMsg + "Sorry, start and end times can't be equal<br />";
+
+        //=== if allDay is set to true, then empty the the time for last date
+        if (allDay == true) $('#end-time').val('');
+        //alert(startDate);
+        //alert(endDate);
+
+        $.post(ajaxurl,
+            { startDate: startDateConflict, endDate: endDateConflict, startTime: startTimeConflict, endTime: endTimeConflict, action: 'CHECK_CONFLICT'},
+            function (eventJSON) {
+            }, "json")
+            .always(function (eventJSON) { //==== no event found?
+                if(errMsg+errMsgTitle == ''){
+                    if(eventJSON.title > 0){
+                        var overlap = confirm('This will conflict with another event, will you proceed?');
+
+                        if(overlap){
+                            eventCreateUpdate();
+                        }
+                    }
+                    else{
+                        if(errMsg+errMsgTitle == '')
+                            eventCreateUpdate();
+                    }
+                }
+                /*$.bootstrapGrowl("<div style='text-align: left'>"+eventJSON.title+"</div>", {
+                 type: 'warning',
+                 width: 280
+                 });*/
+            }, "json");
+
+        return errMsg + errMsgTitle;
+    }
+
+    $('.repeat_on_day').click(function () {
+        var tid = this.id;
+        var tcheck = this.checked;
+
+        if (tid == 'repeat_on_sun' && tcheck == false) repeat_on_sun = 0;
+        if (tid == 'repeat_on_sun' && tcheck == true) repeat_on_sun = 1;
+
+        if (tid == 'repeat_on_mon' && tcheck == false) repeat_on_mon = 0;
+        if (tid == 'repeat_on_mon' && tcheck == true) repeat_on_mon = 1;
+
+        if (tid == 'repeat_on_tue' && tcheck == false) repeat_on_tue = 0;
+        if (tid == 'repeat_on_tue' && tcheck == true) repeat_on_tue = 1;
+
+        if (tid == 'repeat_on_wed' && tcheck == false) repeat_on_wed = 0;
+        if (tid == 'repeat_on_wed' && tcheck == true) repeat_on_wed = 1;
+
+        if (tid == 'repeat_on_thu' && tcheck == false) repeat_on_thu = 0;
+        if (tid == 'repeat_on_thu' && tcheck == true) repeat_on_thu = 1;
+
+        if (tid == 'repeat_on_fri' && tcheck == false) repeat_on_fri = 0;
+        if (tid == 'repeat_on_fri' && tcheck == true) repeat_on_fri = 1;
+
+        if (tid == 'repeat_on_sat' && tcheck == false) repeat_on_sat = 0;
+        if (tid == 'repeat_on_sat' && tcheck == true) repeat_on_sat = 1;
+
+    });
+
+    $('#myModal').on('hide.bs.modal', function (e) {
+        $('#reminder_type_1').val('email');
+        $('#reminder_time_1').val('1');
+        $('#reminder_time_unit_1').val('minute');
+
+        $('#reminder_type_2').val('email');
+        $('#reminder_time_2').val('1');
+        $('#reminder_time_unit_2').val('minute');
+
+        $('#reminder_type_3').val('email');
+        $('#reminder_time_3').val('1');
+        $('#reminder_time_unit_3').val('minute');
+
+        hideReminder2();
+        hideReminder3();
+        $('#guest-list div').remove();
+        serial = 1; //reset event reminder guest serial
+
+        // to reset organizer form
+        $('#selector').show();
+        $('#organizer-input').hide();
+        $('#add_organizer').show();
+        $('#cancel_organizer').hide();
+
+        // to reset venue settings part
+        $('#venue-select').show();
+        $('#venue-holder').hide();
+        $('#add_venue').show();
+        $('#cancel_venue').hide();
+        $('#hide-venue-settings').click();
+
+    })
+
+    $('#create-event').click(function () {
+        //==== start JS validating
+        var errMsg = '';
+        errMsg = validateEventCreateForm();
+
+        //==== display error message if there is any error
+        if (errMsg != '') {
+            $.bootstrapGrowl("<div style='text-align: left'>" + errMsg + "</div>", {
+                type: 'warning',
+                width: 450
+            });
+
+            return false;
+        }
+
     });
 
     $('#start-date').datetimepicker({
@@ -710,6 +790,17 @@ jQuery(document).ready(function($) {
                 break;
         }
         $('#repeat_interval_label').html(intervalLabel);
+    });
+
+    $('#show-venue-settings').click(function () {
+        $('.venue').fadeIn();
+        $('.basic-venue .show-link-venue').hide();
+        $('.venue').css('display', 'inline-block');
+    });
+
+    $('#hide-venue-settings').click(function () {
+        $('.basic-venue .show-link-venue').fadeIn();
+        $('.venue').hide();
     });
 
     $('#show-standard-settings').click(function () {
@@ -1328,7 +1419,8 @@ jQuery(document).ready(function($) {
             type: "POST",
             //url: "<?php echo WP_PEC_PLUGIN_SITE_URL?>/server/ajax/calendar_manager.php",
             url: ajaxurl,
-            data: {formData:formData, action: 'CALENDAR_SETTINGS_SAVE', _ajax_nonce: 'wp_create_nonce(NONCE_CALENDAR_SETTINGS_SAVE)'}
+            data: formData,
+            dataType: 'json'
         })
             .done(function (calJSON) {
                 $('#myModalCalendarCreate').modal('hide');
@@ -1339,7 +1431,7 @@ jQuery(document).ready(function($) {
                 })
 
                 setTimeout(function () {
-                    location.href = '<?php echo WP_PEC_PLUGIN_SITE_URL?>/calendar.php';
+                    location.reload();
                 }, 3000);
             })
             .fail(function () {
@@ -1635,6 +1727,8 @@ function eventRenderer(calEvent,jsEvent,view,userRole,shortdateFormat, longdateF
             //alert(ed.location);
             $('#location').val(ed.location);
             $('#url').val(ed.url);
+            $('#select-organizer').selectpicker('val', ed.organizer);
+            $('#select-venue').selectpicker('val', ed.venue);
             $('#description').val(ed.description);
             $('#backgroundColor').val(ed.backgroundColor);
             $('.color-box-selected').html('&nbsp;');

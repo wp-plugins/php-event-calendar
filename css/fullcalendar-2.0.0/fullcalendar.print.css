@@ -28,5 +28,13 @@
 .fc-event .ui-resizable-handle {
 	display: none !important;
 	}
+
+/* hide left sidebar, search and top bar */
+div.container > div > div > div.col-md-2, #pec_toolbar, div.navbar.navbar-inverse.navbar-fixed-top{
+    display: none;
+}
+
+
+
 	
 	

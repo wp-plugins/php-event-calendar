@@ -373,11 +373,11 @@ class C_PhpEventCal extends C_Core
 
                             if(ed.location == null || ed.location == '') {
                                 $('#loc_msg').hide();
-                                $('#location').val('');
+                                $('#location').html('');
                             }
                             else {
                                 $('#loc_msg').show();
-                                $('#location').val(ed.location);
+                                $('#location').html(ed.location);
                             }
 
                             if(ed.image == null || ed.image == '') {

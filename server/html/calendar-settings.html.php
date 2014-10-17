@@ -110,11 +110,11 @@
                                     <div class="col-sm-8">
                                         <select class="form-control" name="default_view" id="default_view">
                                             <option value="month" <?php echo ($calendarProperties['default_view'] == 'month') ? 'selected="selected"':'' ?>>Month</option>
-<!--                                            <option value="basicWeek" --><?//=($calendarProperties['default_view'] == 'basicWeek') ? 'selected="selected"':'' ?><!-->Basic Week</option>-->
-<!--                                            <option value="basicDay" --><?//=($calendarProperties['default_view'] == 'basicDay') ? 'selected="selected"':'' ?><!-->Basic Day</option>-->
+                                            <!--option value="basicWeek" --><?//=($calendarProperties['default_view'] == 'basicWeek') ? 'selected="selected"':'' ?><!-->Basic Week</option>-->
+                                            <!--option value="basicDay" --><?//=($calendarProperties['default_view'] == 'basicDay') ? 'selected="selected"':'' ?><!-->Basic Day</option>-->
                                             <option value="agendaWeek" <?php echo ($calendarProperties['default_view'] == 'agendaWeek') ? 'selected="selected"':'' ?>>Week</option>
                                             <option value="agendaDay" <?php echo ($calendarProperties['default_view'] == 'agendaDay') ? 'selected="selected"':'' ?>>Day</option>
-                                            <option value="list" <?php echo ($calendarProperties['default_view'] == 'list') ? 'selected="selected"':'' ?>>Agenda</option>
+                                            <option value="pec" <?php echo ($calendarProperties['default_view'] == 'pec') ? 'selected="selected"':'' ?>>Upcoming</option>
                                         </select>
                                     </div>
                                 </div>
@@ -168,11 +168,19 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group" style="display:none">
+                                    <label for="event_conflict" class="col-sm-4 control-label">Enable Event Conflict</label>
+                                    <div class="col-sm-8" style="margin-top: 8px;">
+                                        <input type="radio" class="cal-public" name="event_conflict" id="event_conflict_no" value="0" <?php echo (@$calendarProperties['event_conflict'] == '0') ? 'checked':'' ?>><label for="event_conflict_no">&nbsp;No</label>
+                                        <input type="radio" class="cal-public" name="event_conflict" id="event_conflict_yes"  value="1" <?php echo (@$calendarProperties['event_conflict'] == '1') ? 'checked':'' ?>><label for="event_conflict_yes">&nbsp;Yes</label>
 
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </fieldset>
 
+                    <input type="hidden" name="action" id="calendar-settings" value="CALENDAR_SETTINGS_SAVE" />
                     <input type="hidden" name="calendar-settings" id="calendar-settings" value="1" />
                     <input type="hidden" name="calendar-settings-update" id="calendar-settings-update" value="0" />
                 </form>

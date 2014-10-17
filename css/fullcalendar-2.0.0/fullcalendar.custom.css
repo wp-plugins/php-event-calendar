@@ -130,7 +130,9 @@ td.day.active{
     border-top-left-radius: 0;
 }
 
-
+.fc-button-list.fc-state-default.fc-corner-right {
+    border-radius: 0;
+}
 
 .ris_pagination_item_hide {
     display: none;

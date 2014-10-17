@@ -121,6 +121,7 @@ class C_Calendar_Settings
     {
 
         //==== Create Params Array for saving
+        /*
         $params['shortdate_format'] = 'MM/DD/YYYY';
         $params['longdate_format'] = 'dddd, DD MMMM YYYY';
         $params['timeformat'] = 'core';
@@ -145,10 +146,22 @@ class C_Calendar_Settings
         $params['time_zone'] = '-12';
         $params['privacy'] = 'public';
         $params['email_server'] = 'PHPMailer';
+        */
+        $sql = "SELECT `ps`.* FROM  `pec_settings` as `ps` LEFT JOIN `pec_users` `pu` ON (`ps`.`user_id` = `pu`.`id`) WHERE `pu`.`role` = 'super' ";
+        $allCals = $this->dbObj->db_query($sql);
+
+        $result = NULL;
+
+        if ($this->dbObj->num_rows($allCals) > 0) {
+            while ($res = $this->dbObj->fetch_array_assoc($allCals)) {
+                $result = $res;
+            }
+        } else return NULL;
+        $result['privacy'] = 'public';
+        return $result;
 
 
-
-        return $params;
+        //return $params;
 
     }
 

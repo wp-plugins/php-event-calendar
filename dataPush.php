@@ -3,7 +3,7 @@
  * Plugin Name: PHP Event Calendar
  * Plugin URI: http://phpeventcalendar.com/
  * Description: Easily create, share, and display beautiful and responsive online event calendars through intuitive user interface.
- * Version: 1.3
+ * Version: 1.4
  * Author: PHPControls Inc.
  * Author URI: http://phpcontrols.com/
  * License: GPL2
@@ -379,5 +379,12 @@ function my_AJAX_REMOVE_THIS_EVENT(){
 add_action('wp_ajax_REMOVE_THIS_EVENT', 'my_AJAX_REMOVE_THIS_EVENT');
 //add_action('wp_ajax_nopriv_REMOVE_THIS_EVENT', 'my_AJAX_REMOVE_THIS_EVENT');
 
+
+function my_CHECK_CONFLICT(){
+    require_once('conf.php');
+    require_once(WP_ROOT.PEC_PLUGIN_DIR.'/server/ajax/events_manager.php');
+}
+add_action('wp_ajax_CHECK_CONFLICT', 'my_CHECK_CONFLICT');
+//add_action('wp_ajax_nopriv_CHECK_CONFLICT', 'my_CHECK_CONFLICT');
 
 ?>

@@ -110,6 +110,18 @@ class C_Events extends C_Calendar
     public $image;
 
     /**
+     * @var string $organizer
+     * String. Optional. An organizer that will be visited when this event is clicked by the user. For more information on controlling this behavior, see the eventClick callback.
+     */
+    public $organizer;
+
+    /**
+     * @var string $venue
+     * String. Optional. An venue that will be visited when this event is clicked by the user. For more information on controlling this behavior, see the eventClick callback.
+     */
+    public $venue;
+
+    /**
      * @var string $className
      * String/Array. Optional. A CSS class (or array of classes) that will be attached to this event's element.
      */
@@ -387,7 +399,7 @@ class C_Events extends C_Calendar
      * @author : Richard Z.C. <info@phpeventcalendar.com>
      *
      */
-    public function __construct($calendarID = 0, $title, $start = '', $end = '', $url = '', $allDay = '', $className = '', $editable = '', $startEditable = '',
+    public function __construct($calendarID = 0, $title, $start = '', $end = '', $url = '', $organizer = '', $venue = '', $allDay = '', $className = '', $editable = '', $startEditable = '',
                                 $durationEditable = '', $source = '', $color = '', $backgroundColor = '', $borderColor = '', $textColor = '', $description = '',
                                 $free_busy = 'free', $location = '', $privacy = 'public',                $repeat_start_date = '', $repeat_end_on = '', $repeat_end_after = '',
                                 $repeat_never = '', $repeat_by='',                  $repeat_type = 'none', $repeat_interval = '',
@@ -505,6 +517,8 @@ class C_Events extends C_Calendar
             $this->end_time = date('H:i',$this->end_timestamp);
 
             $this->url = $url;
+            $this->organizer = $organizer;
+            $this->venue = $venue;
             $this->image = $image;
             $this->allDay = $allDay;
             $this->className = $className;
@@ -569,6 +583,31 @@ class C_Events extends C_Calendar
         } else return NULL;
 
     }
+    /**
+     * Loads Venue data on Venue ID passed in parameter
+     *
+     * @param $venueID
+     * @return mixed|null
+     * @author Richard Z.C. <info@phpeventcalendar.com>
+     *
+     */
+    public static function loadVenueData($venueID)
+    {
+        //====DB
+        $dbObj = new C_Database(PEC_DB_HOST, PEC_DB_USER, PEC_DB_PASS, PEC_DB_NAME, PEC_DB_TYPE, PEC_DB_CHARSET);
+        $db = $dbObj->db;
+
+        //$userID = $_SESSION['userData']['id'];
+        $sql = "SELECT * FROM  `pec_venues` WHERE `id`=$venueID";
+        $venueData = $dbObj->db_query($sql);
+
+        if ($dbObj->num_rows($venueData) > 0) {
+            return $dbObj->fetch_array($venueData);
+        } else return NULL;
+
+    }
+
+
 
 
     /**
@@ -1147,6 +1186,38 @@ class C_Events extends C_Calendar
     }
 
     /**
+     * Check event time conflict based on event start and end time provided as parameter
+     *
+     * @param $start, $end
+     * @return string
+     * @author Richard Z.C. <info@phpeventcalendar.com>
+     *
+     */
+    public static function checkConflict($start, $end)
+    {
+        //====DB
+        $dbObj = new C_Database(PEC_DB_HOST, PEC_DB_USER, PEC_DB_PASS, PEC_DB_NAME, PEC_DB_TYPE, PEC_DB_CHARSET);
+        $db = $dbObj->db;
+
+        // $userID = $_SESSION['userData']['id'];
+        $sql = "SELECT * FROM  `pec_settings` WHERE `event_conflict` = 1 ";
+        $eventData = $dbObj->db_query($sql);
+        if($dbObj->num_rows($eventData) > 0){
+            $sql = "SELECT * FROM  `pec_events` WHERE (`start_timestamp` <= $start AND `end_timestamp` > $start) OR (`start_timestamp` < $end AND `end_timestamp` >= $end) OR (`start_timestamp` >= $start AND `end_timestamp` <= $end)";
+            $eventData = $dbObj->db_query($sql);
+
+            if ($dbObj->num_rows($eventData) > 0) {
+                return $dbObj->num_rows($eventData);
+            }
+            else return 0;
+        }
+        else return 0;
+
+    }
+
+
+
+    /**
      * Prepare Events for Calendar to Show.
      * This is for internal use
      *
@@ -1345,6 +1416,54 @@ class C_Events extends C_Calendar
         } else $activeExternalURLForCalendars = false;
 
         return $activeExternalURLForCalendars;
+
+    }
+
+    /**
+     *
+     */
+    public static function getAllSavedOrganizers(){
+        //====DB
+        $dbObj = new C_Database(PEC_DB_HOST, PEC_DB_USER, PEC_DB_PASS, PEC_DB_NAME, PEC_DB_TYPE, PEC_DB_CHARSET);
+        $db = $dbObj->db;
+
+        $eventsWithOrganizers = NULL;
+
+        $sql = "SELECT * FROM `pec_organizers` ";
+
+        $eventsWithOrganizerData = $dbObj->db_query($sql);
+
+        if ($dbObj->num_rows($eventsWithOrganizerData) > 0) {
+            while ($res = $dbObj->fetch_array($eventsWithOrganizerData)){
+                $eventsWithOrganizers[$res['id']] = $res;
+            }
+        } else $eventsWithOrganizers = NULL;
+
+        return $eventsWithOrganizers;
+
+    }
+
+    /**
+     *
+     */
+    public static function getAllSavedVenues(){
+        //====DB
+        $dbObj = new C_Database(PEC_DB_HOST, PEC_DB_USER, PEC_DB_PASS, PEC_DB_NAME, PEC_DB_TYPE, PEC_DB_CHARSET);
+        $db = $dbObj->db;
+
+        $eventsWithVenues = NULL;
+
+        $sql = "SELECT * FROM `pec_venues` ";
+
+        $eventsWithVenueData = $dbObj->db_query($sql);
+
+        if ($dbObj->num_rows($eventsWithVenueData) > 0) {
+            while ($res = $dbObj->fetch_array($eventsWithVenueData)){
+                $eventsWithVenues[$res['id']] = $res;
+            }
+        } else $eventsWithVenues = NULL;
+
+        return $eventsWithVenues;
 
     }
 
