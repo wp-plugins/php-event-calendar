@@ -8,46 +8,44 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Event Management Made Easy. Create, share, and display beautiful and responsive online event calendars through intuitive user interface.
+Event Management Made Easy. Create, share, and display beautiful and responsive online events calendars through an intuitive user interface.
 
 == Description ==
 
->Check out the <a href="http://quickproductdemo.com/phpeventcal/calendar.php">complete online events calendar demo</a>. Feel free to play around, add new events, create recurring events or calendars, search, or event upload an event image file!
+>Check out the <a href="http://quickproductdemo.com/phpeventcal/calendar.php">complete online events calendar demo</a>. Feel free to play around, add new events, create recurring events, open a new calendar, search for events, or upload an image file for an event!
 
-The PHP Events Calendar is developed by good people from <a href="http://PHPEventCalendar.com">PHPEventCalendar.com</a>. The plugin is built with the FREE [PHP Event Calendar](http://phpeventcalendar.com/ "PHP Event Calendar") Lite, a modern, responsive and multi-user calendar/scheduling application. It can be used right out of the box as a standalone event calendar application, or can be customized to seamlessly integrate into your existing environment.
+The PHP Events Calendar is developed by the good people at <a href="http://PHPEventCalendar.com">PHPEventCalendar.com</a>. It can be used right out of the box as a standalone event calendar or can be customized to integrate seamlessly into your existing WordPress environment. The plugin was built with the FREE [PHP Event Calendar Lite](http://phpeventcalendar.com/ "PHP Events Calendar Lite"), a modern, responsive and multi-user calendar/scheduling application.
 
-Looking for additional functionality including recurring events, multiple event calendars, double booking prevention, publicly/private calendar events, email reminders and more? Check out our <a href="http://phpeventcalendar.com/50-off-limited-time-offer-complete-add-on-bundle/">premium add-ons</a>.
+Are you looking for additional functionality in your calendar, including scheduling recurring events, easy switching among multiple event calendars, double booking prevention, programming public or private calendar events, timely email reminders and more? Check out our <a href="http://phpeventcalendar.com/50-off-limited-time-offer-complete-add-on-bundle/">premium add-ons</a>.
 
-Our Event Calendar supports all major desktop web browsers and works well on mobile and tablet devices.
+Our Event Calendar is supported by all major desktop web browsers as well as on mobile and tablet devices.
 
-= Event Management Made Easy = 
+= Event Management Made Easy =
 
-The calendar is designed for simplicity and easy of use. The admin back-end is very similar to Google Calendar. With minimum learning curve, even you are new to WordPress, you can start managing events in less than five minutes. Users can create new and edit existing events, change calendar settings, all through visual events management user interface instead of arcane WordPress table editors. It is easy and intuitive, perfect for people who are not tech savvy but wish to create and manage online events quickly in WordPress.
+The PHP Event Calendar is designed for simplicity and ease of use. The look and feel is very similar to Google Calendar. Even you are new to WordPress, you can start managing events in less than five minutes! Create new events and edit existing ones or change calendar settings through an intuitive visual events management system instead of through arcane WordPress table editors. Perfect for people who are not tech savvy but want to create and manage online events quickly and easily.
 
-= Great Software Comes with Great Support = 
+= Great Software Comes with Great Support =
 
-We apply advanced software test methodologies to thoroughly test our software to guarantee that it's easy to use and bug free. We are perfectionists who obsess with quality and satisfactions of our users.
-
-Our team is always here to help. Feel free to ask a question at our <a href="https://phpeventcalendar.uservoice.com/">dedicated product support</a>. Need faster support turn-around? Add the <a href="http://phpeventcalendar.com/50-off-limited-time-offer-complete-add-on-bundle/">premium add-on plugin</a> and you get access to premium support forums with guaranteed maximum 24hr response time.
-
-Musicians, sports organizations, universities, restaurants, art schools, churches use our event calendar. They all love how easy it is to get started within almost no training. If you have uses Google Calendar or Microsoft Outlook, you will feel very comfortable when use PHP Events Calendar.
+As perfectionists obsessed with quality and customer satisfaction, we apply advanced methodologies to thoroughly test our software to guarantee that it's easy to use and bug-free. Our team is always ready to help. Feel free to post a question at our <a href="https://phpeventcalendar.uservoice.com/">dedicated product support forum</a>. Need faster support turn-around? Add the <a href="http://phpeventcalendar.com/50-off-limited-time-offer-complete-add-on-bundle/">premium add-on plugin</a> and you’ll get access to premium support forums with a guaranteed maximum 24hr response time.
 
 = Features: =
 
-Are you manage a massive list of different calendars, each with hundreds of events for school or music events, or you're just small business owner who plan to list upcoming free training courses, our PHP Events Calendar has your back.
+If you’re managing multiple calendars, each with numerous school or music events, or even if you're just a small business owner who’d like to list a series of upcoming free training courses, our PHP Event Calendar has your back.
+
+Musicians, sports organizations, universities, restaurants, art schools, and churches are among the many satisfied customers who use our event calendar. They all love how easy it is to get started with almost no training. If you have ever used Google Calendar or Microsoft Outlook, you will feel very comfortable using the PHP Event Calendar.
 
 Here's a quick list of features:
 
-* Intuitive event management user interface - Manage events directly in calendar instead of old-school table editors
-* Multiple Views - Day, Week, Month, Upcoming views
-* Event Import - Imports events from major calendar software including Google Calendar and Microsoft Outlook
+* Manage events directly in the calendar with our intuitive events management instead of with old-school Wordpress table editors.
+* View your events by day, week, month, or upcoming.
+* Import events from other major calendars such as Google Calendar and Microsoft Outlook.
 * Organizers
-* Event image upload
-* Mobile Support - Supports mobile devices via responsive user interface.
-* Bootstrap Ready - Built with the most popular front-end framework for web and mobile
-* Event Color - Pick from a dozens of colors and bring events to life!
-* Google Maps
-* Professionally crafted - Professionally designed and tested!
+* Upload custom images for your events
+* Mobile and tablet support.
+* Pick from dozens of colors to bring events to life!
+* Make it easy for others to find your event by using Google Maps integration.
+* Built with the most popular front-end framework for web and mobile.
+* Professionally crafted, professionally designed and tested!
 
 = Looking for more features? =
 
@@ -55,15 +53,15 @@ Our premium add-ons include:
 
 * Multiple Calendars - Multiple calendars with different colors, toggled with one click.
 * Repeating Events - Fully customizable daily, weekly, monthly repeating events.
-* Double Booking Prevention - Never have scheduling conflict again!
-* Agenda View - A glance at a list of upcoming events
-* Email Reminders - Send users events reminder through email.
-* Subscribe to 3rd party Calendars - Subscribe and forget! No more importing events by entering them manually again.
-* Set events to be viewable by public or private access only.
-* Event Search.
+* Double Booking Prevention - Never have a scheduling conflict again!
+* Agenda View – For an overview of upcoming events
+* Email Reminders - Send event reminders through email.
+* Subscribe to 3rd party Calendars - Subscribe and forget! No need to enter events manually into multiple calendars.
+* Events can be set to be viewed by the public or for private access only.
+* Easily search for events.
 * And more...
 
-More information on <a href="http://phpeventcalendar.com/50-off-limited-time-offer-complete-add-on-bundle/">PHP Event Calendar Premium Add-ons</a>. You should check out the <a href="http://quickproductdemo.com/phpeventcal/calendar.php">complete online event calendar demo</a>. 
+For more information about <a href="http://phpeventcalendar.com/50-off-limited-time-offer-complete-add-on-bundle/">PHP Event Calendar Premium Add-ons</a>, check out our <a href="http://quickproductdemo.com/phpeventcal/calendar.php">complete online event calendar demo</a>.
 
 == Installation ==
 
@@ -73,14 +71,14 @@ Please follow these simple steps to install the plugin:
 2. Select the Upload option and hit "Choose File."
 3. When the popup appears select the php-event-calendar-x.x.zip file from your desktop. (The 'x.x' will change depending on the current version number).
 4. Follow the on-screen instructions and wait as the upload completes.
-5. When it's finished, activate the plugin via the prompt. A message will show confirming activation was successful. 
+5. When it's finished, activate the plugin via the prompt. A message will show confirming activation was successful.
 
-That's it! You can now access events calendar setting on the nav bar in admin dashboard. 
+That's it! You can now access events calendar setting on the nav bar in admin dashboard.
 == Frequently Asked Questions ==
 
 = Where can I see a working demo? =
 
-A fully featured <a href="http://quickproductdemo.com/phpeventcal/calendar.php">online event calendar demo</a> is now available. Feel free to play around, add new events, create recurring events or calendars, search, or event upload an event image file!
+A fully featured <a href="http://quickproductdemo.com/phpeventcal/calendar.php">online event calendar demo</a> is now available. Feel free to play around, add new events, create recurring events or new calendars, search for an event, or even upload an event image file!
 
 You can also check out the <a href="http://phpeventcalendar.com">PHP Event Calendar</a> website to learn more about us.
 
@@ -92,31 +90,31 @@ You can enter events in two ways:
 
 * Go to PHP Events Calendar > Imports to upload events through a local .ics file or an URL that links to a .ics file.
 
-= How do I remove an event from calendar? = 
+= How do I remove an event from calendar? =
 
 Go to PHP Events Calendar > Events Management to add, modify or remove any event.
 
 = How do I export Google Calendar or Outlook events to .ics file? =
 
-Please go to PHP Event Calendar > Imports in admin dashboard and check out Screenshot links that show how to export in different calendar software.
+Go to PHP Event Calendar > Imports in the admin dashboard and check out the screenshot links that explain how to export to an .ics file.
 
-= What is .ics file? =
+= What is an .ics file? =
 
 From Wikipedia: iCalendar is a computer file format which allows Internet users to send meeting requests and tasks to other Internet users, via email, or sharing files with an extension of .ics.
 
 iCalendar is used and supported by Google Calendar, Apple Calendar (formerly iCal), IBM Lotus Notes, Yahoo! Calendar, Evolution (software), eM Client, Lightning extension for Mozilla Thunderbird and SeaMonkey, and partially by Microsoft Outlook and Novell GroupWise.
 
-= I don't see my calendar! =
+= I don't see my calendar on my Web page! =
 
-Please make sure to include [php_event_calendar] shortcode in your page. 
+Please make sure to include [php_event_calendar] shortcode on your page.
 
-= Where can I purchase Events Calendar add-on? =
+= Where can I purchase PHP Event Calendar add-ons? =
 
-The add-ons can be directly purchased at the <a href="">PHP Event Calendar website.</a> There are three (3) license types available, and all licenses include 1 year of access to support + updates.
+The add-ons can be directly purchased on the <a href="">PHP Event Calendar website.</a> There are two (2) license types available, and all licenses include 1 year of access to support and updates.
 
 = What add-ons are available, and where can I read more about them? =
 
-Currently, the following add-ons are available for Events Calendar:
+Currently, the following add-ons are available for The Events Calendar:
 
 * <a href="http://phpeventcalendar.com/50-off-limited-time-offer-complete-add-on-bundle/">Complete add-on bundle at 50% off - limited time only!</a>
 * <a href="http://phpeventcalendar.com/recurring-events-add-on/">Recurring events</a>
@@ -137,7 +135,7 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 3. Week View
 4. Upcoming event view
 5. Individual Event Detail View
-6. Month View with Sidebar 
+6. Month View with Sidebar
 7. Month View (Full Width Responsive)
 8. Events Management UI - Event Edit Window
 9. Events Management UI - Week View
@@ -150,7 +148,7 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 * Added Event organizer field
 * Faster switch between event view types
 
-= 1.3 = 
+= 1.3 =
 * Event image upload using Uploadify
 * Upcoming events view
 * Front-end CSS enhancement
