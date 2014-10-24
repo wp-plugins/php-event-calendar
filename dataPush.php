@@ -3,13 +3,13 @@
  * Plugin Name: PHP Event Calendar
  * Plugin URI: http://phpeventcalendar.com/
  * Description: Easily create, share, and display beautiful and responsive online event calendars through intuitive user interface.
- * Version: 1.4
+ * Version: 1.4.1
  * Author: PHPControls Inc.
  * Author URI: http://phpcontrols.com/
  * License: GPL2
  */
 global $db_version;
-$db_version = "1.0";
+$db_version = "1.4";
 
 
 add_thickbox();
@@ -64,6 +64,20 @@ function table_install() {
         }
     }
 
+    //return number of successful queries and total number of queries found
+    return array(
+        "success" => $success,
+        "total" => $total
+    );
+
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta( $sql );
+
+    add_option( "db_version", $db_version );
+}
+
+function table_install_data(){
+
     //== Check and Insert user info if current user never import an ics file.
     $dbcon = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     global $current_user; get_currentuserinfo();
@@ -106,6 +120,31 @@ VALUES('1', 1, '$current_user->ID', 'super', '$current_user->user_firstname', '$
     if(mysqli_num_rows($resultCal) <= 0){
         mysqli_query($dbcon, $user_update);
     }
+}
+
+
+function table_update() {
+    $dir = plugin_dir_path( __FILE__ );
+    $location = $dir.'full_calendar_update.php';
+    global $wpdb;
+    global $db_version;
+    $db_version = "1.4";
+
+    //load file
+    $commands ='';
+    include($location);
+
+    //convert to array
+    $commands = explode(";", $commands);
+
+    //run commands
+    $total = $success = 0;
+    foreach($commands as $command){
+        if(trim($command)){
+            $success += (@$wpdb->query($command)==false ? 0 : 1);
+            $total += 1;
+        }
+    }
 
     //return number of successful queries and total number of queries found
     return array(
@@ -119,10 +158,17 @@ VALUES('1', 1, '$current_user->ID', 'super', '$current_user->user_firstname', '$
     add_option( "db_version", $db_version );
 }
 
-
+function myplugin_update_db_check() {
+    global $db_version;
+    if ( get_site_option( 'db_version' ) != $db_version ) {
+        table_update();
+    }
+}
+add_action( 'plugins_loaded', 'myplugin_update_db_check' );
 
 // Create tables on plugin activation
 register_activation_hook(__FILE__, 'table_install');
+register_activation_hook(__FILE__, 'table_install_data');
 
 require_once 'uninstall.php'; register_uninstall_hook( __FILE__, 'table_uninstall' );
 //require_once 'uninstall.php'; register_deactivation_hook( __FILE__, 'table_uninstall' );

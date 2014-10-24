@@ -142,6 +142,11 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 
 == Changelog ==
 
+= 1.4.1 =
+* Fixed a bug that causes missing database tables during upgrade. 
+* Set lightbox z-index to higher number so it appears on top of dimmed overlay   
+* Upcoming events widget (premium add-on only)
+
 = 1.4 =
 * Default view type is now available in Calendar settings dialog!
 * Event image upload no longer displays broken image in preview

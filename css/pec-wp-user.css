@@ -10,3 +10,6 @@ table.fc-header td {
 table.fc-header, th, td{ border: 0px solid rgba(0, 0, 0, 0.1); }
 table.fc-border-separate, th, td{ border: 0px solid rgba(0, 0, 0, 0.1); }
 
+.modal-backdrop.fade.in {
+    z-index: 0;
+}
