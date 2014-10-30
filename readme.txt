@@ -76,6 +76,12 @@ Please follow these simple steps to install the plugin:
 That's it! You can now access events calendar setting on the nav bar in admin dashboard.
 == Frequently Asked Questions ==
 
+= I don't see my calendar on my Web page! =
+
+Please make sure to include below shortcode on your page.
+
+`[php_event_calendar]`
+
 = Where can I see a working demo? =
 
 A fully featured <a href="http://quickproductdemo.com/phpeventcal/calendar.php">online event calendar demo</a> is now available. Feel free to play around, add new events, create recurring events or new calendars, search for an event, or even upload an event image file!
@@ -103,10 +109,6 @@ Go to PHP Event Calendar > Imports in the admin dashboard and check out the scre
 From Wikipedia: iCalendar is a computer file format which allows Internet users to send meeting requests and tasks to other Internet users, via email, or sharing files with an extension of .ics.
 
 iCalendar is used and supported by Google Calendar, Apple Calendar (formerly iCal), IBM Lotus Notes, Yahoo! Calendar, Evolution (software), eM Client, Lightning extension for Mozilla Thunderbird and SeaMonkey, and partially by Microsoft Outlook and Novell GroupWise.
-
-= I don't see my calendar on my Web page! =
-
-Please make sure to include [php_event_calendar] shortcode on your page.
 
 = Where can I purchase PHP Event Calendar add-ons? =
 
@@ -143,8 +145,8 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 == Changelog ==
 
 = 1.4.1 =
-* Fixed a bug that causes missing database tables during upgrade. 
-* Set lightbox z-index to higher number so it appears on top of dimmed overlay   
+* Fixed a bug that causes missing database tables during upgrade.
+* Set lightbox z-index to higher number so it appears on top of dimmed overlay
 * Upcoming events widget (premium add-on only)
 
 = 1.4 =
