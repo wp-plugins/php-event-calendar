@@ -2417,7 +2417,7 @@
 
         if (tzo != null) {
             // FYI, the delete statements need to be before the .zone() call or else chaos ensues
-            // for reasons I don't understand. 
+            // for reasons I don't understand.
             delete this._ambigTime;
             delete this._ambigZone;
         }
@@ -6818,6 +6818,18 @@
             var event = segment.event;
             var url = event.url;
 
+            var imgURL = '';
+            var imgHTML = '';
+            if(event.thumbnail == 1){
+                if( event.image != null && event.image != '' ){
+                    imgURL = PEC_JS_OBJECT.PEC_PLUGIN_UPLOAD_URL_FOR_JS+'/'+ event.image;
+                    imgHTML = "<div class='thumb-image'>" +
+                        "<img style='height:100px' src='"+imgURL+"'/>" +
+                        "</div>";
+
+                }
+            }
+
             // generate the list of CSS classNames
             var classNames = [ 'fc-event', 'fc-event-hori' ];
             if (isEventDraggable(event)) {
@@ -6868,6 +6880,7 @@
                 "<span class='fc-event-title'>" +
                     htmlEscape(event.title || '') +
                     "</span>" +
+                    imgHTML+
                     "</div>";
             if (event.allDay && segment.isEnd && isEventResizable(event)) {
                 html +=

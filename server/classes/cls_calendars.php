@@ -203,13 +203,13 @@ class C_Calendar extends C_Calendar_Settings
                 $params['type'] = 'user';
                 $params['status'] = 'on';
                 $params['show_in_list'] = '1';
-                $params['public'] = 0;
+                $params['public'] = 1;
                 $params['reminder_message_email'] = '';
                 $params['reminder_message_popup'] = '';
                 $params['access_key'] = '';
                 $params['created_on'] = date('Y-m-d');
                 $params['updated_on'] = '';
-                $this->id = $this->saveCalendar($params);
+                $this->id = $this->saveCalendar($userID, $params);
                 $params['id'] = $this->id;
 
                 C_User::setActiveCalendar($userID, array($this->id));
@@ -375,10 +375,10 @@ class C_Calendar extends C_Calendar_Settings
      * @return bool|integer on success returns inserted calendar id, otherwise returns a boolean false
      * @author: Richard Z.C. <info@phpeventcalendar.com>
      */
-    public function saveCalendar($params = array())
+    public function saveCalendar($userID, $params = array())
     {
         //==== get current user id
-        $params['user_id'] = $_SESSION['userData']['id'];
+        $params['user_id'] = $userID;
         return ($this->db->AutoExecute('pec_calendars', $params, 'INSERT') && isset($this->db->_connectionID->insert_id)) ? $this->db->_connectionID->insert_id : false;
     }
 

@@ -38,6 +38,7 @@ if(isset($_POST['update-event']) && $_POST['action'] == 'PEC_CREATE_EVENT'){
     $textColor = (isset($_POST['textColor']) && $_POST['textColor'] != '') ? $_POST['textColor'] : '';
     $description = (isset($_POST['description']) && $_POST['description'] != '') ? $_POST['description'] : '';
     $image = (isset($_POST['imageName']) && $_POST['imageName'] != '') ? $_POST['imageName'] : '';
+    $thumbnail = (isset($_POST['thumbnail']) && $_POST['thumbnail'] != '') ? $_POST['thumbnail'] : '';
 
     $location = (isset($_POST['location']) && $_POST['location'] != '') ? $_POST['location'] : '';
     $privacy = (isset($_POST['privacy']) && $_POST['privacy'] != '') ? $_POST['privacy'] : '';
@@ -110,7 +111,7 @@ if(isset($_POST['update-event']) && $_POST['action'] == 'PEC_CREATE_EVENT'){
         $durationEditable,$source,$color, $backgroundColor,$borderColor,$textColor,$description,
         $free_busy,$location,$privacy,$repeat_start_date, $repeat_end_on, $repeat_end_after,
         $repeat_never,$repeat_by,$repeat_type, $repeat_interval,
-        $repeat_on_sun,$repeat_on_mon,$repeat_on_tue,$repeat_on_wed,$repeat_on_thu,$repeat_on_fri,$repeat_on_sat,$image);
+        $repeat_on_sun,$repeat_on_mon,$repeat_on_tue,$repeat_on_wed,$repeat_on_thu,$repeat_on_fri,$repeat_on_sat,$image, $thumbnail);
 
     //==== Create Params Array for saving
     $params['title'] = $eventObj->title;
@@ -124,6 +125,7 @@ if(isset($_POST['update-event']) && $_POST['action'] == 'PEC_CREATE_EVENT'){
     $params['textColor'] = $eventObj->textColor;
     $params['description'] = $eventObj->description;
     $params['image'] = $eventObj->image;
+    $params['thumbnail'] = $eventObj->thumbnail;
     $params['free_busy'] = $eventObj->free_busy;
     $params['location'] = $eventObj->location;
     $params['privacy'] = $eventObj->privacy;

@@ -52,3 +52,8 @@ div.pec-upcoming-datetime > div.pec-upcoming-time{
     font-size:12pt;
     display: inline;
 }
+
+/* align thumbnail */
+#calendar div.thumb-image{
+    text-align:center;
+}

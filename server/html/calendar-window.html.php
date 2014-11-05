@@ -23,6 +23,7 @@
 
 
     <ul class="nav nav-pills" style="float: right">
+        <li style="border-right: 1px solid lightgray"><a href="<?php echo plugins_url( 'where-is-my-calendar.html.php?width=800&height=200', __FILE__ )?>" class="thickbox">Where is my calendar?</a></li>
         <li><a href="javascript:void(0);" id="cal-settings-link">Settings</a></li>
         <!--li><a href="javascript: window.print();">Print</a></li-->
     </ul>

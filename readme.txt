@@ -144,9 +144,17 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 
 == Changelog ==
 
+= 1.4.2 =
+* Added link to instruction for shortcode
+* Added Uservoice link bubble to lower right corner for user feedback
+* Added "Manage Event" link to plugin page
+* Hide toolbar completely from the user front-end
+* Center event thumbnails in month view
+
+
 = 1.4.1 =
-* Fixed a bug that causes missing database tables during upgrade.
-* Set lightbox z-index to higher number so it appears on top of dimmed overlay
+* Fixed a bug that causes missing database tables during upgrade. 
+* Set lightbox z-index to higher number so it appears on top of dimmed overlay   
 * Upcoming events widget (premium add-on only)
 
 = 1.4 =

@@ -2,8 +2,8 @@
 /**
  * Plugin Name: PHP Event Calendar
  * Plugin URI: http://phpeventcalendar.com/
- * Description: Easily create, share, and display beautiful and responsive online event calendars through intuitive user interface.
- * Version: 1.4.1
+ * Description: Easily create, share, and display beautiful and responsive online event calendars through an intuitive user interface.
+ * Version: 1.4.2
  * Author: PHPControls Inc.
  * Author URI: http://phpcontrols.com/
  * License: GPL2
@@ -101,7 +101,7 @@ VALUES('1', 1, '$current_user->ID', 'super', '$current_user->user_firstname', '$
     $today = date('Y-m-d');
 
     $cal_insert = "INSERT INTO `pec_calendars` (`type`, `user_id`, `name`, `description`, `color`, `admin_id`, `status`, `show_in_list`, `public`, `reminder_message_email`, `reminder_message_popup`, `access_key`, `created_on`, `updated_on`) VALUES
-('user', '$current_user->ID', '$cal_name', '$cal_desc', '#3a87ad', NULL, 'on', '1', 0, '', '', '', '$today', NULL)";
+('user', '$current_user->ID', '$cal_name', '$cal_desc', '#3a87ad', NULL, 'on', '1', 1, '', '', '', '$today', NULL)";
 
     $resultCal = mysqli_query($dbcon,$cal_select);
     if(mysqli_num_rows($resultCal) <= 0){
@@ -433,4 +433,12 @@ function my_CHECK_CONFLICT(){
 add_action('wp_ajax_CHECK_CONFLICT', 'my_CHECK_CONFLICT');
 //add_action('wp_ajax_nopriv_CHECK_CONFLICT', 'my_CHECK_CONFLICT');
 
+
+function plugin_add_pec_settings_link( $links ) {
+    $settings_link = '<a href="admin.php?page=mt-top-level-handle">' . __( 'Manage Events' ) . '</a>';
+    array_push( $links, $settings_link );
+    return $links;
+}
+$plugin = plugin_basename( __FILE__ );
+add_filter( "plugin_action_links_$plugin", 'plugin_add_pec_settings_link' );
 ?>

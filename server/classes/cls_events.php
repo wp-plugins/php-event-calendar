@@ -110,6 +110,12 @@ class C_Events extends C_Calendar
     public $image;
 
     /**
+     * @var string $thumbnail
+     * String. Optional. A Image that will be viewed when this event is clicked by the user. For more information on controlling this behavior, see the eventClick callback.
+     */
+    public $thumbnail;
+
+    /**
      * @var string $organizer
      * String. Optional. An organizer that will be visited when this event is clicked by the user. For more information on controlling this behavior, see the eventClick callback.
      */
@@ -403,7 +409,7 @@ class C_Events extends C_Calendar
                                 $durationEditable = '', $source = '', $color = '', $backgroundColor = '', $borderColor = '', $textColor = '', $description = '',
                                 $free_busy = 'free', $location = '', $privacy = 'public',                $repeat_start_date = '', $repeat_end_on = '', $repeat_end_after = '',
                                 $repeat_never = '', $repeat_by='',                  $repeat_type = 'none', $repeat_interval = '',
-                                $repeat_on_sun = 0, $repeat_on_mon = 0, $repeat_on_tue = 0, $repeat_on_wed = 0, $repeat_on_thu = 0, $repeat_on_fri = 0, $repeat_on_sat = 0, $image='')
+                                $repeat_on_sun = 0, $repeat_on_mon = 0, $repeat_on_tue = 0, $repeat_on_wed = 0, $repeat_on_thu = 0, $repeat_on_fri = 0, $repeat_on_sat = 0, $image='', $thumbnail = 0)
     {
 
         if ($title == 'LOAD_MY_EVENTS') {
@@ -520,6 +526,7 @@ class C_Events extends C_Calendar
             $this->organizer = $organizer;
             $this->venue = $venue;
             $this->image = $image;
+            $this->thumbnail = $thumbnail;
             $this->allDay = $allDay;
             $this->className = $className;
             $this->editable = $editable;
@@ -1241,6 +1248,7 @@ class C_Events extends C_Calendar
             $url = $res['url'];
             $location = stripslashes($res['location']);
             $image = stripslashes($res['image']);
+            $thumbnail = $res['thumbnail'];
             $start_date = $res['start_date'];
             $start_time = $res['start_time'];
             $start_timestamp = $res['start_timestamp'];
@@ -1268,6 +1276,7 @@ class C_Events extends C_Calendar
                 //'url' => $url,
                 'location' => $location,
                 'image' => $image,
+                'thumbnail' => $thumbnail,
                 'start' => '',
                 'end' => '',
                 'borderColor' => $borderColor,

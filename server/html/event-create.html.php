@@ -588,6 +588,13 @@ $venueData = C_Events::getAllSavedVenues();
                                     </div>
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="thumbnail" class="col-sm-4 control-label">Enable Image Thumbnail</label>
+                                    <div class="col-sm-8" style="margin-top: 8px;">
+                                        <input type="radio" class="cal-public" name="thumbnail" id="thumbnail_no" value="0" ><label for="thumbnail_no">&nbsp;No</label>
+                                        <input type="radio" class="cal-public" name="thumbnail" id="thumbnail_yes"  value="1" ><label for="thumbnail_yes">&nbsp;Yes</label>
+                                    </div>
+                                </div>
 
                                 <div class="form-group" style="display:none">
                                     <label for="free_busy" class="col-sm-3 control-label">Show as</label>

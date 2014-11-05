@@ -45,4 +45,7 @@ $commands .= "CREATE TABLE IF NOT EXISTS `pec_venues` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 ALTER TABLE `pec_events` ADD `venue` INT NOT NULL AFTER `organizer`";
+
+// Update version 1.4.2
+$commands .= "ALTER TABLE `pec_events` ADD `thumbnail` VARCHAR( 10 ) NOT NULL AFTER `image`";
 ?>
