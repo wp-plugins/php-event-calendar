@@ -1,7 +1,7 @@
 === PHP Event Calendar for WordPress ===
 Contributors: chenster
 Donate link: http://phpeventcalendar.com/
-Tags: events, calendar, event, venue, organizer, meeting, google maps, event calendar, events calendar, PHP Event Calendar
+Tags: events, calendar, event, venue, organizer, meeting, event calendar, events calendar, PHP Event Calendar, WordPress event calendar
 Requires at least: 3.0.1
 Tested up to: 4.0
 Stable tag: trunk
