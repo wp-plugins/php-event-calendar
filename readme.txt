@@ -3,7 +3,7 @@ Contributors: chenster
 Donate link: http://phpeventcalendar.com/
 Tags: events, calendar, event, venue, organizer, meeting, event calendar, events calendar, PHP Event Calendar, WordPress event calendar
 Requires at least: 3.0.1
-Tested up to: 4.0
+Tested up to: 4.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +12,7 @@ Event Management Made Easy. Create, share, and display beautiful and responsive 
 
 == Description ==
 
->Check out the <a href="http://quickproductdemo.com/phpeventcal/calendar.php">complete online events calendar demo</a>. Feel free to play around, add new events, create recurring events, open a new calendar, search for events, or upload an image file for an event!
+>Check out the <a href="http://quickproductdemo.com/phpeventcal/calendar.php">complete online events calendar demo</a>. Feel free to play around, add new events, create recurring events, resource day view, open a new calendar, search for events, or upload an image file for an event!
 
 The PHP Events Calendar is developed by the good people at <a href="http://PHPEventCalendar.com">PHPEventCalendar.com</a>. It can be used right out of the box as a standalone event calendar or can be customized to integrate seamlessly into your existing WordPress environment. The plugin was built with the FREE [PHP Event Calendar Lite](http://phpeventcalendar.com/ "PHP Events Calendar Lite"), a modern, responsive and multi-user calendar/scheduling application.
 
@@ -143,6 +143,10 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 9. Events Management UI - Week View
 
 == Changelog ==
+
+= 1.5 =
+* Calendar view now persists (per popular requests)
+* Database structure update to support newer MySQL v5.6
 
 = 1.4.2 =
 * Added link to instruction for shortcode

@@ -27,9 +27,9 @@ $pec->header();
 
 //$pec->contentHeight(400);
 //$pec->slotMinutes(50);
-if(isset($_SESSION['currentView']) && $_SESSION['currentView']!=''){
-    $pec->defaultView($_SESSION['currentView']); //month,basicWeek,agendaWeek,basicDay,agendaDay
-    unset($_SESSION['currentView']);
+if(isset($_COOKIE['currentView']) && $_COOKIE['currentView']!=''){
+    $pec->defaultView($_COOKIE['currentView']); //month,basicWeek,agendaWeek,basicDay,agendaDay
+    @setcookie("currentView", ""); // TODO, fix "header already sent". It's surpressed for now. Bad
 }
 
 //$pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Agenda Day','basicDay'=>'Day','basicWeek'=>'Week','month'=>'Month','agendaWeek'=>'Agenda Week'));

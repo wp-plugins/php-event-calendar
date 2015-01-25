@@ -525,7 +525,7 @@ jQuery(document).ready(function($) {
     }).on('changeDate', function (ev) {
 
         //alert(ev.date)
-        var startMoment = moment(ev.date).subtract('days', 1);
+        var startMoment = moment(ev.date).subtract('days', 0); // 0 was 1
 
         //====Move calendar to the selected date
         $('#calendar').fullCalendar('gotoDate', startMoment);

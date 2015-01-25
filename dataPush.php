@@ -3,13 +3,13 @@
  * Plugin Name: PHP Event Calendar
  * Plugin URI: http://phpeventcalendar.com/
  * Description: Easily create, share, and display beautiful and responsive online event calendars through an intuitive user interface.
- * Version: 1.4.2
+ * Version: 1.5
  * Author: PHPControls Inc.
  * Author URI: http://phpcontrols.com/
  * License: GPL2
  */
 global $db_version;
-$db_version = "1.4";
+$db_version = "1.5";
 
 
 add_thickbox();
@@ -128,7 +128,7 @@ function table_update() {
     $location = $dir.'full_calendar_update.php';
     global $wpdb;
     global $db_version;
-    $db_version = "1.4";
+    $db_version = "1.5";
 
     //load file
     $commands ='';

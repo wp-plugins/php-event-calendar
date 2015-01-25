@@ -255,6 +255,9 @@ class C_PhpEventCal extends C_Core
                 viewRender: function(view, element){
                     //alert('here');
                     //alert(view);
+                    var view = $('#calendar').fullCalendar('getView');
+                    document.cookie = 'currentView='+view.name;
+                    //alert(view.name);
                 },
 
                 eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
@@ -551,6 +554,9 @@ class C_PhpEventCal extends C_Core
                 viewRender: function(view, element){
                     //alert('here');
                     //alert(view);
+                    var view = $('#calendar').fullCalendar('getView');
+                    document.cookie = 'currentView='+view.name;
+                    //alert(view.name);
                 },
 
                 eventResize: function(event, revertFunc, jsEvent, ui, view) {
