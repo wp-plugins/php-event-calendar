@@ -147,6 +147,7 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 = 1.5 =
 * Calendar view now persists (per popular requests)
 * Database structure update to support newer MySQL v5.6
+* Bug fixes
 
 = 1.4.2 =
 * Added link to instruction for shortcode
