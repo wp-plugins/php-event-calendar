@@ -1,0 +1,36 @@
+<style>
+
+    body {
+        margin-top: 0px; /*lite_disabled : 40px*/
+        /*text-align: center;*/
+        font-size: 14px;
+        font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    }
+    /*
+            #calendar {
+                width: 900px;
+                margin: 0 auto;
+            }
+    */
+</style>
+
+<div id="pec_toolbar">
+
+    <!--div class="input-group col-md-3"  style="padding-left: 0; margin-bottom: 10px; padding-right: 2px;">
+        <input id="search-event-input" type="search" class="form-control" placeholder="Search" name="search" />
+        <span class="input-group-addon btn-info ladda-button" data-style="expand-right" id="search-btn" style="cursor: pointer; cursor: hand;"><span class="ladda-label"><span class="glyphicon glyphicon-search"> </span></span></span>
+    </div-->
+
+
+    <ul class="nav nav-pills" style="float: right">
+        <li style="border-right: 1px solid lightgray"><a href="<?php echo plugins_url( 'where-is-my-calendar.html.php?width=800&height=200', __FILE__ )?>" class="thickbox">Where is my calendar?</a></li>
+        <li><a href="javascript:void(0);" id="cal-settings-link">Settings</a></li>
+        <!--li><a href="javascript: window.print();">Print</a></li-->
+    </ul>
+
+    <?php //require_once ('includes/calendar-search.html.php'); ?>
+
+</div>
+
+<div style="clear: both"></div>
+<div id="calendar"></div>
