@@ -576,11 +576,11 @@ $venueData = C_Events::getAllSavedVenues();
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <!--div class="form-group">
                                     <label for="eventImage" class="col-sm-3 control-label">Image</label>
                                     <div class="col-sm-6">
                                         <input type="file" name="eventImage" id="eventImage" class="" />
-                                        <!--a href="javascript:jQuery('#eventImage').uploadify('cancel')" id="cancel-file">Cancel File</a-->
+                                        <!--a href="javascript:jQuery('#eventImage').uploadif('cancel')" id="cancel-file">Cancel File</a>
                                         <input type="hidden" id="imageName" name="imageName" value="" />
                                     </div>
                                     <div class="col-sm-3">
@@ -594,7 +594,7 @@ $venueData = C_Events::getAllSavedVenues();
                                         <input type="radio" class="cal-public" name="thumbnail" id="thumbnail_no" value="0" ><label for="thumbnail_no">&nbsp;No</label>
                                         <input type="radio" class="cal-public" name="thumbnail" id="thumbnail_yes"  value="1" ><label for="thumbnail_yes">&nbsp;Yes</label>
                                     </div>
-                                </div>
+                                </div-->
 
                                 <div class="form-group" style="display:none">
                                     <label for="free_busy" class="col-sm-3 control-label">Show as</label>

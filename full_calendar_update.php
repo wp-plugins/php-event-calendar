@@ -44,15 +44,8 @@ $commands .= "CREATE TABLE IF NOT EXISTS `pec_venues` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
-ALTER TABLE `pec_events` ADD `venue` INT NOT NULL AFTER `organizer`;";
+ALTER TABLE `pec_events` ADD `venue` INT NOT NULL AFTER `organizer`";
 
 // Update version 1.4.2
-$commands .= "ALTER TABLE `pec_events` ADD `thumbnail` VARCHAR( 10 ) NOT NULL AFTER `image`;";
-
-// Update version 1.5
-$commands .= "ALTER TABLE `pec_events` 
-  CHANGE COLUMN `organizer` `organizer` INT(11) NOT NULL DEFAULT  '0',
-  CHANGE COLUMN `venue` `venue` INT(11) NULL ,
-  CHANGE COLUMN `thumbnail` `thumbnail` varchar(10) DEFAULT '',
-  CHANGE COLUMN `free_busy` `free_busy` ENUM('free','busy') NOT NULL DEFAULT 'free' ;";
+$commands .= "ALTER TABLE `pec_events` ADD `thumbnail` VARCHAR( 10 ) NOT NULL AFTER `image`";
 ?>

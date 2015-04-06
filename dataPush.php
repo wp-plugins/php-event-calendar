@@ -3,13 +3,13 @@
  * Plugin Name: PHP Event Calendar
  * Plugin URI: http://phpeventcalendar.com/
  * Description: Easily create, share, and display beautiful and responsive online event calendars through an intuitive user interface.
- * Version: 1.5
+ * Version: 1.4.3
  * Author: PHPControls Inc.
  * Author URI: http://phpcontrols.com/
  * License: GPL2
  */
 global $db_version;
-$db_version = "1.5";
+$db_version = "1.4";
 
 
 add_thickbox();
@@ -128,7 +128,7 @@ function table_update() {
     $location = $dir.'full_calendar_update.php';
     global $wpdb;
     global $db_version;
-    $db_version = "1.5";
+    $db_version = "1.4";
 
     //load file
     $commands ='';
@@ -213,7 +213,6 @@ function pec_load_scripts_20(){
     wp_enqueue_style( 'fullcalendar', plugins_url( '/css/fullcalendar-2.0.0/fullcalendar.css' , __FILE__ ));
     wp_enqueue_style( 'fullcalendar-print', plugins_url( '/css/fullcalendar-2.0.0/fullcalendar.print.css' , __FILE__ ), false, false, 'print' );
     wp_enqueue_style( 'fullcalendar-custom', plugins_url( '/css/fullcalendar-2.0.0/fullcalendar.custom.css' , __FILE__ ) );
-    wp_enqueue_style( 'uploadify', plugins_url( '/css/uploadify.css' , __FILE__ ));
 }
 
 function pec_load_scripts() {
@@ -250,16 +249,11 @@ function pec_load_scripts() {
     $translation_array = array( 'PEC_PLUGIN_URL_FOR_JS' => plugins_url( '' , __FILE__ ),'PEC_PLUGIN_UPLOAD_URL_FOR_JS'=>str_replace('\\','/',$upload_dir_params['baseurl']), 'PEC_PLUGIN_USER_ID_FOR_JS'=>$user_ID);
     wp_localize_script( 'fullcalendar', 'PEC_JS_OBJECT', $translation_array );
 
-    wp_enqueue_script(
-        'pec-uploadify',
-        plugins_url( '/js/jquery.uploadify.js' , __FILE__ ),
-        array( 'jquery' )
-    );
 
     wp_enqueue_script(
         'pec-calendar-custom',
         plugins_url( '/js/custom/calendar.js' , __FILE__ ),
-        array('jquery', 'fullcalendar', 'pec-uploadify')
+        array('jquery', 'fullcalendar')
     );
 
 

@@ -468,39 +468,12 @@ class C_PhpEventCal extends C_Core
     private function display_properties_main($calendarProperties)
     {
         $userRol = $_SESSION['userData']['role'];
-        $upload_swf = plugins_url( 'uploadify.swf', __FILE__ );
-        $upload_php = plugins_url( 'uploadify.php', __FILE__ );
-        $upload_cancel = plugins_url( 'uploadify-cancel.png', __FILE__ );
-        $upload = wp_upload_dir();
-        $upload_dir = str_replace('\\','\\\\',$upload['basedir']);
-        $upload_url = $upload['baseurl'];
         echo "
             //==================Custom JS=============================
             $('#eventForm').click(function (){
 
             });
 
-            $('#eventImage').uploadify({
-                'auto'     : true,
-                'formData' : {'targetFolder': '$upload_dir', 'user_id': PEC_JS_OBJECT.PEC_PLUGIN_USER_ID_FOR_JS },
-                'method'   : 'post',
-                'multi'    : false,
-                'onUploadComplete' : function(file) {
-                    $('#imageName').val(PEC_JS_OBJECT.PEC_PLUGIN_USER_ID_FOR_JS+'_'+file.name);
-                    $('#img-preview').show().attr('src','$upload_url'+'/'+PEC_JS_OBJECT.PEC_PLUGIN_USER_ID_FOR_JS+'_'+file.name);
-                    $('.create-event').show();
-                },
-                'onUploadProgress' : function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
-                    $('.create-event').hide();
-                },
-                'onCancel' : function(file) {
-                    $('#cancel-file').val('');
-                    $('#img-preview').attr('src','').hide();
-                } ,
-                'swf'      : '$upload_swf',
-                'uploader' : '$upload_php'
-                // Your options here
-            });
             //==================Event Calander Script=================
             //alert('$this->handleWindowResize');
             var date = new Date();
