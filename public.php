@@ -32,7 +32,7 @@ $pec->header();
 
 if(isset($_COOKIE['currentView']) && $_COOKIE['currentView']!=''){
     $pec->defaultView($_COOKIE['currentView']); //month,basicWeek,agendaWeek,basicDay,agendaDay
-    setcookie("currentView", "");
+    if(! headers_sent ()) {setcookie("currentView", "");}
 }
 //$pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Agenda Day','basicDay'=>'Day','basicWeek'=>'Week','month'=>'Month','agendaWeek'=>'Agenda Week'));
 $pec->buttonText(array('prev'=>'Prev','next'=>'Next', 'agendaDay'=>'Day','basicDay'=>'Day','month'=>'Month','agendaWeek'=>'Week','pec'=>'Upcoming'));

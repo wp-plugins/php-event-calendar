@@ -318,7 +318,9 @@ class C_Properties
                                 prevYear: 'left-double-arrow',
                                 nextYear: 'right-double-arrow'}";
         //====First Day
-        (isset($calendarProperties['start_day'])) ? $this->firstDay = $calendarProperties['start_day'] : '0';
+//        (isset($calendarProperties['start_day'])) ? $this->firstDay = $calendarProperties['start_day'] : '0';
+$this->firstDay = (isset($calendarProperties['start_day'])) ? $calendarProperties['start_day'] : '0';
+
         //====Is RTL (Right to Left)
         $this->isRTL = 'false';
         //====Weekends
@@ -341,7 +343,9 @@ class C_Properties
         $this->handleWindowResize = 'true';
 
         //====Default View
-        (isset($calendarProperties['default_view'])) ? $this->defaultView = $calendarProperties['default_view'] : 'month';
+//        (isset($calendarProperties['default_view'])) ? $this->defaultView = $calendarProperties['default_view'] : 'month';
+$this->defaultView = (isset($calendarProperties['default_view'])) ? $calendarProperties['default_view'] : 'month';
+
 
         //====All Day Slot
         $this->allDaySlot = 'true';

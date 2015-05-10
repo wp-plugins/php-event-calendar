@@ -3,7 +3,7 @@
  * Plugin Name: PHP Event Calendar
  * Plugin URI: http://phpeventcalendar.com/
  * Description: Easily create, share, and display beautiful and responsive online event calendars through an intuitive user interface.
- * Version: 1.5.1
+ * Version: 1.5.3
  * Author: PHPControls Inc.
  * Author URI: http://phpcontrols.com/
  * License: GPL2
@@ -85,7 +85,7 @@ function table_install_data(){
     $select_sql = "SELECT * FROM `pec_users` WHERE `admin_id`='$current_user->ID' ";
 
     $insert_sql = "INSERT INTO `pec_users` (`access_key`, `activated`, `admin_id`, `role`, `first_name`, `last_name`, `active_calendar_id`, `company`, `username`, `password`, `email`, `timezone`, `language`, `theme`, `kbd_shortcuts`, `created_on`, `updated_on`)
-VALUES('1', 1, '$current_user->ID', 'super', '$current_user->user_firstname', '$current_user->user_lastname', '0', 'Highpitch', '$current_user->user_login', '$current_user->user_pass', '$current_user->user_email', '$timezone', 'English', 'default', 1, '', '')";
+VALUES('1', 1, '$current_user->ID', 'admin', '$current_user->user_firstname', '$current_user->user_lastname', '0', 'Highpitch', '$current_user->user_login', '$current_user->user_pass', '$current_user->user_email', '$timezone', 'English', 'default', 1, '', '')";
     $result = mysqli_query($dbcon,$select_sql);
     if(mysqli_num_rows($result) < 1)
         mysqli_query($dbcon, $insert_sql);
@@ -173,6 +173,46 @@ register_activation_hook(__FILE__, 'table_install_data');
 require_once 'uninstall.php'; register_uninstall_hook( __FILE__, 'table_uninstall' );
 //require_once 'uninstall.php'; register_deactivation_hook( __FILE__, 'table_uninstall' );
 
+// Hook for adding users
+add_action( 'user_register', 'user_registration_save', 10, 1 );
+
+function user_registration_save( $user_id ) {
+
+    global $wpdb;
+    $user_info = get_userdata($user_id);
+    $admin_id = $user_info->ID;
+    $user_name =  $user_info->user_login;
+    $role = implode(', ', $user_info->roles);
+
+    $table = 'pec_users';
+    $data = array(
+        'admin_id'=>$admin_id,
+        'role'=>$role,
+        'username'=>$user_name,
+        'active_calendar_id'=>1
+    );
+
+    $wpdb->insert($table, $data);
+
+    //var_dump($wpdb->last_query);
+    //wp_die();
+
+}
+function my_delete_user( $user_id ) {
+    global $wpdb;
+
+    $user_obj = get_userdata( $user_id );
+    $admin_id = $user_obj->ID;
+    $user_name =  $user_obj->user_login;
+
+    $table = 'pec_users';
+    $data = array(
+        'username'=>$user_name
+    );
+
+    $wpdb->delete($table, $data);
+}
+add_action( 'delete_user', 'my_delete_user' );
 // Hook for adding admin menus
 add_action('admin_menu', 'mt_add_pages');
 

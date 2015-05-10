@@ -297,7 +297,8 @@ class C_Calendar extends C_Calendar_Settings
      */
     public function loadAllCalendars($userID)
     {
-        $sql = "SELECT * FROM  `pec_calendars` WHERE `user_id` = $userID";
+        //$sql = "SELECT * FROM  `pec_calendars` WHERE `user_id` = $userID";
+        $sql = "SELECT * FROM  `pec_calendars`";
         $allCals = $this->dbObj->db_query($sql);
 
         $result = NULL;

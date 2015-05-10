@@ -48,4 +48,6 @@ ALTER TABLE `pec_events` ADD `venue` INT NOT NULL AFTER `organizer`";
 
 // Update version 1.4.2
 $commands .= "ALTER TABLE `pec_events` ADD `thumbnail` VARCHAR( 10 ) NOT NULL AFTER `image`";
+$commands .= "ALTER TABLE `pec_users` DROP FOREIGN KEY `fk_admin_id` ";//update on version 1.5.3 19-04-2015
+$commands .= "ALTER TABLE `pec_users` CHANGE `role` `role` VARCHAR( 30 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ";//update on version 1.5.3 19-04-2015
 ?>

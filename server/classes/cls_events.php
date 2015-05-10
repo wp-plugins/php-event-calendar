@@ -626,7 +626,7 @@ class C_Events extends C_Calendar
     public function loadAllEvents($calID = 0,$searchKey='')
     {
         $userID = PEC_USER_ID;
-        $sql = "SELECT `pe`.* FROM  `pec_events` as `pe` LEFT JOIN `pec_calendars` `pc` ON (`pe`.`cal_id` = `pc`.`id`) WHERE `pc`.`user_id`=$userID";
+        $sql = "SELECT `pe`.* FROM  `pec_events` as `pe` LEFT JOIN `pec_calendars` `pc` ON (`pe`.`cal_id` = `pc`.`id`) WHERE `pc`.`user_id` IN (SELECT ID FROM `".PREFIX."users`)";
 
 
         if (!is_array($calID) && $calID > 0) $sql .= " AND `pe`.`cal_id` IN ($calID)";

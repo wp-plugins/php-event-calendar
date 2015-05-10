@@ -144,6 +144,13 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 
 == Changelog ==
 
+= 1.5.3 =
+* Non-default admin now can also manage calendar events
+* Added header_sent validation before setcookie; 
+* Partial fix tenary operators issues
+* Delete unnecessary folders
+* WordPress user role support (premium only)
+
 = 1.5.1 = 
 * Remove file upload for security reason. 
 

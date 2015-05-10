@@ -1,7 +1,9 @@
 <?php
+global $wpdb;
 
 $current_user = wp_get_current_user();
 define('PEC_USER_ID', $current_user->ID);
+define('PREFIX',$wpdb->prefix);
 
 //define('PEC_PATH', '/phpEventCal/trunk');
 //define('PEC_PATH_LOCAL','/highpitch_eventcal'); //==when in local
