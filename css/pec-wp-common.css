@@ -1,0 +1,59 @@
+.pec-logo{
+    width:150px;
+}
+
+.pec-upcoming-event{
+    margin-bottom: 45px;
+    height: auto;
+    width: 100%;
+}
+
+.pec-upcoming-datetime{
+    font-weight: bold;
+    color:#000000;
+    margin: 5px 0 5px 0;
+}
+
+div.pec-upcoming-datetime > div.pec-upcoming-date{
+    /* float: left; */
+    display: inline;
+    margin-right: 5px;
+}
+
+div.pec-upcoming-datetime > div.pec-upcoming-time{
+    display:inline;
+}
+
+.pec-upcoming-loc{
+    color: gray;
+    margin-bottom: 5px;
+
+}
+
+.pec-upcoming-img img{
+    height: auto;
+    float: left;
+    margin-right: 10px;
+    width: 350px;
+}
+
+.pec-upcoming-desc{
+    height: auto;
+}
+
+#calendar > table > tbody > tr > td{
+}
+
+#calendar{
+    font-size: 9pt;
+}
+
+#calendar table td.fc-header-center > span.fc-header-title h2{
+    font-size:12pt;
+    display: inline;
+}
+
+/* align thumbnail */
+#calendar div.thumb-image{
+    text-align:center;
+}

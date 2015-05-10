@@ -1,0 +1,19 @@
+table.fc-header td {
+	border: 0px solid white;
+}
+
+.entry-content table, .comment-content table {
+	border-top: 0px !important
+}
+
+/* remove unwanted border style by some theme */
+table.fc-header, th, td{ border: 0px solid rgba(0, 0, 0, 0.1); }
+table.fc-border-separate, th, td{ border: 0px solid rgba(0, 0, 0, 0.1); }
+
+.modal-backdrop.fade.in {
+    z-index: 0;
+}
+
+#pec_toolbar {
+    display:none;
+}
