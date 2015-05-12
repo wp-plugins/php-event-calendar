@@ -318,8 +318,7 @@ class C_Properties
                                 prevYear: 'left-double-arrow',
                                 nextYear: 'right-double-arrow'}";
         //====First Day
-//        (isset($calendarProperties['start_day'])) ? $this->firstDay = $calendarProperties['start_day'] : '0';
-$this->firstDay = (isset($calendarProperties['start_day'])) ? $calendarProperties['start_day'] : '0';
+        $this->firstDay = (isset($calendarProperties['start_day'])) ? $calendarProperties['start_day'] : '0';
 
         //====Is RTL (Right to Left)
         $this->isRTL = 'false';
@@ -343,10 +342,7 @@ $this->firstDay = (isset($calendarProperties['start_day'])) ? $calendarPropertie
         $this->handleWindowResize = 'true';
 
         //====Default View
-//        (isset($calendarProperties['default_view'])) ? $this->defaultView = $calendarProperties['default_view'] : 'month';
-$this->defaultView = (isset($calendarProperties['default_view'])) ? $calendarProperties['default_view'] : 'month';
-
-
+        $this->defaultView = (isset($calendarProperties['default_view'])) ? $calendarProperties['default_view'] : 'month';
         //====All Day Slot
         $this->allDaySlot = 'true';
         //====All Day Text
@@ -417,7 +413,7 @@ $this->defaultView = (isset($calendarProperties['default_view'])) ? $calendarPro
         //====All Day Default
         $this->allDayDefault = 'true';
         //====Ignore Time Zone
-        (isset($calendarProperties['time_zone']) && ((int)$calendarProperties['time_zone'] >= -12 && (int)$calendarProperties['time_zone'] <= 12)) ? $this->ignoreTimezone = 'true' : $this->ignoreTimezone = 'false';
+        $this->ignoreTimezone = (isset($calendarProperties['time_zone']) && ((int)$calendarProperties['time_zone'] >= -12 && (int)$calendarProperties['time_zone'] <= 12)) ? 'true' : 'false';
 
         //====Start Param
         $this->startParam = 'start';

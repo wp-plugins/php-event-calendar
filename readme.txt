@@ -3,7 +3,7 @@ Contributors: chenster
 Donate link: http://phpeventcalendar.com/
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, event calendar, events calendar, PHP Event Calendar
 Requires at least: 3.0.1
-Tested up to: 4.0
+Tested up to: 4.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -110,6 +110,21 @@ From Wikipedia: iCalendar is a computer file format which allows Internet users 
 
 iCalendar is used and supported by Google Calendar, Apple Calendar (formerly iCal), IBM Lotus Notes, Yahoo! Calendar, Evolution (software), eM Client, Lightning extension for Mozilla Thunderbird and SeaMonkey, and partially by Microsoft Outlook and Novell GroupWise.
 
+= Is WordPress user role supported? =
+
+Lite version
+
+- only administrator can use the calendar
+- calendar management is not available in lite
+- new calendar can not be created
+
+Premium version
+
+- Administrator and Editor can use calendars
+- Calendar create, edit
+- Administrator can manage all users' calendar
+- Editor can only manage his calendars
+
 = Where can I purchase PHP Event Calendar add-ons? =
 
 The add-ons can be directly purchased on the <a href="">PHP Event Calendar website.</a> There are two (2) license types available, and all licenses include 1 year of access to support and updates.
@@ -144,12 +159,17 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 
 == Changelog ==
 
+= 1.5.4 =
+* Fixed a critical bug that prevents guests from viewing public events
+* Internal ternary bug fix
+
 = 1.5.3 =
 * Non-default admin now can also manage calendar events
+* Both Administrator and Editor can manage calendars (premium only)
+* Editor can only manage his calendars (premium only)
 * Added header_sent validation before setcookie; 
 * Partial fix tenary operators issues
 * Delete unnecessary folders
-* WordPress user role support (premium only)
 
 = 1.5.1 = 
 * Remove file upload for security reason. 

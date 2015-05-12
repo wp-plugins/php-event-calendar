@@ -147,7 +147,7 @@ class C_Calendar_Settings
         $params['privacy'] = 'public';
         $params['email_server'] = 'PHPMailer';
         */
-        $sql = "SELECT `ps`.* FROM  `pec_settings` as `ps` LEFT JOIN `pec_users` `pu` ON (`ps`.`user_id` = `pu`.`id`) WHERE `pu`.`role` = 'super' ";
+        $sql = "SELECT `ps`.* FROM  `pec_settings` as `ps` LEFT JOIN `pec_users` `pu` ON (`ps`.`user_id` = `pu`.`id`) WHERE `pu`.`role` = 'administrator' ";
         $allCals = $this->dbObj->db_query($sql);
 
         $result = NULL;

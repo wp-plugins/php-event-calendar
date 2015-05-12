@@ -3,7 +3,7 @@
  * Plugin Name: PHP Event Calendar
  * Plugin URI: http://phpeventcalendar.com/
  * Description: Easily create, share, and display beautiful and responsive online event calendars through an intuitive user interface.
- * Version: 1.5.3
+ * Version: 1.5.4
  * Author: PHPControls Inc.
  * Author URI: http://phpcontrols.com/
  * License: GPL2
@@ -85,7 +85,7 @@ function table_install_data(){
     $select_sql = "SELECT * FROM `pec_users` WHERE `admin_id`='$current_user->ID' ";
 
     $insert_sql = "INSERT INTO `pec_users` (`access_key`, `activated`, `admin_id`, `role`, `first_name`, `last_name`, `active_calendar_id`, `company`, `username`, `password`, `email`, `timezone`, `language`, `theme`, `kbd_shortcuts`, `created_on`, `updated_on`)
-VALUES('1', 1, '$current_user->ID', 'admin', '$current_user->user_firstname', '$current_user->user_lastname', '0', 'Highpitch', '$current_user->user_login', '$current_user->user_pass', '$current_user->user_email', '$timezone', 'English', 'default', 1, '', '')";
+VALUES('1', 1, '$current_user->ID', 'administrator', '$current_user->user_firstname', '$current_user->user_lastname', '0', 'Highpitch', '$current_user->user_login', '$current_user->user_pass', '$current_user->user_email', '$timezone', 'English', 'default', 1, '', '')";
     $result = mysqli_query($dbcon,$select_sql);
     if(mysqli_num_rows($result) < 1)
         mysqli_query($dbcon, $insert_sql);
