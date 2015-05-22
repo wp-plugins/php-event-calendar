@@ -298,7 +298,9 @@ class C_PhpEventCal extends C_Core
                         .done(function(ed) {
                             var shortdateFormat = '$calendarProperties[shortdate_format]';
                             var longdateFormat = '$calendarProperties[longdate_format]';
-
+                            if(longdateFormat == '' || longdateFormat == null){
+                                longdateFormat = 'dddd, DD MMMM YYYY';
+                            }
                             $('#myModal').modal({backdrop:'static',keyboard:false});
                             var modalTitle = '<b>'+ calEvent.title.toUpperCase() + '</b> <br >' +  $.fullCalendar.moment(calEvent.start).format(longdateFormat+' hh:mm A');
                             $('#myModalLabel').html(modalTitle);
@@ -309,8 +311,8 @@ class C_PhpEventCal extends C_Core
                             $('#title').val(calEvent.title);
 
                             var startMoment = moment(calEvent.start)
-                            $('#start-date-guest').val(startMoment.format('YYYY-MM-DD'));
-                            $('#start-time').val(startMoment.format('hh:mm A'));
+                            $('#start-date-guest').text(startMoment.format('YYYY-MM-DD'));
+                            $('#start-time').text(startMoment.format('hh:mm A'));
 
                             var endMiliseconds = Date.parse(calEvent.end);
                             var endMoment = '';
@@ -332,8 +334,8 @@ class C_PhpEventCal extends C_Core
                             }
 
                             if(calEvent.end != null){
-                                $('#end-date-guest').val(endMoment.format('YYYY-MM-DD'));
-                                $('#end-time').val(endMoment.format('hh:mm A'));
+                                $('#end-date-guest').text(endMoment.format('YYYY-MM-DD'));
+                                $('#end-time').text(endMoment.format('hh:mm A'));
                             }
 
 

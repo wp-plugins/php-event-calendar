@@ -159,6 +159,11 @@ Great! Please visit our <a href="http://phpeventcalendar.uservoice.com/">technic
 
 == Changelog ==
 
+= 1.5.5 =
+* Fixed event detail popup content alignment issue
+* Fixed a bug interferes with Screen Options widget
+* Upgraded plugin source to be forward compatible with WP new versions.
+
 = 1.5.4 =
 * Fixed a critical bug that prevents guests from viewing public events
 * Internal ternary bug fix

@@ -160,54 +160,39 @@ $allCalendars = $allCals->allCalendars;
 
                                 <div class="event-details col-sm-12">
                                     <div class="col-sm-4">
-                                        <h6>Start</h6>
-                                        <div class="input-group col-sm-4" data-date="" data-date-format="yyyy-mm-dd" data-link-field="start" data-link-format="yyyy-mm-dd" >
-                                            <input type="text" class="form-control guest-view" id="start-date-guest" name="start-date" placeholder="Start Date" />
+                                        <div class="form-group col-sm-12">
+                                            <h6>Start</h6>
+                                            <p>
+                                                <span class="guest-view" id="start-date-guest"></span>
+                                                <span id="start-time" class="guest-view"></span>
+                                            </p>
                                         </div>
-                                        <div class="col-sm-3">
-                                            <input type="text" name="start-time" id="start-time" class="form-control guest-view"/>
-                                        </div>
-
-                                        <div id="end-group">
+                                        <div class="form-group col-sm-12" id="end-group">
                                             <h6>End</h6>
-                                            <div class="input-group col-sm-4" data-date="" data-date-format="yyyy-mm-dd" data-link-field="end" data-link-format="yyyy-mm-dd" >
-                                                <input type="text" class="form-control guest-view" placeholder="End Date" name="end-date" id="end-date-guest" />
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <input type="text" name="end-time" id="end-time" class="form-control guest-view"/>
-                                            </div>
+                                            <p>
+                                                <span class="guest-view" id="end-date-guest"></span>
+                                                <span id="end-time" class="guest-view"></span>
+                                            </p>
                                         </div>
 
-                                        <div class="form-group" id="allday_msg">
-                                            <label for="dayAll" class="col-sm-3 control-label">&nbsp;</label>
-
-                                            <div class="col-sm-9">
-                                                <span id="dayAll" style="font-size: 12px; font-weight: bold;"></span>
-                                            </div>
+                                        <div class="form-group col-sm-12" id="allday_msg">
+                                            <span id="dayAll" style="font-size: 12px; font-weight: bold;"></span>
                                         </div>
 
-                                        <div class="form-group" id="repeat_msg">
-                                            <label for="repeat_type" class="col-sm-3 control-label">&nbsp;</label>
-
-                                            <div class="col-sm-9">
-                                                <span id="repeat_type" style="font-size: 12px; font-weight: bold;"></span>
-                                            </div>
+                                        <div class="form-group col-sm-12" id="repeat_msg">
+                                            <span id="repeat_type" style="font-size: 12px; font-weight: bold;"></span>
                                         </div>
                                     </div>
 
                                     <div class="col-sm-3">
-                                        <div class="form-group" id="loc_msg">
+                                        <div class="form-group col-sm-12" id="loc_msg">
                                             <h6>Venue</h6>
-                                            <p class="" id="location">
-                                                <!-- input text not to be used -->
-                                                <!--input type="text" class="form-control guest-view" id="location" name="location" placeholder="Location" /-->
-                                            </p>
+                                            <p class="" id="location"></p>
                                         </div>
 
-                                        <div class="form-group" id="url_msg">
+                                        <div class="form-group col-sm-12" id="url_msg">
                                             <h6>URL</h6>
                                             <p>
-                                                <!-- input type="text" class="form-control guest-view" id="url" name="url" -->
                                                 <a href="" class="guest-view" id="url" name="url"></a>
                                             </p>
                                         </div>
